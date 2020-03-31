@@ -25,3 +25,6 @@ team_sts = spark.read.csv("/FileStore/tables/game_teams_stats.csv", header = Tru
 # drop the unwanted columns
 team_sts = team_sts.drop("powerPlayOpportunities","faceOffWinPercentage","giveaways","takeaways")
 team_sts.show(5)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
