@@ -63,4 +63,15 @@ spark.sql("select ts.game_id, ts.team_id, ts.HoA, ts.won, tm.teamName from Team_
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+from pyspark.sql import SparkSession
+from pyspark.sql.types import *
 
+# read the datafile from the location
+game = spark.read.csv("/FileStore/tables/game.csv", header = True, inferSchema = True)
+# drop the unwanted columns
+game = game.drop("type","date_time","away_team_id",	"home_team_id","venue_link", "venue_time_zone_id", "venue_time_zone_offset", "venue_time_zone_tz")
+
+game.createOrReplaceTempView("Games")
+spark.sql("select * from Games").show(10)
+
+-------------------------------------------------------------------------------------------------------------------------------
