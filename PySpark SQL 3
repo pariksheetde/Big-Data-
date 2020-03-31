@@ -1,0 +1,12 @@
+from pyspark.sql import SparkSession
+from pyspark.sql.types import *
+
+# read the datafile from the location
+team_sts = spark.read.csv("/FileStore/tables/game_teams_stats.csv", header = True, inferSchema = True)
+# drop the unwanted columns
+team_sts = team_sts.drop("powerPlayOpportunities","faceOffWinPercentage","giveaways","takeaways")
+team_sts.show(5)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
