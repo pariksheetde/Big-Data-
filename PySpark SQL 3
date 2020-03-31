@@ -60,3 +60,7 @@ team = spark.read.csv("/FileStore/tables/team_info.csv", header = True, inferSch
 team.createOrReplaceTempView("Team")
 
 spark.sql("select ts.game_id, ts.team_id, ts.HoA, ts.won, tm.teamName from Team_Stat ts join Team tm on ts.team_id = tm.team_id").show(10)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
