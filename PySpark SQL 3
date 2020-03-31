@@ -58,5 +58,5 @@ team_sts.createOrReplaceTempView("Team_Stat")
 # read the datafile from the location
 team = spark.read.csv("/FileStore/tables/team_info.csv", header = True, inferSchema = True)
 team.createOrReplaceTempView("Team")
-# spark.sql("select * from team").show(1)
+
 spark.sql("select ts.game_id, ts.team_id, ts.HoA, ts.won, tm.teamName from Team_Stat ts join Team tm on ts.team_id = tm.team_id").show(10)
