@@ -28,3 +28,35 @@ team_sts.show(5)
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+from pyspark.sql import SparkSession
+from pyspark.sql.types import *
+
+# read the datafile from the location
+team = spark.read.csv("/FileStore/tables/team_info.csv", header = True, inferSchema = True)
+
+team.show(5)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql import SparkSession
+from pyspark.sql.types import *
+
+ds = [StructField("game_id", IntegerType(),True),StructField("team_id", IntegerType(),True),StructField("HoA", StringType(),True),
+     StructField("won", StringType(),True),StructField("settled_in", StringType(),True),StructField("head_coach", StringType(),True),
+     StructField("goals", IntegerType(),True),StructField("shots", IntegerType(),True),StructField("hits", IntegerType(),True),
+     StructField("pim", IntegerType(),True),StructField("powerPlayGoals", IntegerType(),True)]
+
+fds = StructType(fields = ds)
+
+# read the datafile from the location
+team_sts = spark.read.csv("/FileStore/tables/game_teams_stats.csv", header = True, schema = fds)
+# drop the unwanted columns
+team_sts = team_sts.drop("powerPlayOpportunities","faceOffWinPercentage","giveaways","takeaways")
+team_sts.createOrReplaceTempView("Team_Stat")
+
+
+# read the datafile from the location
+team = spark.read.csv("/FileStore/tables/team_info.csv", header = True, inferSchema = True)
+team.createOrReplaceTempView("Team")
+# spark.sql("select * from team").show(1)
+spark.sql("select ts.game_id, ts.team_id, ts.HoA, ts.won, tm.teamName from Team_Stat ts join Team tm on ts.team_id = tm.team_id").show(10)
