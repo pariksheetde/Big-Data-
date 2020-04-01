@@ -17,3 +17,64 @@ game_df = game.where("venue like ('%Arena') and home_rink_side_start == 'right'"
 game_df.show(25)
 
 -------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+
+# read the datafile from the location
+game = spark.read.csv("/FileStore/tables/game.csv", header = True, inferSchema = True)
+
+# Drop the unwanted columns
+game = game.drop("date_time","date_time_GMT","venue_time_zone_offset","venue_time_zone_offset","venue_time_zone_tz","venue_time_zone_id","venue_link")
+
+# Select the columns for the report
+game = game.select("game_id","season","type","away_team_id","home_team_id","away_goals","home_goals","outcome","venue","home_rink_side_start")
+
+# Limit the DataFrame using where function with multiple data values
+game_df = game.where("venue like ('%Arena') and home_rink_side_start == 'left' and type != 'R'")
+
+game_df.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+
+# read the datafile from the location
+game = spark.read.csv("/FileStore/tables/game.csv", header = True, inferSchema = True)
+
+# Drop the unwanted columns
+game = game.drop("date_time","date_time_GMT","venue_time_zone_offset","venue_time_zone_offset","venue_time_zone_tz","venue_time_zone_id","venue_link")
+
+# Select the columns for the report
+game = game.select("game_id","season","type","away_team_id","home_team_id","away_goals","home_goals","outcome","venue","home_rink_side_start")
+
+# Limit the DataFrame using where function with multiple data values
+game_df = game.where("venue like ('%Arena') and home_rink_side_start == 'left' and season between 201001 and 20103112")
+
+game_df.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+
+# read the datafile from the location
+game = spark.read.csv("/FileStore/tables/game.csv", header = True, inferSchema = True)
+
+# Drop the unwanted columns
+game = game.drop("date_time","date_time_GMT","venue_time_zone_offset","venue_time_zone_offset","venue_time_zone_tz","venue_time_zone_id","venue_link")
+
+# Select the columns for the report. Sort the DataFrame by using sort() function
+game = game.select("game_id","season","type","away_team_id","home_team_id","away_goals","home_goals","outcome","venue","home_rink_side_start").sort("season", ascending = True)
+
+# Limit the DataFrame using where function with multiple data values
+game_df = game.where("venue like ('%Arena') and home_rink_side_start == 'left'")
+
+game_df.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
