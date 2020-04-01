@@ -124,3 +124,4 @@ df = spark.sql("select gm.game_id, gm.season, gm.type, gm.away_goals, gm.home_go
 df.show()# 498265 is the record count
 
 -------------------------------------------------------------------------------------------------------------------------------
+
