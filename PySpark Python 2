@@ -144,3 +144,28 @@ df.show()# 498265 is the record count
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+
+# read the datafile from the location
+game = spark.read.csv("/FileStore/tables/game.csv", header = True, inferSchema = True)
+
+# Drop the unwanted columns
+game = game.drop("date_time","away_team_id","home_team_id","date_time_GMT","venue_time_zone_offset","venue_time_zone_offset","venue_time_zone_tz","venue_time_zone_id","venue_link")
+
+# Select the columns for the report. Sort the DataFrame by using sort() or orderBy() function
+game = game.selectExpr("game_id as Game_ID","season as Season","type as Type","away_goals as Away_Goals","home_goals as Home_Goals","outcome as Outcome","venue as Venue","home_rink_side_start as Home_Rink_Side_Start").orderBy("game_id", ascending = True)
+game_df = game.where("venue like ('%Arena') and home_rink_side_start == 'left'")
+
+# read the datafile from the location
+game_shift = spark.read.csv("/FileStore/tables/game_shifts_info.csv", header = True, inferSchema = True)
+
+# Select the columns for the report. Sort the DataFrame by using sort() or orderBy() function
+game_shift = game_shift.selectExpr("game_id as Game_ID","player_id as Player_ID","period as Period","shift_start as Shift_Start","shift_end as Shift_End").orderBy("game_id", ascending = True)
+
+df = game_df.join(game_shift, on="game_id", how='inner')
+
+df.show()# 69460 is the record count
+
+-------------------------------------------------------------------------------------------------------------------------------
