@@ -33,6 +33,7 @@ fdf = spark.sql("select player_id, firstname, lastname, nationality, birthcity, 
 from pyspark.sql import SparkSession
 from pyspark.sql.types import *
 
+# Read the game_shift_info datafile
 gsi_ds = [StructField("game_id", IntegerType(),True),StructField("player_id", IntegerType(),True),StructField("period", IntegerType(),True),
      StructField("shift_start", IntegerType(),True),StructField("shift_end", IntegerType(),True)]
 gsi = StructType(fields = gsi_ds)
@@ -41,7 +42,7 @@ player = spark.read.csv("/FileStore/tables/game_shifts_info.csv", header = True,
 
 player.createOrReplaceTempView("Geme_Shift_Info")
 
-
+# Read the player_info datafile
 pi_ds = [StructField("player_id", IntegerType(),True),StructField("firstname", StringType(),True),StructField("lastname", StringType(),True),
      StructField("nationality", StringType(),True),StructField("birthCity", StringType(),True),StructField("primaryPosition", StringType(),True),
      StructField("birthdate", DateType(),True),StructField("link", StringType(),True)]
@@ -54,7 +55,6 @@ player.createOrReplaceTempView("Player_Info")
 
 
 df = spark.sql("select pl.player_id, gm.game_id, pl.firstname, pl.lastname, pl.nationality, pl.birthCity, gm.period, gm.shift_start, gm.shift_end from Geme_Shift_Info gm join Player_Info pl on pl.player_id = gm.player_id").show(10)
-
 -------------------------------------------------------------------------------------------------------------------------------
 
 from pyspark.sql import SparkSession
