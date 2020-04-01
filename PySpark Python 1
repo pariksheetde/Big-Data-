@@ -1,0 +1,14 @@
+from pyspark.sql import SparkSession
+from pyspark.sql.types import *
+
+# read the datafile from the location
+game = spark.read.csv("/FileStore/tables/game.csv", header = True, inferSchema = True)
+
+# Drop the unwanted columns
+game = game.drop("date_time","date_time_GMT","venue_time_zone_offset","venue_time_zone_offset","venue_time_zone_tz","venue_time_zone_id","venue_link")
+game = game.select("game_id","season","type","away_team_id","home_team_id","away_goals","home_goals","outcome","venue","home_rink_side_start")
+game_df = game.filter(game.type != 'P')
+game_df.show(25)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
