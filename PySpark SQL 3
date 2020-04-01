@@ -107,4 +107,20 @@ spark.sql("select ts.game_id, gm.venue, gm.season, substr(gm.season,1,4) as year
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
 
+# read the datafile from the location
+game = spark.read.csv("/FileStore/tables/game.csv", header = True, inferSchema = True)
+game.createOrReplaceTempView("Game")
+
+# read the datafile from the location
+game_shift = spark.read.csv("/FileStore/tables/game_shifts_info.csv", header = True, inferSchema = True)
+game_shift.createOrReplaceTempView("Game_Shift")
+
+df = spark.sql("select gm.game_id, gm.season, gm.type, gm.away_goals, gm.home_goals, gm.outcome, gm.venue, gm.home_rink_side_start, gs.player_id, gs.shift_start, gs.shift_end from game gm join game_shift gs on gm.game_id = gs.game_id")
+
+df.show()# 498265 is the record count
+
+-------------------------------------------------------------------------------------------------------------------------------
