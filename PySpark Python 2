@@ -139,7 +139,8 @@ game_shift = spark.read.csv("/FileStore/tables/game_shifts_info.csv", header = T
 game_shift = game_shift.selectExpr("game_id as Game_ID","player_id as Player_ID","period as Period","shift_start as Shift_Start","shift_end as Shift_End").orderBy("game_id", ascending = True)
 
 df = game.join(game_shift, on="game_id", how='inner')
-df.show()
+
+df.show()# 498265 is the record count
 
 -------------------------------------------------------------------------------------------------------------------------------
 
