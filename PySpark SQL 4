@@ -101,4 +101,23 @@ df.show(1000)
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
 
+# read the datafile from the location
+game = spark.read.csv("/FileStore/tables/game.csv", header = True, inferSchema = True)
+game.createOrReplaceTempView("Game")
+
+# read the datafile from the location
+game_shift = spark.read.csv("/FileStore/tables/game_shifts_info.csv", header = True, inferSchema = True)
+game_shift.createOrReplaceTempView("Game_Shift")
+
+# df = spark.sql("select gm.game_id, gm.season, gm.type, gm.away_goals, gm.home_goals, gm.outcome, gm.venue, gm.home_rink_side_start, gs.player_id, gs.shift_start, gs.shift_end from game gm join game_shift gs on gm.game_id = gs.game_id")
+
+df = spark.sql("select * from(select gm.game_id, gm.season, sum(away_goals) as away_goals, sum(home_goals) as home_goals, rank() over (order by sum(away_goals) desc) as rank from game gm join game_shift gs on gm.game_id = gs.game_id group by 1,2) a")
+
+df.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
