@@ -14,4 +14,4 @@ game_shift.createOrReplaceTempView("Game_Shift")
 
 df = spark.sql("select gm.game_id, gm.season, sum(gm.away_goals), sum(gm.home_goals) from game gm join game_shift gs on gm.game_id = gs.game_id group by 1,2")
 
-df.show()# 498265 is the record count
+df.show()
