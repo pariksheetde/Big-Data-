@@ -230,3 +230,72 @@ df = spark.sql("select * from(select gs.player_id, pi.firstname, pi.lastname, gm
 df.show()
 
 -------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+
+# read the datafile from the location
+game = spark.read.csv("/FileStore/tables/game.csv", header = True, inferSchema = True)
+game.createOrReplaceTempView("Game")
+
+# read the datafile from the location
+game_shift = spark.read.csv("/FileStore/tables/game_shifts_info.csv", header = True, inferSchema = True)
+game_shift.createOrReplaceTempView("Game_Shift")
+
+# read the datafile from the location
+player_info = spark.read.csv("/FileStore/tables/player_info.csv", header = True, inferSchema = True)
+player_info.createOrReplaceTempView("Player_Info")
+
+df = spark.sql("select * from(select gs.player_id, pi.firstname, pi.lastname, gm.game_id, gm.season, sum(away_goals) as away_goals, sum(home_goals) as home_goals, rank() over (partition by gm.season order by sum(away_goals) desc) as rank from game gm join game_shift gs on gm.game_id = gs.game_id join player_info pi on pi.player_id = gs.player_id group by 1,2,3,4,5 order by gs.player_id asc, rank asc) a")
+
+df.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+
+# read the datafile from the location
+game = spark.read.csv("/FileStore/tables/game.csv", header = True, inferSchema = True)
+game.createOrReplaceTempView("Game")
+
+# read the datafile from the location
+game_shift = spark.read.csv("/FileStore/tables/game_shifts_info.csv", header = True, inferSchema = True)
+game_shift.createOrReplaceTempView("Game_Shift")
+
+# read the datafile from the location
+player_info = spark.read.csv("/FileStore/tables/player_info.csv", header = True, inferSchema = True)
+player_info.createOrReplaceTempView("Player_Info")
+
+df = spark.sql("select * from(select gs.player_id, pi.firstname, pi.lastname, gm.game_id, gm.season, sum(away_goals) as away_goals, sum(home_goals) as home_goals, rank() over (partition by gm.season order by sum(away_goals) desc) as rank, row_number() over (order by sum(away_goals) desc) as row_number from game gm join game_shift gs on gm.game_id = gs.game_id join player_info pi on pi.player_id = gs.player_id group by 1,2,3,4,5 order by row_number asc) a")
+
+df.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+
+# read the datafile from the location
+game = spark.read.csv("/FileStore/tables/game.csv", header = True, inferSchema = True)
+game.createOrReplaceTempView("Game")
+
+# read the datafile from the location
+game_shift = spark.read.csv("/FileStore/tables/game_shifts_info.csv", header = True, inferSchema = True)
+game_shift.createOrReplaceTempView("Game_Shift")
+
+# read the datafile from the location
+player_info = spark.read.csv("/FileStore/tables/player_info.csv", header = True, inferSchema = True)
+player_info.createOrReplaceTempView("Player_Info")
+
+df = spark.sql("select * from(select row_number() over (order by sum(away_goals) desc) as row_number, rank() over (partition by gm.season order by sum(away_goals) desc) as rank, gs.player_id, pi.firstname, pi.lastname, gm.game_id, gm.season, sum(away_goals) as away_goals, sum(home_goals) as home_goals from game gm join game_shift gs on gm.game_id = gs.game_id join player_info pi on pi.player_id = gs.player_id group by 3,4,5,6,7) a")
+
+df.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
