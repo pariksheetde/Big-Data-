@@ -95,3 +95,11 @@ player_info.createOrReplaceTempView("player_info")
 spark.sql("select * from (select gss.game_id, ti.franchiseId, ti.teamName,ti.abbreviation, gss.player_id, pi.firstname, pi.lastname, sum(gss.assists) over (partition by gss.game_id order by gss.game_id) as assists, sum(gss.goals) over (partition by gss.game_id order by gss.game_id) as goals, sum(gss.shots) over (partition by gss.game_id order by gss.game_id) as shots, sum(gss.hits) over (partition by gss.game_id order by gss.game_id) as hits from game_skater_stats gss join team_info ti on gss.team_id = ti.team_id join player_info pi on pi.player_id = gss.player_id) a").show(10)
 
 -------------------------------------------------------------------------------------------------------------------------------
+
+Delete the files or dir
+
+%fs rm -r /FileStore/tables/FileStore
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
