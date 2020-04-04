@@ -52,3 +52,46 @@ df.show()
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+
+# read the datafile from the location
+game_skater_stats = spark.read.csv("/FileStore/tables/game_skater_stats.csv", header = True, inferSchema = True)
+
+# drop the unwanted columns
+game_skater_stats = game_skater_stats.drop("penaltyMinutes",	"faceOffWins",	"faceoffTaken",	"takeaways",	"giveaways",	"shortHandedGoals",	"shortHandedAssists",	"blocked",	"plusMinus",	"evenTimeOnIce",	"shortHandedTimeOnIce",	"powerPlayTimeOnIce")
+game_skater_stats.createOrReplaceTempView("game_skater_stats")
+
+# read the datafile from the location
+team_info = spark.read.csv("/FileStore/tables/team_info.csv", header = True, inferSchema = True)
+team_info.createOrReplaceTempView("team_info")
+
+spark.sql("select * from (select gss.game_id, ti.franchiseId, ti.teamName,ti.abbreviation, gss.player_id, sum(gss.assists) over (partition by gss.game_id order by gss.game_id) as assists, sum(gss.goals) over (partition by gss.game_id order by gss.game_id) as goals, sum(gss.shots) over (partition by gss.game_id order by gss.game_id) as shots, sum(gss.hits) over (partition by gss.game_id order by gss.game_id) as hits from game_skater_stats gss join team_info ti on gss.team_id = ti.team_id) a").show(10)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+
+# read the datafile from the location
+game_skater_stats = spark.read.csv("/FileStore/tables/game_skater_stats.csv", header = True, inferSchema = True)
+
+# drop the unwanted columns
+game_skater_stats = game_skater_stats.drop("penaltyMinutes",	"faceOffWins",	"faceoffTaken",	"takeaways",	"giveaways",	"shortHandedGoals",	"shortHandedAssists",	"blocked",	"plusMinus",	"evenTimeOnIce",	"shortHandedTimeOnIce",	"powerPlayTimeOnIce")
+game_skater_stats.createOrReplaceTempView("game_skater_stats")
+
+# read the datafile from the location
+team_info = spark.read.csv("/FileStore/tables/team_info.csv", header = True, inferSchema = True)
+team_info.createOrReplaceTempView("team_info")
+
+# read the datafile from the location
+player_info = spark.read.csv("/FileStore/tables/player_info.csv", header = True, inferSchema = True)
+player_info.createOrReplaceTempView("player_info")
+
+spark.sql("select * from (select gss.game_id, ti.franchiseId, ti.teamName,ti.abbreviation, gss.player_id, pi.firstname, pi.lastname, sum(gss.assists) over (partition by gss.game_id order by gss.game_id) as assists, sum(gss.goals) over (partition by gss.game_id order by gss.game_id) as goals, sum(gss.shots) over (partition by gss.game_id order by gss.game_id) as shots, sum(gss.hits) over (partition by gss.game_id order by gss.game_id) as hits from game_skater_stats gss join team_info ti on gss.team_id = ti.team_id join player_info pi on pi.player_id = gss.player_id) a").show(10)
+
+-------------------------------------------------------------------------------------------------------------------------------
