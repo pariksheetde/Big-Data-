@@ -118,4 +118,22 @@ spark.sql("select play_id, game_id, team_id_for,	team_id_against, period,	period
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+from pyspark.sql.types import DateType
 
+# read the datafile from the location
+game_plays_info = spark.read.csv("/FileStore/tables/game_plays_info.csv", header = True, inferSchema = True)
+
+game_plays_info = game_plays_info.fillna( { 'team_id_for':0, 'team_id_against':0 } )
+# game_plays_info = game_plays_info.fillna(0)
+# game_plays_info = game_plays_info.fillna(0, subset=['team_id_for', 'team_id_against'])
+# game_plays_info.createOrReplaceTempView("game_plays_info")
+# game_plays_info = game_plays_info.select(game_plays_info.columns[2:4]).fillna(0)
+
+
+spark.sql("select play_id, game_id, team_id_for,	team_id_against, period,	periodType,	periodTime,	dateTime,  dayofmonth(dateTime) as date, month(dateTime) as month, year(dateTime) as year,	goals_away,	goals_home,	description from game_plays_info").show()
+
+-------------------------------------------------------------------------------------------------------------------------------
