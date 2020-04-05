@@ -135,4 +135,51 @@ game_plays_info.createOrReplaceTempView("game_plays_info")
 
 
 spark.sql("select play_id, game_id, nvl(team_id_for,0) as team_id_for,	nvl(team_id_against,0) as team_id_against, period,	periodType,	periodTime,	dateTime,  dayofmonth(dateTime) as date, month(dateTime) as month, year(dateTime) as year,	goals_away,	goals_home,	description from game_plays_info").show()
+
 -------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+from pyspark.sql.types import DateType
+
+# read the datafile from the location
+vid_game = spark.read.csv("/FileStore/tables/vgsales.csv", header = True, inferSchema = True)
+vid_game.createOrReplaceTempView("Video_Game_Sales")
+
+# spark.sql("select Year, Genre, Publisher, sum(EU_Sales) as Europe, sum(JP_Sales) as Japan, sum(Global_Sales) as Global from video_game_sales  group by Year, Genre, Publisher").show(10)
+spark.sql("select Name, Platform, Year, Genre, Publisher, sum(EU_Sales) over (partition by Genre, Publisher order by Year asc) as Europe_Sales, sum(JP_Sales) over (partition by Genre, Publisher order by Year asc) as Japan_Sales, sum(Global_Sales) over (partition by Genre, Publisher order by Year asc) as Global_Sales from video_game_sales").show(10000)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+from pyspark.sql.types import DateType
+
+# read the datafile from the location
+vid_game = spark.read.csv("/FileStore/tables/vgsales.csv", header = True, inferSchema = True)
+vid_game.createOrReplaceTempView("Video_Game_Sales")
+
+# spark.sql("select Year, Genre, Publisher, sum(EU_Sales) as Europe, sum(JP_Sales) as Japan, sum(Global_Sales) as Global from video_game_sales  group by Year, Genre, Publisher").show(10)
+spark.sql("select * from (select Name, Platform, Year, Genre, Publisher, sum(EU_Sales) over (partition by Genre, Publisher order by Year asc) as Europe_Sales, sum(JP_Sales) over (partition by Genre, Publisher order by Year asc) as Japan_Sales, sum(Global_Sales) over (partition by Genre, Publisher order by Year asc) as Global_Sales from video_game_sales) a where Global_Sales = (Europe_Sales + Japan_Sales)").show(10000)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+from pyspark.sql.types import DateType
+
+# read the datafile from the location
+vid_game = spark.read.csv("/FileStore/tables/vgsales.csv", header = True, inferSchema = True)
+vid_game.createOrReplaceTempView("Video_Game_Sales")
+
+# spark.sql("select Year, Genre, Publisher, sum(EU_Sales) as Europe, sum(JP_Sales) as Japan, sum(Global_Sales) as Global from video_game_sales  group by Year, Genre, Publisher").show(10)
+spark.sql("select * from (select Name, Platform, Year, Genre, Publisher, sum(EU_Sales) over (partition by Genre, Publisher order by Year asc) as Europe_Sales, sum(JP_Sales) over (partition by Genre, Publisher order by Year asc) as Japan_Sales, sum(Global_Sales) over (partition by Genre, Publisher order by Year asc) as Global_Sales from video_game_sales) a where Global_Sales = (Europe_Sales + Japan_Sales) order by Year asc").show(10000)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
