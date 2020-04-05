@@ -1,0 +1,16 @@
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+from pyspark.sql.types import DateType
+
+# read the datafile from the location
+vid_game = spark.read.csv("/FileStore/tables/vgsales.csv", header = True, inferSchema = True)
+
+# select the columns using select function
+vid_game = vid_game.select( "Name", "Platform", "Year", "Genre", "Publisher")
+
+# filter the DatFrame using filter function
+vid_con = vid_game.filter("Publisher == 'Nintendo'").show()
+
+-------------------------------------------------------------------------------------------------------------------------------
