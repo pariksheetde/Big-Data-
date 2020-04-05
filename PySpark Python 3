@@ -225,6 +225,49 @@ vid_game = vid_game.selectExpr("Name as Name", "Platform", "Year", "Genre", "Pub
 
 # rank the DataFrame using rank() function
 vid_rnk = vid_game.select("Name", "Platform", "Year", "Genre", "Publisher", "EU_Sales", "JP_Sales",
-          dense_rank().over(Window.partitionBy("Publisher").orderBy("EU_Sales")).alias("rank")).show()
+          dense_rank().over(Window.partitionBy("Publisher").orderBy("EU_Sales")).alias("dense_rank")).show()
 		  
 -------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+from pyspark.sql.types import DateType
+from pyspark.sql.functions import *
+from pyspark.sql.functions import col
+
+# read the datafile from the location
+vid_game = spark.read.csv("/FileStore/tables/vgsales.csv", header = True, inferSchema = True)
+
+# filter the DatFrame using where function with multiple values
+vid_game = vid_game.selectExpr("Name as Name", "Platform", "Year", "Genre", "Publisher","EU_Sales","JP_Sales").where("Publisher in ('Nintendo','Electronic Arts') and Year > (2010)").where("Platform like ('X%')").where("Name not like ('NHL%')").where("Genre not like ('Action%')").orderBy("Genre", ascending = True)
+
+# rank the DataFrame using rank() function
+vid_rnk = vid_game.select("Name", "Platform", "Year", "Genre", "Publisher", "EU_Sales", "JP_Sales",
+          dense_rank().over(Window.orderBy("EU_Sales")).alias("dense_rank"))
+
+display(vid_rnk)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+from pyspark.sql.types import DateType
+from pyspark.sql.functions import *
+from pyspark.sql.functions import col
+
+# read the datafile from the location
+vid_game = spark.read.csv("/FileStore/tables/vgsales.csv", header = True, inferSchema = True)
+
+# filter the DatFrame using where function with multiple values
+vid_game = vid_game.selectExpr("Name as Name", "Platform", "Year", "Genre", "Publisher","EU_Sales","JP_Sales").where("Publisher in ('Nintendo','Electronic Arts') and Year > (2010)").where("Platform like ('X%')").where("Name not like ('NHL%')").where("Genre not like ('Action%')").orderBy("Genre", ascending = True)
+
+# rank the DataFrame using dense_rank() function
+vid_rnk = vid_game.select("Name", "Platform", "Year", "Genre", "Publisher", "EU_Sales", "JP_Sales",
+          dense_rank().over(Window.partitionBy("Publisher","Genre").orderBy("EU_Sales")).alias("dense_rank")).show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
