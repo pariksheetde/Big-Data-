@@ -14,3 +14,87 @@ vid_game = vid_game.select( "Name", "Platform", "Year", "Genre", "Publisher")
 vid_con = vid_game.filter("Publisher == 'Nintendo'").show()
 
 -------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+from pyspark.sql.types import DateType
+
+# read the datafile from the location
+vid_game = spark.read.csv("/FileStore/tables/vgsales.csv", header = True, inferSchema = True)
+
+# select the columns using select function
+vid_game = vid_game.select( "Name", "Platform", "Year", "Genre", "Publisher")
+
+# filter the DatFrame using where function with multiple values
+vid_con = vid_game.where("Publisher in ('Nintendo','Electronic Arts')").show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+from pyspark.sql.types import DateType
+
+# read the datafile from the location
+vid_game = spark.read.csv("/FileStore/tables/vgsales.csv", header = True, inferSchema = True)
+
+# select the columns using select function
+vid_game = vid_game.select( "Name", "Platform", "Year", "Genre", "Publisher")
+
+# filter the DatFrame using where function with multiple values
+vid_con1 = vid_game.where("Publisher in ('Nintendo','Electronic Arts')")
+vid_con2 = vid_con1.where("Year in (2006)").show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+from pyspark.sql.types import DateType
+
+# read the datafile from the location
+vid_game = spark.read.csv("/FileStore/tables/vgsales.csv", header = True, inferSchema = True)
+
+# select the columns using select function
+vid_game = vid_game.select( "Name", "Platform", "Year", "Genre", "Publisher")
+
+# filter the DatFrame using where function with multiple values
+vid_con1 = vid_game.where("Publisher in ('Nintendo','Electronic Arts') and Year == (2006)").show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+from pyspark.sql.types import DateType
+
+# read the datafile from the location
+vid_game = spark.read.csv("/FileStore/tables/vgsales.csv", header = True, inferSchema = True)
+
+# select the columns using select function
+vid_game = vid_game.select( "Name", "Platform", "Year", "Genre", "Publisher")
+
+# filter the DatFrame using where function with multiple values
+vid_con1 = vid_game.where("Publisher in ('Nintendo','Electronic Arts') and Year > (2010)").show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+from pyspark.sql.types import DateType
+
+# read the datafile from the location
+vid_game = spark.read.csv("/FileStore/tables/vgsales.csv", header = True, inferSchema = True)
+
+# select the columns using select function
+vid_game = vid_game.select( "Name", "Platform", "Year", "Genre", "Publisher").where("Publisher in ('Nintendo','Electronic Arts') and Year > (2010)").orderBy("Genre", ascending = True).show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
