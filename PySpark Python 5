@@ -108,3 +108,91 @@ display(df)
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+from pyspark.sql.types import DateType
+from pyspark.sql.functions import *
+
+# read the datafile from the location
+game = spark.read.csv("/FileStore/tables/game.csv", header = True, inferSchema = True)
+# filter the DatFrame using where function with multiple values
+game = game.selectExpr("game_id","season","type","away_goals","home_goals","venue")
+
+# read the datafile from the location
+game_shift_info = spark.read.csv("/FileStore/tables/game_shifts_info.csv", header = True, inferSchema = True)
+# filter the DatFrame using where function with multiple values
+game_shift_info = game_shift_info.selectExpr("game_id","player_id","period","shift_start","shift_end")
+
+df = game.join(game_shift_info, on="game_id", how='inner').select("game_id","player_id","season","type","venue","period","shift_start","shift_end","away_goals", "home_goals",dense_rank().over(Window.orderBy(desc("away_goals"))).alias("Dense_Rank"))
+display(df)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+from pyspark.sql.types import DateType
+from pyspark.sql.functions import *
+
+# read the datafile from the location
+game = spark.read.csv("/FileStore/tables/game.csv", header = True, inferSchema = True)
+# filter the DatFrame using where function with multiple values
+game = game.selectExpr("game_id","season","type","away_goals","home_goals","venue")
+
+# read the datafile from the location
+game_shift_info = spark.read.csv("/FileStore/tables/game_shifts_info.csv", header = True, inferSchema = True)
+# filter the DatFrame using where function with multiple values
+game_shift_info = game_shift_info.selectExpr("game_id","player_id","period","shift_start","shift_end")
+
+df = game.join(game_shift_info, on="game_id", how='inner').select("game_id","player_id","season","type","venue","period","shift_start","shift_end","away_goals", "home_goals",dense_rank().over(Window.orderBy(desc("away_goals"))).alias("Dense_Rank"),rank().over(Window.orderBy(desc("away_goals"))).alias("Rank"))
+display(df)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+from pyspark.sql.types import DateType
+from pyspark.sql.functions import *
+
+# read the datafile from the location
+game = spark.read.csv("/FileStore/tables/game.csv", header = True, inferSchema = True)
+# filter the DatFrame using where function with multiple values
+game = game.selectExpr("game_id","season","type","away_goals","home_goals","venue")
+
+# read the datafile from the location
+game_shift_info = spark.read.csv("/FileStore/tables/game_shifts_info.csv", header = True, inferSchema = True)
+# filter the DatFrame using where function with multiple values
+game_shift_info = game_shift_info.selectExpr("game_id","player_id","period","shift_start","shift_end")
+
+df = game.join(game_shift_info, on="game_id", how='inner').select(dense_rank().over(Window.orderBy(desc("away_goals"))).alias("Dense_Rank"),rank().over(Window.orderBy(desc("away_goals"))).alias("Rank"),"player_id","season","type","venue","period","shift_start","shift_end","away_goals", "home_goals")
+display(df)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+from pyspark.sql.types import DateType
+from pyspark.sql.functions import *
+
+# read the datafile from the location
+game = spark.read.csv("/FileStore/tables/game.csv", header = True, inferSchema = True)
+# filter the DatFrame using where function with multiple values
+game = game.selectExpr("game_id","season","type","away_goals","home_goals","venue")
+
+# read the datafile from the location
+game_shift_info = spark.read.csv("/FileStore/tables/game_shifts_info.csv", header = True, inferSchema = True)
+# filter the DatFrame using where function with multiple values
+game_shift_info = game_shift_info.selectExpr("game_id","player_id","period","shift_start","shift_end")
+
+df = game.join(game_shift_info, on="game_id", how='inner').select(dense_rank().over(Window.orderBy(desc("away_goals"))).alias("Dense_Rank"),rank().over(Window.orderBy(desc("away_goals"))).alias("Rank"),"player_id","season",sum("away_goals").over(Window.orderBy(desc("away_goals"))).alias("away_goals"),sum("home_goals").over(Window.orderBy(desc("home_goals"))).alias("home_goals"),"type","venue","period","shift_start","shift_end", "home_goals")
+display(df)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
