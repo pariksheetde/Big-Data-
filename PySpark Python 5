@@ -491,3 +491,49 @@ fdf = df.select(dense_rank().over(Window.orderBy(desc("away_goals"))).alias("Den
 display(fdf)
 
 -------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+from pyspark.sql.types import DateType
+from pyspark.sql.functions import *
+
+# read the datafile from the location
+game = spark.read.csv("/FileStore/tables/game.csv", header = True, inferSchema = True)
+# filter the DatFrame using where function with multiple values
+game = game.selectExpr("game_id","season","type","away_goals","home_goals","venue")
+
+# read the datafile from the location
+game_shift_info = spark.read.csv("/FileStore/tables/game_shifts_info.csv", header = True, inferSchema = True)
+# filter the DatFrame using where function with multiple values
+game_shift_info = game_shift_info.selectExpr("game_id","player_id","period","shift_start","shift_end")
+
+
+# read the datafile from the location
+player_info = spark.read.csv("/FileStore/tables/player_info.csv", header = True, inferSchema = True)
+# filter the DatFrame using where function with multiple values
+player_info = player_info.selectExpr("player_id","firstname","lastname","nationality","birthCity")
+
+
+# read the datafile from the location
+game_stats_info = spark.read.csv("/FileStore/tables/game_skater_stats.csv", header = True, inferSchema = True)
+# filter the DatFrame using where function with multiple values
+game_stats_info = game_stats_info.selectExpr("game_id","player_id","team_id","assists","goals","shots")
+
+
+# join 2 DataFrames
+res = game.join(game_shift_info, on = ["game_id"], how = "inner")
+
+# join the DataFrame with the result of the previous DataFrame
+df = player_info.join(res, on = ["player_id"], how = "inner")
+
+# join the DataFrame with the result of the previous DataFrame
+fdf = game_stats_info.join(df, on = ["game_id","player_id"], how = "inner")
+
+res_fdf = fdf.select(dense_rank().over(Window.orderBy(desc("away_goals"))).alias("Dense_Rank"),rank().over(Window.orderBy(desc("away_goals"))).alias("Rank"),sum("home_goals").over(Window.partitionBy("season").orderBy(desc("player_id"))).alias("home_goals"),sum("away_goals").over(Window.partitionBy("season").orderBy(desc("player_id"))).alias("away_goals"),"game_id","player_id","firstname","lastname",sum("assists").over(Window.partitionBy("season").orderBy(desc("player_id"))).alias("assists"),sum("goals").over(Window.partitionBy("season").orderBy(desc("player_id"))).alias("goals"),sum("shots").over(Window.partitionBy("season").orderBy(desc("player_id"))).alias("shots"),"season","type","venue","period")
+display(res_fdf)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
