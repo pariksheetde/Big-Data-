@@ -302,4 +302,60 @@ display(df)
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+from pyspark.sql.types import DateType
+from pyspark.sql.functions import *
+
+# read the datafile from the location
+game = spark.read.csv("/FileStore/tables/game.csv", header = True, inferSchema = True)
+# filter the DatFrame using where function with multiple values
+game = game.selectExpr("game_id","season","type","away_goals","home_goals","venue")
+
+# read the datafile from the location
+game_shift_info = spark.read.csv("/FileStore/tables/game_shifts_info.csv", header = True, inferSchema = True)
+# filter the DatFrame using where function with multiple values
+game_shift_info = game_shift_info.selectExpr("game_id","player_id","period","shift_start","shift_end")
+
+
+# read the datafile from the location
+player_info = spark.read.csv("/FileStore/tables/player_info.csv", header = True, inferSchema = True)
+# filter the DatFrame using where function with multiple values
+player_info = player_info.selectExpr("player_id","firstname","lastname","nationality","birthCity")
+
+# read the datafile from the location
+goalie_stat = spark.read.csv("/FileStore/tables/game_goalie_stats.csv", header = True, inferSchema = True)
+# filter the DatFrame using where function with multiple values
+goalie_stat = goalie_stat.selectExpr("game_id",	"player_id", "team_id",	"timeOnIce","decision",	"savePercentage",	"powerPlaySavePercentage", "evenStrengthSavePercentage")
+
+# join 4 DataFrames
+df = game.join(game_shift_info, on="game_id", how='inner').join(player_info, on = "player_id", how = "inner").join(goalie_stat, on = ["player_id","game_id"], how = "inner").select("player_id","firstname","lastname","nationality","birthCity","season","type","venue","period")
+display(df)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+from pyspark.sql.types import DateType
+from pyspark.sql.functions import *
+
+# read the datafile from the location
+game = spark.read.csv("/FileStore/tables/game.csv", header = True, inferSchema = True)
+# filter the DatFrame using where function with multiple values
+game = game.selectExpr("game_id","season","type","away_goals","home_goals","venue")
+
+# read the datafile from the location
+game_shift_info = spark.read.csv("/FileStore/tables/game_shifts_info.csv", header = True, inferSchema = True)
+# filter the DatFrame using where function with multiple values
+game_shift_info = game_shift_info.selectExpr("game_id","player_id","period","shift_start","shift_end")
+
+# join 2 DataFrames
+res = game.join(game_shift_info, on = "game_id", how = "inner")
+res.select("game_id","season","type","away_goals","home_goals","venue","player_id","period").show()
+
+-------------------------------------------------------------------------------------------------------------------------------
 
