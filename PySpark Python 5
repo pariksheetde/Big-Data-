@@ -267,6 +267,7 @@ player_info = player_info.selectExpr("player_id","firstname","lastname","nationa
 # df = game.join(game_shift_info, on="game_id", how='inner').select(dense_rank().over(Window.orderBy(desc("away_goals"))).alias("Dense_Rank"),rank().over(Window.orderBy(desc("away_goals"))).alias("Rank"),"player_id","season",sum("away_goals").over(Window.partitionBy("season").orderBy(desc("away_goals"))).alias("away_goals"),sum("home_goals").over(Window.partitionBy("season").orderBy(desc("home_goals"))).alias("home_goals"),"type","venue","period","shift_start","shift_end")
 # display(df)
 
+# join 3 DataFrames
 df = game.join(game_shift_info, on="game_id", how='inner').join(player_info, on = "player_id", how = "inner").select(dense_rank().over(Window.orderBy(desc("away_goals"))).alias("Dense_Rank"),rank().over(Window.orderBy(desc("away_goals"))).alias("Rank"),"player_id","firstname","lastname","nationality","birthCity","season",sum("away_goals").over(Window.partitionBy("season").orderBy(desc("away_goals"))).alias("away_goals"),sum("home_goals").over(Window.partitionBy("season").orderBy(desc("home_goals"))).alias("home_goals"),"type","venue","period","shift_start","shift_end")
 display(df)
 
