@@ -1,1 +1,107 @@
-Sqoop
+                         Sqoop query to import all the tables from mysql
+----------------------------------------------------------------------------------------------------------------------------------
+
+sqoop import-all-tables --connect jdbc:mysql://quickstart.cloudera:3306/retail_db  --username root --password cloudera  --warehouse-dir /user/cloudera/pariksheet/sqoop_stage
+
+----------------------------------------------------------------------------------------------------------------------------------
+                         
+						 Sqoop query to import all columns from orders tables
+----------------------------------------------------------------------------------------------------------------------------------
+
+sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+             --username root --password cloudera  --query "SELECT * from categories WHERE \$CONDITIONS" \
+			 --delete-target-dir --target-dir /user/cloudera/pariksheet/sqoop/categories --split-by category_id \
+			 --m 1 --fields-terminated-by ','
+			 
+sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+             --username root --password cloudera  \
+             --query "SELECT * from customers WHERE \$CONDITIONS" --delete-target-dir \
+			 --target-dir /user/cloudera/pariksheet/sqoop/customers \
+			 --split-by customer_id --m 1 --fields-terminated-by ','
+			 
+sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+             --username root --password cloudera  
+			 --query "SELECT * from departments WHERE \$CONDITIONS" \
+			 --delete-target-dir --target-dir /user/cloudera/pariksheet/sqoop/departments --split-by department_id \
+			 --m 1 --fields-terminated-by ','
+			 
+sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+             --username root --password cloudera  
+			 --query "SELECT * from order_items WHERE \$CONDITIONS" \
+			 --delete-target-dir --target-dir /user/cloudera/pariksheet/sqoop/order_items --split-by order_item_id \
+			 --m 1 --fields-terminated-by ','
+			 
+sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+             --username root --password cloudera  \
+             --query "SELECT * from orders WHERE \$CONDITIONS" \
+             --delete-target-dir --target-dir /user/cloudera/pariksheet/sqoop/orders --split-by order_id --m 1 \
+			 --fields-terminated-by ','
+			 
+sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+             --username root --password cloudera  \
+             --query "SELECT * from products WHERE \$CONDITIONS" \
+             --delete-target-dir --target-dir /user/cloudera/pariksheet/sqoop/products --split-by product_id --m 1 \
+			 --fields-terminated-by ','
+
+sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+             --username root --password cloudera  \
+			 --query "select prd.product_id, prd.product_category_id,prd.product_name,prd.product_price,cat.category_department_id, cat.category_name from products prd inner join categories cat on prd.product_category_id = cat.category_id WHERE \$CONDITIONS" \
+			 --delete-target-dir --target-dir /user/cloudera/pariksheet/sqoop/prod_cat \--split-by category_id --m 1 \
+			 --fields-terminated-by ','
+
+sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+             --username root --P  \
+             --query "select ord.order_id,oi.order_item_id,ord.order_date,ord.order_status,oi.order_item_product_price \
+			 from orders ord join order_items oi on ord.order_id = oi.order_item_id \
+             WHERE \$CONDITIONS" --delete-target-dir --target-dir /user/cloudera/pariksheet/sqoop/order_item_status \
+             --split-by order_id --m 1 --fields-terminated-by ','
+			 
+sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/retail_db --username root --password cloudera  \
+             --query "select o.order_id, o.order_date,c.customer_id, c.customer_fname, c.customer_lname,o.order_status,oi.order_item_quantity from orders o join customers c on o.order_customer_id = c.customer_id join order_items oi on oi.order_item_id = o.order_id WHERE \$CONDITIONS AND o.order_status in ('CLOSED','PENDING')" \
+			 --delete-target-dir --target-dir /user/cloudera/pariksheet/sqoop_edl/ord_cust \
+			 --split-by order_id --m 1 --fields-terminated-by ','
+			 
+sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/retail_db --username root --password cloudera  \
+             --query "select o.order_id, o.order_date,c.customer_id, concat(c.customer_fname,c.customer_lname) as customer_name,o.order_status,oi.order_item_quantity from orders o join customers c on o.order_customer_id = c.customer_id join order_items oi on oi.order_item_id = o.order_id WHERE \$CONDITIONS AND o.order_status in ('CLOSED','PENDING')" \
+			 --delete-target-dir --target-dir /user/cloudera/pariksheet/sqoop_edl/cust_orders_dtls --split-by order_id --m 1 \
+			 --fields-terminated-by ','
+			 
+sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/retail_db --username root --password cloudera  \
+             --query "select * from (select sum(oi.order_item_quantity) as order_item_quantity,o.order_status from orders o join order_items oi on oi.order_item_id = o.order_id group by o.order_status) q WHERE \$CONDITIONS AND q.order_status in ('CLOSED','PENDING') order by 1" \
+			 --delete-target-dir --target-dir /user/cloudera/pariksheet/sqoop_edl/orders_ord_items --split-by order_id --m 1 \
+			 --fields-terminated-by ','
+			 
+
+----------------------------------------------------------------------------------------------------------------------------------
+                         Sqoop query to import all columns from tables with where condition
+----------------------------------------------------------------------------------------------------------------------------------
+
+sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/retail_db --username root --password cloudera  --query "SELECT * from categories WHERE \$CONDITIONS AND category_name in ('Football') or category_name like ('%nfl%')" --delete-target-dir --target-dir /user/cloudera/pariksheet/sqoop_edl/categories --split-by category_id --m 1 --fields-terminated-by ','
+
+sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/retail_db --username root --password cloudera  --query "SELECT * from orders WHERE \$CONDITIONS AND order_status =  'CLOSED' and order_customer_id > 5000" --delete-target-dir --target-dir /user/cloudera/pariksheet/sqoop_edl/orders --split-by order_id --m 1 --fields-terminated-by ','
+
+sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/retail_db --username root --password cloudera  --query "select ord.order_id,oi.order_item_id,ord.order_date,ord.order_status,oi.order_item_product_price from orders ord join order_items oi on ord.order_id = oi.order_item_id WHERE \$CONDITIONS" --delete-target-dir --target-dir /user/cloudera/pariksheet/sqoop_edl/orders --split-by order_id --m 1 --fields-terminated-by ','
+
+sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/retail_db --username root --password cloudera  --query "select ord.order_id,oi.order_item_id,ord.order_date,ord.order_status,oi.order_item_product_price from orders ord join order_items oi on ord.order_id = oi.order_item_id WHERE \$CONDITIONS AND ord.order_status = 'COMPLETE'" --delete-target-dir --target-dir /user/cloudera/pariksheet/sqoop_edl/orders --split-by order_id --m 1 --fields-terminated-by ','
+
+sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/retail_db --username root --password cloudera  --query "select ord.order_id,oi.order_item_id,ord.order_date,lower(ord.order_status) as order_status,oi.order_item_product_price from orders ord join order_items oi on ord.order_id = oi.order_item_id WHERE \$CONDITIONS AND ord.order_status = 'COMPLETE'" --delete-target-dir --target-dir /user/cloudera/pariksheet/sqoop_edl/orders --split-by order_id --m 1 --fields-terminated-by ','
+
+sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/retail_db --username root --password cloudera  --query "select ord.order_id,oi.order_item_id,ord.order_date,lower(ord.order_status) as order_status,oi.order_item_product_price from orders ord join order_items oi on ord.order_id = oi.order_item_id WHERE \$CONDITIONS AND ord.order_status = 'COMPLETE'" --delete-target-dir --target-dir /user/cloudera/pariksheet/sqoop_edl/orders --split-by order_id --m 1 --fields-terminated-by ','
+
+sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/retail_db --username root --password cloudera  --query "select ord.order_id,oi.order_item_id,ord.order_date,lower(ord.order_status) as order_status,oi.order_item_product_price from orders ord join order_items oi on ord.order_id = oi.order_item_id WHERE \$CONDITIONS AND ord.order_status = 'COMPLETE' and ord.order_date > '2013-12-31'" --delete-target-dir --target-dir /user/cloudera/pariksheet/sqoop_edl/orders --split-by order_id --m 1 --fields-terminated-by ','
+
+----------------------------------------------------------------------------------------------------------------------------------
+                         Sqoop query to import data in hive tables
+----------------------------------------------------------------------------------------------------------------------------------
+
+sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/retail_db --username root --password cloudera  --table categories --fields-terminated-by '|' --split-by category_id --hive-import --hive-table retail_db.categories
+
+sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/retail_db --username root --password cloudera  --table customers --fields-terminated-by '|' --split-by customer_id --hive-import --hive-table retail_db.customers --hive-overwrite
+
+sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/retail_db --username root --password cloudera  --table departments --fields-terminated-by '|' --split-by department_id --hive-import --hive-table retail_db.departments --hive-overwrite
+
+sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/retail_db --username root --password cloudera  --table order_items --fields-terminated-by '|' --split-by order_item_id --hive-import --hive-table retail_db.order_items --hive-overwrite
+
+sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/retail_db --username root --password cloudera  --table orders_cat --fields-terminated-by '|' --split-by product_id --hive-import --hive-table retail_db.orders_cat --hive-overwrite
+
+sqoop import --connect jdbc:mysql://quickstart.cloudera:3306/retail_db --username root --password cloudera  --table products --fields-terminated-by '|' --split-by product_id --hive-import --hive-table retail_db.products --hive-overwrite
