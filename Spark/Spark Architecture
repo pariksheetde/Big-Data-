@@ -1,0 +1,61 @@
+What is Apache Spark?
+Apache Spark is a lightning-fast cluster computing framework designed for real-time processing. Spark is an open-source project from Apache Software Foundation. Spark overcomes the limitations of Hadoop MapReduce, and it extends the MapReduce model to be efficiently used for data processing.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+What happens when Spark job is submitted:
+
+When a client submits a spark user application code, the driver implicitly converts the code containing transformations and actions into a logical directed acyclic graph (DAG). At this stage, the driver program also performs certain optimizations like pipelining transformations and then it converts the logical DAG into physical execution plan with set of stages. After creating the physical execution plan, it creates small physical execution units referred to as tasks under each stage. Then tasks are bundled to be sent to the Spark Cluster.
+The driver program then talks to the cluster manager and negotiates for resources. The cluster manager then launches executors on the worker nodes on behalf of the driver. At this point the driver sends tasks to the cluster manager based on data placement. Before executors begin execution, they register themselves with the driver program so that the driver has holistic view of all the executors. Now executors start executing the various tasks assigned by the driver program. At any point of time when the spark application is running, the driver program will monitor the set of executors that run. Driver program in the spark architecture also schedules future tasks based on data placement by tracking the location of cached data. When driver programs main () method exits or when it call the stop () method of the Spark Context, it will terminate all the executors and release the resources from the cluster manager.
+The structure of a Spark program at higher level is - RDD's are created from the input data and new RDD's are derived from the existing RDD's using different transformations, after which an action is performed on the data. In any spark program, the DAG operations are created by default and whenever the driver runs the Spark DAG will be converted into a physical execution plan.
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Spark Architecture Overview
+
+Apache Spark has a well-defined layered architecture where all the spark components and layers are loosely coupled. This architecture is further integrated with various extensions and libraries. Apache Spark Architecture is based on two main abstractions:
+
+Resilient Distributed Dataset (RDD)
+Directed Acyclic Graph (DAG)
+
+Spark Eco-System
+As you can see from the below image, the spark ecosystem is composed of various components like Spark SQL, Spark Streaming, MLlib, GraphX, and the Core API component.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Spark Core:
+
+Spark Core is the base engine for large-scale parallel and distributed data processing. Further, additional libraries which are built on the top of the core allows diverse workloads for streaming, SQL, and machine learning. It is responsible for memory management and fault recovery, scheduling, distributing and monitoring jobs on a cluster & interacting with storage systems.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Resilient Distributed Dataset(RDD)
+RDDs are the building blocks of any Spark application. RDDs Stands for:
+
+Resilient: Fault tolerant and is capable of rebuilding data on failure
+Distributed: Distributed data among the multiple nodes in a cluster
+Dataset: Collection of partitioned data with values
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+There are two ways to create RDDs
+1. Parallelizing an existing collection in your driver program.
+2. By referencing a dataset in an external storage system, such as a shared file system, HDFS, HBase, etc.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Transformations: They are the operations that are applied to create a new RDD.
+Actions: They are applied on an RDD to instruct Apache Spark to apply computation and pass the result back to the driver.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+STEP 1: The client submits spark user application code. When an application code is submitted, the driver implicitly converts user code that contains transformations and actions into a logically directed acyclic graph called DAG. At this stage, it also performs optimizations such as pipelining transformations.
+
+STEP 2: After that, it converts the logical graph called DAG into physical execution plan with many stages. After converting into a physical execution plan, it creates physical execution units called tasks under each stage. Then the tasks are bundled and sent to the cluster.
+
+STEP 3: Now the driver talks to the cluster manager and negotiates the resources. Cluster manager launches executors in worker nodes on behalf of the driver. At this point, the driver will send the tasks to the executors based on data placement. When executors start, they register themselves with drivers. So, the driver will have a complete view of executors that are executing the task.
+
+STEP 4: During the course of execution of tasks, driver program will monitor the set of executors that runs. Driver node also schedules future tasks based on data placement.
+
+-------------------------------------------------------------------------------------------------------------------------------
