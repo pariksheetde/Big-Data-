@@ -1,0 +1,280 @@
+Spark Session: 
+
+Spark is an open-source cluster-computing framework which addresses all the limitations of MapReduce.
+In earlier versions of Spark, Spark Context was the entry point for Spark. For every other API, we needed to use different contexts. For streaming, we needed StreamingContext, for SQL sqlContext and for hive HiveContext. To solve this issue, SparkSession came into the picture. It is essentially a combination of SQLContext, HiveContext and future StreamingContext.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+The Apache Spark framework uses a master–slave architecture that consists of a driver, which runs as a master node, and many executors that run across as worker nodes in the cluster. Apache Spark can be used for batch processing and real-time processing as well.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Data Sources:
+
+The Data Source API provides a pluggable mechanism for accessing structured data though Spark SQL. Data Source API is used to read and store structured and semi-structured data into Spark SQL. Data sources can be more than just simple pipes that convert data and pull it into Spark.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+RDD:
+
+Resilient Distributed Dataset (RDD) is a fundamental data structure of Spark. It is an immutable distributed collection of objects. Each dataset in RDD is divided into logical partitions, which may be computed on different nodes of the cluster. RDDs can contain any type of Python, Java, or Scala objects, including user-defined classes.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+DataFrames: 
+
+A DataFrame is a Dataset organized into named columns. It is conceptually equivalent to a table in a relational database or a data frame in R/Python, but with richer optimizations under the hood. DataFrames can be constructed from a wide array of sources such as: structured data files, tables in Hive, external databases or existing RDDs.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Hadoop components can be used alongside Spark in the following ways:
+
+HDFS: Spark can run on top of HDFS to leverage the distributed replicated storage.
+MapReduce: Spark can be used along with MapReduce in the same Hadoop cluster or separately as a processing framework.
+YARN: Spark applications can be made to run on YARN (Hadoop NextGen).
+Batch & Real Time Processing: MapReduce and Spark are used together where MapReduce is used for batch processing and Spark for real-time processing.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Spark Core
+Spark Core is the base engine for large-scale parallel and distributed data processing. The core is the distributed execution engine and the Java, Scala, and Python APIs offer a platform for distributed ETL application development. Further, additional libraries which are built atop the core allow diverse workloads for streaming, SQL, and machine learning. It is responsible for:
+
+1. Memory management and fault recovery
+2. Scheduling, distributing and monitoring jobs on a cluster
+3. Interacting with storage systems
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Features of Spark:
+
+In Memory Computation: Uses multi-stage (mostly) in-memory computing engine for performing most computations in memory, instead of storing temporary results of long running computations to file system.
+
+Performance and Speed: Provides better performance for certain applications, e.g. iterative algorithms or interactive data mining. Spark focuses on speed, ease of use, compared to earlier Hadoop systems. Refer the link for more details of the benchmark – Databricks benchmark of Spark
+
+Fault Tolerance: Spark retries failed tasks
+
+Advanced User Friendly APIs and Data structures: Rich Set of data structures supporting tabular structures, SQL Queries, easier transformations, rich set of aggregate functions
+
+Supports many Languages: Spark is mostly written in Scala but provides APIs for languages – java, python, SQL and R
+
+Lazy Evaluation: when we do a transformation on RDD, spark doesn’t immediately do the transformation. It updates its execution model ( DAG) with this information and only when the driver requests data, the DAG is executed. Do you see the benefit of this approach ? Think about it. Spark can make optimizations on the execution plan and refine it once it had a chance to look at the DAG in full. This would be impossible if it executed everything on the fly.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+RDD:
+
+RDD is a collection of elements partitioned across the nodes of the cluster that can be operated on in parallel. For instance you can create an RDD of integers and these gets partitioned and divided and assigned to various nodes in the cluster for parallel processing.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Features of RDD
+Resilient: They are fault tolerant and able to detect and recompute missing or damaged partitions of an RDD due to node or network failures.
+
+Distributed: Data is partitioned and resides on multiple nodes depending on the cluster size, type and configuration
+
+In Memory Data structure: Mostly they are in memory so that iterative operations runs faster and performs way better than traditional Hadoop programs in executing iterative algorithms
+
+Dataset: it can represent any form of data be it reading from a csv file, loading data from a table using rdbms, text file, json , xml.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Architecture
+1. What is a Driver – Don’t get confused with JDBC Driver 🙂 It is not that driver. Driver program in practical terms, is the code you write that applies various transformations and action on the RDDs. The entire program that you make as jar and execute is the spark application.
+2. Put it another way, driver is the program containing the SparkContext or your main program
+3. Spark uses a master/worker architecture. The driver talks to a single coordinator called master. The master manages the worker nodes in which executors run. Don’t worry, i will explain this more clearly in below sections.
+4. Workers – Machines in which distributed task(s) are scheduled for execution
+5. Executor – A separate Java process in the worker executing a task.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Executors:
+
+In spark , an executor is an agent or a process running in a worker machine that is capable of executing tasks and as soon as it finishes the task execution, sends the results to the driver. Executor process also send heartbeats and other metrics to the driver. Executor typically runs for the entire duration of the Spark application. This is is called static allocation of executors. But if you want more elasticity to have better utilization of the resources, you could opt for dynamic allocation of executors. The executor is a separate process and hence is separate for each spark application providing total isolation in the case of multiple applications running in spark cluster. Hence there no direct application to application communication possible even when they are running in same spark cluster.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+What is a Node: ( a machine )
+Worker: The machine where one or many executors are started for task execution.
+Executor: A process in a worker node where one or many tasks are going to be executed. A worked node may contain many executors
+RDD: The basic abstraction of data provided by spark which has characteristics like fault tolerance, partitioning, resilience, distributed and uses memory storage.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Transformations:
+
+A transformation results in the creation of another RDD from the given RDD. Remember an RDD is immutable so what ever transform you do will result in a new RDD and the original RDD will be untouched. This is by design of spark and is the right thing. A Transform takes RDD as input and produces one or more RDD as output.
+
+Actions:
+
+A Spark Action results in the creation of a non RDD output. The values of actions are either returned to the driver or stored in some external storage system like HDFS, Hive , Cassandra etc.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Resilient Distributed Datasets (RDD):
+
+RDD’s are collection of data items that are split into partitions and can be stored in-memory on workers nodes of the spark cluster. In terms of datasets, apache spark supports two types of RDD’s – Hadoop Datasets which are created from the files stored on HDFS and parallelized collections which are based on existing Scala collections. Spark RDD’s support two different types of operations – Transformations and Actions.  
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Directed Acyclic Graph (DAG)
+
+Direct - Transformation is an action which transitions data partition state from A to B.
+
+Acyclic -Transformation cannot return to the older partition
+
+DAG is a sequence of computations performed on data where each node is an RDD partition and edge is a transformation on top of data.  The DAG abstraction helps eliminate the Hadoop MapReduce multi0stage execution model and provides performance enhancements over Hadoop.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Resilient Distributed Datasets (RDD):
+
+RDD’s are collection of data items that are split into partitions and can be stored in-memory on workers nodes of the spark cluster. In terms of datasets, apache spark supports two types of RDD’s – Hadoop Datasets which are created from the files stored on HDFS and parallelized collections which are based on existing Scala collections. Spark RDD’s support two different types of operations – Transformations and Actions.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Directed Acyclic Graph (DAG):
+
+Direct - Transformation is an action which transitions data partition state from A to B.
+
+Acyclic -Transformation cannot return to the older partition
+
+DAG is a sequence of computations performed on data where each node is an RDD partition and edge is a transformation on top of data.  The DAG abstraction helps eliminate the Hadoop MapReduce multi0stage execution model and provides performance enhancements over Hadoop.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Role of Executor in Spark Architecture:
+
+Executor is a distributed agent responsible for the execution of tasks. Every spark applications has its own executor process. Executors usually run for the entire lifetime of a Spark application and this phenomenon is known as “Static Allocation of Executors”. However, users can also opt for dynamic allocations of executors wherein they can add or remove spark executors dynamically to match with the overall workload.
+
+Executor performs all the data processing.
+Reads from and Writes data to external sources.
+Executor stores the computation results data in-memory, cache or on hard disk drives.
+Interacts with the storage systems.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Features of Spark:
+
+In Memory Computation: Uses multi-stage (mostly) in-memory computing engine for performing most computations in memory, instead of storing temporary results of long running computations to file system.
+
+Performance and Speed: Provides better performance for certain applications, e.g. iterative algorithms or interactive data mining. Spark focuses on speed, ease of use, compared to earlier Hadoop systems. Refer the link for more details of the benchmark – Databricks benchmark of Spark.
+
+Fault Tolerance: Spark retries failed tasks
+
+Advanced User Friendly APIs and Data structures: Rich Set of data structures supporting tabular structures, SQL Queries, easier transformations, rich set of aggregate functions
+
+Supports many Languages: Spark is mostly written in Scala but provides APIs for languages – Java, python, sql and R.
+
+Lazy Evaluation: When we do a transformation on RDD, spark doesn’t immediately do the transformation. It updates its execution model (DAG) with this information and only when the driver requests data, the DAG is executed. Do you see the benefit of this approach ? Think about it. Spark can make optimizations on the execution plan and refine it once it had a chance to look at the DAG in full. This would be impossible if it executed everything on the fly.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Executors:
+
+In spark , an executor is an agent or a process running in a worker machine that is capable of executing tasks and as soon as it finishes the task execution, sends the results to the driver. Executor process also send heartbeats and other metrics to the driver. Executor typically runs for the entire duration of the Spark application. This is is called static allocation of executors. But if you want more elasticity to have better utilization of the resources, you could opt for dynamic allocation of executors.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Resilient Distributed Dataset (RDD):
+
+A Resilient Distributed Dataset (RDD), the basic abstraction in Spark, represents an immutable, partitioned collection of elements that can be operated on in parallel.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Resilient
+Meaning it provides fault tolerance through lineage graph. A lineage graph keeps a track of transformations to be executed after an action has been called. RDD lineage graph helps recomputed any missing or damaged partitions because of node failures.
+
+Distributed
+RDDs are distributed - meaning the data is present on multiple nodes in a cluster.
+
+Datasets
+Collection of partitioned data with primitive values.
+Apache Spark allows users to consider input files just like any other variables which is not possible in case of Hadoop MapReduce.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Features of Spark RDDs;
+
+Immutable
+​They read only abstraction and cannot be changed once created. However, one RDD can be transformed into another RDD using transformations like map, filter, join, cogroup, etc. Immutable nature of RDD Spark helps attain consistencies in computations.
+
+Partitioned
+RDDs in Spark have collection of records that contain partitions. RDDs in Spark are divided into small logical chunks of data - known as partitions, when an action is executed, a task will be launched per partition. Partitions in RDDs are the basic units of parallelism. Apache Spark architecture is designed to automatically decide on the number of partitions that an RDD can be divided into. However, the number of partitions an RDD can be divided into can be specified when creating an RDD. Partitions of an RDD are distributed through all the nodes in a network.
+
+Lazy Evaluated
+RDDs are computed in a lazy manner, so that the transformations can be pipelined. Data inside RDDs will not be transformed unless, an action that triggers the execution of transformations is invoked.
+
+Persistence
+The persistence of RDDs makes them good for fast computations. Users can specify which RDD they want to reuse and select the desired storage for them -whether they would like to store them on disk or in-memory. RDDs are cacheable i.e. they can hold all the data in desired persistent storage.
+
+Fault Tolerance
+Spark RDDs log all transformation in a lineage graph so that whenever a partition is lost, lineage graph can be used to reply the transformation instead of having to replicate data across multiple nodes (like in Hadoop MapReduce).
+
+Parallel
+RDDs in Spark process data in parallel.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+RDD Operations - Transformation
+RDDs are immutable. Data in an RDD never changes; they transform in sequence to modify the data as needed. You don’t need to make changes to an RDD; you can simply create a new RDD using a transformation. Spark programs are mostly made up of a series of transformations.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Resilient Distributed Dataset (RDD): 
+RDD is an immutable (read-only), fundamental collection of elements or items that can be operated on many devices at the same time (parallel processing). Each dataset in an RDD can be divided into logical portions, which are then executed on different nodes of a cluster.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Directed Acyclic Graph (DAG): 
+DAG is the scheduling layer of the Apache Spark architecture that implements stage-oriented scheduling. Compared to MapReduce that creates a graph in two stages, Map and Reduce, Apache Spark can create DAGs that contain many stages.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Apache Spark Core
+Apache Spark Core consists of a general execution engine for the Spark platform which is built as per the requirement. It provides in-built memory computing and references datasets stored in external storage systems.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Spark Architecture:
+
+Driver Program in the Apache Spark architecture calls the main program of an application and creates SparkContext. A SparkContext consists of all the basic functionalities. Spark Driver contains various other components such as DAG Scheduler, Task Scheduler, backend Scheduler, and Block Manager, which are responsible for translating the user-written code into jobs that are actually executed on the cluster.
+
+Spark Driver and SparkContext collectively watch over the job execution within the cluster. Spark Driver works with the Cluster Manager to manage various other jobs. Cluster Manager does the resource allocating work. And then, the job is split into multiple smaller tasks which are further distributed to worker nodes.
+
+Whenever an RDD is created in the SparkContext, it can be distributed across many worker nodes and can also be cached there.
+
+Worker nodes execute the tasks assigned by the Cluster Manager and return it back to the Spark Context.
+
+An executor is responsible for the execution of these tasks. The lifetime of executors is the same as that of the Spark Application. If we want to increase the performance of the system, we can increase the number of workers so that the jobs can be divided into more logical portions.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Resilient Distributed Datasets (RDDs):
+
+RDDs are the main logical data units in Spark. They are a distributed collection of objects, which are stored in memory or on disks of different machines of a cluster. A single RDD can be divided into multiple logical partitions so that these partitions can be stored and processed on different machines of a cluster.
+RDDs are immutable (read-only) in nature. You cannot change an original RDD, but you can create new RDDs by performing coarse-grain operations, like transformations, on an existing RDD.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Features of an RDD:
+Resilience: RDDs track data lineage information to recover lost data, automatically on failure. It is also called fault tolerance.
+
+Distributed: Data present in an RDD resides on multiple nodes. It is distributed across different nodes of a cluster.
+
+Lazy evaluation: Data does not get loaded in an RDD even if you define it. Transformations are actually computed when you call an action, such as count or collect, or save the output to a file system.
+
+Immutability: Data stored in an RDD is in the read-only mode━you cannot edit the data which is present in the RDD. But, you can create new RDDs by performing transformations on the existing RDDs.
+
+In-memory computation: An RDD stores any immediate data that is generated in the memory (RAM) than on the disk so that it provides faster access.
+
+Partitioning: Partitions can be done on any existing RDD to create logical parts that are mutable. You can achieve this by applying transformations on the existing partitions.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Transformations:
+These are functions that accept the existing RDDs as input and outputs one or more RDDs. However, the data in the existing RDD in Spark does not change as it is immutable. The transformations are executed when they are invoked or called. Every time transformations are applied, a new RDD is created.
+
+Actions
+Actions in Spark are functions that return the end result of RDD computations. It uses a lineage graph to load data onto the RDD in a particular order. After all of the transformations are done, actions return the final result to the Spark Driver. Actions are operations that provide non-RDD values.
+
+-------------------------------------------------------------------------------------------------------------------------------
