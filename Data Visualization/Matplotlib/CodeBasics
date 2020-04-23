@@ -10,6 +10,7 @@ plt.xlabel("Day")
 plt.ylabel("Temperature")
 plt.title("Whether Forecasting")
 plt.plot(dt,temp, color='black', marker='o',linewidth=1, linestyle='solid', alpha = .5)
+plt.grid()
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
@@ -65,5 +66,77 @@ plt.grid()
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
+# Create a Horizontal Bar Graph
 
+import matplotlib.pyplot as plt
+%matplotlib inline
+import pandas as pd
+import numpy as np
+stk = pd.read_csv("D:\Code\DataSet\PythonDataSet\StockData\StockData.csv")
+
+comp = stk["tickers"]
+eps = stk["eps"]
+rev = stk["revenue"]
+cost = stk["price"]
+
+cpos = np.arange(len(comp))
+plt.xticks(cpos,comp)
+
+plt.bar(cpos-.15, eps, width = 0.45, label = "EPS")
+plt.bar(cpos+.15, rev, width = 0.45, label = "Revenue")
+plt.bar(cpos+.29, cost, width = 0.45,label = "Cost") 
+
+plt.legend()
+plt.xlabel("Company")
+plt.ylabel("Profit")
+plt.title("Stock Price")
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+# Create a Vertical Bar Graph 
+
+import matplotlib.pyplot as plt
+%matplotlib inline
+import pandas as pd
+import numpy as np
+stk = pd.read_csv("D:\Code\DataSet\PythonDataSet\StockData\StockData.csv")
+
+comp = stk["tickers"]
+eps = stk["eps"]
+rev = stk["revenue"]
+cost = stk["price"]
+
+cpos = np.arange(len(comp))
+plt.yticks(cpos,comp)
+
+plt.barh(cpos-.15, eps, label = "EPS")
+plt.barh(cpos+.15, rev, label = "Revenue")
+plt.barh(cpos+.29, cost,label = "Cost")
+
+plt.legend()
+plt.xlabel("Profit")
+plt.title("Stock Price")
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+# Create a Histogram 
+
+import matplotlib.pyplot as plt
+%matplotlib inline
+import pandas as pd
+import numpy as np
+
+women_blood_sugar = [113,85,90,150,149,88,93,115,80,77,85,129,142,147,139,128,200,210]
+men_blood_sugar =   [93,65,75,125,120,50,71,97,65,50,51,120,139,151,140,125,196,201]
+
+##Histogram
+plt.hist([men_blood_sugar,women_blood_sugar], bins = (20), rwidth = .94, color = ["c","r"], label = ["Men","Women"])
+
+
+plt.xlabel("Sugar-Level")
+plt.ylabel("Patient Count")
+plt.title("Diabetes Patient")
+plt.legend()
+
+----------------------------------------------------------------------------------------------------------------------------------
 
