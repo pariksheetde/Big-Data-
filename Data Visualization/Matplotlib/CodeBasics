@@ -6,7 +6,64 @@ dt = whth["Date"]
 temp = whth["Temperature"]
 
 ##plot the graph using plt.plot()
-plt.plot(dt,temp, color='black', marker='o',linewidth=1, linestyle='solid')
+plt.xlabel("Day")
+plt.ylabel("Temperature")
+plt.title("Whether Forecasting")
+plt.plot(dt,temp, color='black', marker='o',linewidth=1, linestyle='solid', alpha = .5)
 
 ----------------------------------------------------------------------------------------------------------------------------------
+
+import matplotlib.pyplot as plt
+%matplotlib inline
+import pandas as pd
+whth = pd.read_csv("D:\Code\DataSet\PythonDataSet\Whether\Whether_Forecast.csv")
+dt = whth["Date"]
+temp = whth["Temperature"]
+
+##plot the graph using plt.plot()
+plt.xlabel("Day")
+plt.ylabel("Temperature")
+plt.title("Whether Forecasting")
+plt.plot(dt,temp, color='red', marker='*',linewidth=1, linestyle='--')
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+import matplotlib.pyplot as plt
+%matplotlib inline
+import pandas as pd
+whth = pd.read_csv("D:\Code\DataSet\PythonDataSet\Whether\Whether_Forecast.csv")
+dt = whth["Date"]
+temp = whth["Temperature"]
+
+##plot the graph using plt.plot()
+plt.xlabel("Day")
+plt.ylabel("Temperature")
+plt.title("Whether Forecasting")
+plt.plot(dt,temp, color='red', marker='d',linewidth=1, linestyle='--')
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+import matplotlib.pyplot as plt
+%matplotlib inline
+import pandas as pd
+whth = pd.read_csv("D:\Code\DataSet\PythonDataSet\Whether\Whether_Forecast.csv")
+dt = whth["Date"]
+temp = whth["Temperature"]
+wind_sp = whth["WindSpeed"]
+prec = whth["Precipitation"]
+
+##plot the graph using plt.plot()
+plt.xlabel("Day")
+plt.ylabel("Whether Data")
+plt.title("Whether Forecasting")
+
+plt.plot(dt,temp, color='red', marker='*',linewidth=1, linestyle='--', label = "Temperature")
+plt.plot(dt,wind_sp, color='blue', marker='*',linewidth=1, linestyle='--',label = "Wind_Speed")
+plt.plot(dt,prec, color='green', marker='*',linewidth=1, linestyle='--', label = "Precipitation")
+plt.legend(loc = "best")
+plt.grid()
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
 
