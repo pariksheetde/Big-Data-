@@ -1,3 +1,27 @@
 import matplotlib.pyplot as plt
 %matplotlib inline
-import pandas as pd
+
+##Median Salary for developers by age
+age = [25,26,27,28,29,30,31,32,33,34,35]
+dev_salary = [38496,42000,46725,49320,53200,56000,63231,
+          64928,67317,68748,73752]
+
+##Median Salary for Python developers by age
+py_salary = [45372,48876,53850,57287,63016,
+            65998,70003,70000,71496,75370,83640]
+
+##plot the graph
+plt.plot(age,dev_salary, color = "black",label = "Dev's Salary")
+
+plt.plot(age,py_salary, color = "orange",label = "Python's Salary")
+
+
+plt.xlabel("Ages")
+plt.ylabel("Median Salary")
+plt.title("Median Salary (USD) by Age")
+plt.grid()
+
+plt.legend()
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
