@@ -751,3 +751,72 @@ plt.show()
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.style.use("ggplot")
+
+data["view_count"]
+data["likes"]
+data["ratio"]
+
+plt.style.use('seaborn')
+
+x = [5, 7, 8, 5, 6, 7, 9, 2, 3, 4, 4, 4, 2, 6, 3, 6, 8, 6, 4, 1]
+y = [7, 4, 3, 9, 1, 3, 2, 5, 2, 4, 8, 7, 1, 6, 4, 9, 7, 7, 5, 1]
+
+##create a scatter plot
+plt.scatter(x,y, 
+            marker = "*",
+            edgecolor = "black",
+            s = 100,
+            color = "orange")
+cbar = plt.colorbar()
+cbar.set_label("satisfaction")
+fig = plt.gcf()
+fig.set_size_inches(11,8)
+plt.tight_layout()
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.style.use("ggplot")
+
+data = pd.read_csv("D:\Code\DataSet\PythonDataSet\dataset.csv")
+
+vc = data["view_count"]
+likes = data["likes"]
+ratio = data["ratio"]
+
+plt.style.use('seaborn')
+
+##create a scatter plot
+plt.scatter(vc,likes, 
+            s = ratio,
+            marker = "*",
+            c = "g")
+
+plt.xscale("log")
+plt.yscale("log")
+
+cbar = plt.colorbar()
+cbar.set_label("satisfaction")
+
+plt.title("Trending YouTube videos")
+plt.xlabel("View Count")
+plt.ylabel("Total Likes")
+fig = plt.gcf()
+fig.set_size_inches(11,8)
+plt.tight_layout()
+fig = plt.gcf()
+fig.set_size_inches(11,8)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
