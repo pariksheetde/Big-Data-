@@ -113,3 +113,92 @@ plt.show()
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+##Median Salary for developers by age
+age = [25,26,27,28,29,30,31,32,33,34,35]
+
+##Median Salary for Python developers by age
+py_salary = [45372,48876,53850,57287,63016,65998,70003,70000,71496,75370,83640]
+
+##plot the graph using bar graph
+plt.bar(age,py_salary,linewidth = 2,label = "Python's Salary")
+
+plt.xlabel("Ages")
+plt.ylabel("Median Salary")
+plt.title("Median Salary (USD) by Age")
+# plt.grid()
+plt.tight_layout()
+plt.style.use("ggplot")
+
+plt.legend()
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+##Median Salary for developers by age
+age = [25,26,27,28,29,30,31,32,33,34,35]
+indx = np.arange(len(age))
+width = 0.25
+
+dev_salary = [38496,42000,46725,49320,53200,56000,63231,
+          64928,67317,68748,73752]
+
+##Median Salary for Python developers by age
+py_salary = [45372,48876,53850,57287,63016,
+            65998,70003,70000,71496,75370,83640]
+
+##Median Salary for Java developers by age
+js_salary = [37810,43515,46823,49293,53437,
+            56373,62375,66674,68745,68746,74583]
+
+##plot the graph using bar graph
+plt.bar(indx - width,py_salary,width = width,label = "Python's Salary")
+plt.bar(indx,dev_salary,width = width,label = "Dev's Salary")
+plt.bar(indx + width,js_salary,width = width,label = "Java's Salary")
+
+plt.xlabel("Ages")
+plt.ylabel("Median Salary")
+plt.xticks(ticks = indx, labels = age)
+plt.title("Median Salary (USD) by Age")
+
+plt.tight_layout()
+plt.style.use("ggplot")
+
+plt.legend()
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+# Create a horizontal bar chart
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+tech = pd.read_csv("D:\Code\DataSet\PythonDataSet\Most_Popular_Technologies-2019.csv")
+lang = tech["language"]
+val = tech["value"]
+
+
+##plot the graph in barh
+plt.barh(lang,val, color = "c")
+
+plt.xlabel("Count")
+plt.title("Most popular \n'Programming Languages'")
+
+plt.tight_layout()
+plt.style.use("seaborn")
+
+fig = plt.gcf()
+fig.set_size_inches(11,8)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
