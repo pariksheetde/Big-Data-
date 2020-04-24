@@ -316,5 +316,348 @@ plt.show()
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
 
+plt.style.use("fivethirtyeight")
+
+salary = [59219, 55466, 47544, 36443, 35917, 31991, 27097, 23030, 20524, 18523, 18017, 7920, 7331, 7201, 5833]
+technology = ['JavaScript', 'HTML/CSS', 'SQL', 'Python', 'Java', 'Bash/Shell/PowerShell', 'C#', 'PHP', 'C++', 'TypeScript', 'C', 'Other(s):', 'Ruby', 'Go', 'Assembly']
+
+##Create a pie chart
+plt.pie(salary,
+        labels = technology,
+        wedgeprops = {"edgecolor" : "black"})
+
+plt.xlabel("Technology")
+plt.title("Most popular \n'Programming Languages'")
+
+plt.tight_layout()
+fig = plt.gcf()
+fig.set_size_inches(11,8)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.style.use("fivethirtyeight")
+salary = [59219, 55466, 47544, 36443, 35917, 31991, 27097, 23030, 20524, 18523, 18017, 7920, 7331, 7201, 5833]
+technology = ['JavaScript', 'HTML/CSS', 'SQL', 'Python', 'Java', 'Bash/Shell/PowerShell', 'C#', 'PHP', 'C++', 'TypeScript', 'C', 'Other(s):', 'Ruby', 'Go', 'Assembly']
+
+##Create a pie chart
+plt.pie(salary,
+        labels = technology,
+        wedgeprops = {"edgecolor" : "black"},
+        autopct = "%.0f",
+        shadow = True)
+
+plt.xlabel("Technology")
+plt.title("Most popular \n'Programming Languages'")
+
+plt.tight_layout()
+fig = plt.gcf()
+fig.set_size_inches(11,8)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.style.use("fivethirtyeight")
+salary = [59219, 55466, 47544, 36443, 35917, 31991, 27097, 23030, 20524, 18523, 18017, 7920, 7331, 7201, 5833]
+technology = ['JavaScript', 'HTML/CSS', 'SQL', 'Python', 'Java', 'Bash/Shell/PowerShell', 'C#', 'PHP', 'C++', 'TypeScript', 'C', 'Other(s):', 'Ruby', 'Go', 'Assembly']
+
+##Create a pie chart
+plt.pie(salary,
+        labels = technology,
+        wedgeprops = {"edgecolor" : "black"},
+        autopct = "%.0f",
+        shadow = True,
+        startangle = 90)
+
+plt.xlabel("Technology")
+plt.title("Most popular \n'Programming Languages'")
+
+plt.tight_layout()
+fig = plt.gcf()
+fig.set_size_inches(11,8)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+minutes = [1,2,3,4,5,6,7,8,9]
+
+Player1 = [8, 6, 5, 5, 4, 2, 1, 1, 0]
+Player2 = [0, 1, 2, 2, 2, 4, 4, 4, 4]
+Player3 = [0, 1, 1, 1, 2, 2, 3, 3, 4]
+
+##Create a stack plot
+labels = ["Player1","Player2","Player3"]
+colors = ["g","r","b"]
+
+plt.stackplot(minutes,
+             Player1,Player2,Player3,
+             labels = labels,
+             colors = colors)
+
+plt.title("Stack Plot")
+# plt.legend(loc = (0.07,0.05))
+plt.legend(loc = "lower left")
+plt.grid()
+plt.tight_layout()
+plt.style.use("seaborn")
+fig = plt.gcf()
+fig.set_size_inches(11,8)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+data = pd.read_csv("D:\Code\DataSet\PythonDataSet\Tech_Data.csv")
+age = data["Age"]
+dev = data["All_Devs"]
+py = data["Python"]
+js = data["JavaScript"]
+
+plt.plot(age, dev, color = "#444444", label = "Developer's Salary")
+plt.plot(age, py, color = "black", label = "Python's Salary")
+plt.plot(age, js, color = "cyan", label = "Java's Salary")
+
+plt.title("Median Salary (USD) by Age")
+plt.fill_between(age,
+                 py,
+                 y2 = 60000,
+                 where = (py > 60000),
+                 interpolate = True,
+                 alpha = 0.25 
+                 )
+
+plt.legend(loc = (0.07,0.05))
+plt.grid()
+plt.tight_layout()
+plt.style.use("seaborn")
+fig = plt.gcf()
+fig.set_size_inches(11,8)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+data = pd.read_csv("D:\Code\DataSet\PythonDataSet\Tech_Data.csv")
+age = data["Age"]
+dev = data["All_Devs"]
+py = data["Python"]
+js = data["JavaScript"]
+
+plt.plot(age, dev, color = "#444444", label = "Developer's Salary")
+plt.plot(age, py, color = "black", label = "Python's Salary")
+plt.plot(age, js, color = "cyan", label = "Java's Salary")
+
+plt.title("Median Salary (USD) by Age")
+plt.fill_between(age,
+                 py,
+                 y2 = 60000,
+                 where = (py > 60000),
+                 interpolate = True,
+                 alpha = 0.25 
+                 )
+
+plt.fill_between(age,
+                 py,
+                 y2 = 60000,
+                 where = (py <= 60000),
+                 interpolate = True,
+                 alpha = 0.25 
+                 )
+
+plt.legend(loc = (0.07,0.05))
+plt.grid()
+plt.tight_layout()
+plt.style.use("ggplot")
+fig = plt.gcf()
+fig.set_size_inches(11,8)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+data = pd.read_csv("D:\Code\Python\DataSet\Tech_Data.csv")
+age = data["Age"]
+dev = data["All_Devs"]
+py = data["Python"]
+js = data["JavaScript"]
+
+plt.plot(age, dev, color = "#444444", label = "Developer's Salary")
+plt.plot(age, py, color = "black", label = "Python's Salary")
+plt.plot(age, js, color = "cyan", label = "Java's Salary")
+
+plt.title("Median Salary (USD) by Age")
+plt.fill_between(age,
+                 py,
+                 y2 = dev,
+                 where = (py > dev),
+                 interpolate = True,
+                 alpha = 0.25,
+                 color = "cyan"
+                 )
+
+plt.fill_between(age,
+                 py,
+                 y2 = dev,
+                 where = (py <= dev),
+                 interpolate = True,
+                 alpha = 0.25,
+                 color = "green"
+                 )
+
+plt.legend(loc = (0.07,0.05))
+plt.grid()
+plt.tight_layout()
+plt.style.use("ggplot")
+fig = plt.gcf()
+fig.set_size_inches(11,8)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+data = pd.read_csv("D:\Code\DataSet\PythonDataSet\Tech_Data.csv")
+age = data["Age"]
+dev = data["All_Devs"]
+py = data["Python"]
+js = data["JavaScript"]
+
+plt.plot(age, dev, color = "#444444", label = "Developer's Salary")
+plt.plot(age, py, color = "black", label = "Python's Salary")
+plt.plot(age, js, color = "cyan", label = "Java's Salary")
+
+plt.title("Median Salary (USD) by Age")
+plt.fill_between(age,
+                 py,
+                 y2 = dev,
+                 where = (py > dev),
+                 interpolate = True,
+                 alpha = 0.25,
+                 color = "cyan"
+                 )
+
+plt.fill_between(age,
+                 py,
+                 y2 = dev,
+                 where = (py <= dev),
+                 interpolate = True,
+                 alpha = 0.25,
+                 color = "green"
+                 )
+
+plt.legend(loc = (0.07,0.05))
+plt.grid()
+plt.tight_layout()
+plt.style.use("fivethirtyeight")
+fig = plt.gcf()
+fig.set_size_inches(11,8)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+data = pd.read_csv("D:\Code\DataSet\PythonDataSet\Tech_Data.csv")
+age = data["Age"]
+dev = data["All_Devs"]
+py = data["Python"]
+js = data["JavaScript"]
+
+plt.plot(age, dev, color = "#444444", label = "Developer's Salary")
+plt.plot(age, py, color = "black", label = "Python's Salary")
+plt.plot(age, js, color = "cyan", label = "Java's Salary")
+
+plt.title("Median Salary (USD) by Age")
+plt.fill_between(age,
+                 py,
+                 y2 = dev,
+                 where = (py > dev),
+                 interpolate = True,
+                 alpha = 0.25,
+                 color = "cyan",
+                 label = "Above Average"
+                 )
+
+plt.fill_between(age,
+                 py,
+                 y2 = dev,
+                 where = (py <= dev),
+                 interpolate = True,
+                 alpha = 0.25,
+                 color = "green",
+                 label  = "Below Average"
+                 )
+
+plt.legend(loc = (0.07,0.05))
+plt.grid()
+plt.tight_layout()
+plt.style.use("ggplot")
+fig = plt.gcf()
+fig.set_size_inches(11,8)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+data = pd.read_csv("D:\Code\DataSet\PythonDataSet\Age_Grp.csv")
+ID = data["Responder_id"]
+age = data["Age"]
+
+##Create a histogram graph
+plt.hist(age, edgecolor = "black",color = "red" ,bins = 10)
+plt.title("Ages of Respondent")
+
+
+plt.xlabel("Ages")
+plt.ylabel("Total Respondent")
+plt.grid(True)
+plt.tight_layout()
+plt.style.use("fivethirtyeight")
+fig = plt.gcf()
+fig.set_size_inches(11,8)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
 
