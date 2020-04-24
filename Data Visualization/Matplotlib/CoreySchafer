@@ -202,3 +202,119 @@ plt.show()
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+import csv
+import numpy as np
+from collections import Counter
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+with open("D:\Code\DataSet\PythonDataSet\Technology_Preference.csv") as csv_file:
+    csv_reader = csv.DictReader(csv_file)
+    
+    lang = Counter()
+    for row in csv_reader:
+        lang.update(row["LanguagesWorkedWith"].split(";"))
+
+technology = []
+popularity = []
+
+for item in lang.most_common(25):
+    technology.append(item[0])
+    popularity.append(item[1])
+    
+##plot the graph in barh
+plt.barh(technology,popularity, color = "c")
+
+plt.xlabel("Count")
+plt.title("Most popular \n'Programming Languages'")
+
+plt.tight_layout()
+plt.style.use("seaborn")
+
+fig = plt.gcf()
+fig.set_size_inches(11,8)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import csv
+import numpy as np
+from collections import Counter
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+with open("D:\Code\DataSet\PythonDataSet\Technology_Preference.csv") as csv_file:
+    csv_reader = csv.DictReader(csv_file)
+    
+    lang = Counter()
+    for row in csv_reader:
+        lang.update(row["LanguagesWorkedWith"].split(";"))
+
+technology = []
+popularity = []
+
+for item in lang.most_common(25):
+    technology.append(item[0])
+    popularity.append(item[1])
+    
+technology.reverse()
+popularity.reverse()
+    
+##plot the graph in barh
+plt.barh(technology,popularity, color = "c")
+
+plt.xlabel("Count")
+plt.title("Most popular \n'Programming Languages'")
+
+plt.tight_layout()
+plt.style.use("seaborn")
+
+fig = plt.gcf()
+fig.set_size_inches(11,8)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import csv
+import pandas as pd
+import numpy as np
+from collections import Counter
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+df = pd.read_csv("D:\Code\DataSet\PythonDataSet\Technology_Preference.csv")
+ids = df["Responder_id"]
+tech = df["LanguagesWorkedWith"]
+    
+lang = Counter()
+
+for i in tech:
+    lang.update(i.split(";"))
+
+technology = []
+popularity = []
+
+for item in lang.most_common(25):
+    technology.append(item[0])
+    popularity.append(item[1])
+    
+technology.reverse()
+popularity.reverse()
+    
+##plot the graph in barh
+plt.barh(technology,popularity, color = "orange")
+
+plt.xlabel("Count")
+plt.title("Most popular \n'Programming Languages'")
+
+plt.tight_layout()
+plt.style.use("seaborn")
+
+fig = plt.gcf()
+fig.set_size_inches(11,8)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+
