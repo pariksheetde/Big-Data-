@@ -9,6 +9,8 @@ from pyspark.sql.functions import *
 game = spark.read.csv("/FileStore/tables/game.csv", header = True, inferSchema = True)
 # filter the DatFrame using where function with multiple values
 game = game.selectExpr("game_id","season","type","away_goals","home_goals","venue")
+# cache the DatFrame in the spark cache
+game.cache()
 
 # read the datafile from the location
 game_shift_info = spark.read.csv("/FileStore/tables/game_shifts_info.csv", header = True, inferSchema = True)
