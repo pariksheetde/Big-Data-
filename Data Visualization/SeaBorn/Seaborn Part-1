@@ -1,12 +1,283 @@
-import matplotlib.pyplot as plt
-%matplotlib inline
 import pandas as pd
-whth = pd.read_csv("D:\Code\DataSet\PythonDataSet\Whether\Whether_Forecast.csv")
-dt = whth["Date"]
-temp = whth["Temperature"]
+import seaborn as sns
+import matplotlib.pyplot as plt
+days = [1,2,3]
+temp = [36.25,35.05,30]
 
-##plot the graph using plt.plot()
-plt.plot(dt,temp, color='black', marker='o',linewidth=1, linestyle='solid')
+df = pd.DataFrame({
+    "days" : days,
+    "temp" : temp
+})
 
-----------------------------------------------------------------------------------------------------------------------------------
+plt.xlabel("Days")
+plt.ylabel("Temperature")
+plt.title("Whether Forecasting")
+plt.grid()
+sns.lineplot(x = days, y = temp, data = df)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import seaborn as sns
+sns.set()
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create a lineplot in seaborn
+sns.lineplot(x="total_bill", y="tip", data=bill)
+
+plt.xlabel("Total Bill")
+plt.ylabel("Tips")
+plt.title("Bill")
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import seaborn as sns
+sns.set()
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create a relplot in seaborn
+sns.relplot(x="total_bill", y="tip", data=bill)
+
+plt.xlabel("Total Bill")
+plt.ylabel("Tips")
+plt.title("Bill")
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import seaborn as sns
+sns.set()
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+
+# create  lineplot for sex column
+sns.lineplot(x="total_bill", y="tip",  hue = "sex", data=bill)
+
+plt.title("Bill")
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import seaborn as sns
+sns.set()
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+
+sns.relplot(x="total_bill", y="tip", hue = "sex", data=bill)
+
+plt.xlabel("Total Bill")
+plt.ylabel("Tips")
+plt.title("Bill")
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import seaborn as sns
+sns.set()
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+
+# create  lineplot for time column
+sns.lineplot(x="total_bill", y="tip",  hue = "time", data=bill)
+
+plt.title("Bill")
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import seaborn as sns
+sns.set()
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create relplot for time column
+sns.relplot(x="total_bill", y="tip", hue = "smoker", data=bill)
+
+plt.xlabel("Total Bill")
+plt.ylabel("Tips")
+plt.title("Bill")
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import seaborn as sns
+sns.set()
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create a scatterplot in seaborn
+sns.scatterplot(x="total_bill", y="tip",data=bill)
+
+plt.xlabel("Total Bill")
+plt.ylabel("Tips")
+plt.title("Bill")
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import seaborn as sns
+sns.set()
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create a scatterplot in seaborn
+sns.scatterplot(x="total_bill", y="tip",
+                hue = 'sex', 
+                style = 'time',
+                data=bill)
+
+plt.xlabel("Total Bill")
+plt.ylabel("Tips")
+plt.title("Bill")
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import seaborn as sns
+sns.set()
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create a lineplot in seaborn
+sns.lineplot(x="total_bill", y="tip",
+                hue = 'sex', 
+                style = 'time',
+                data=bill,
+                palette = "hot")
+
+plt.xlabel("Total Bill")
+plt.ylabel("Tips")
+plt.title("Bill")
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import seaborn as sns
+sns.set()
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create a lineplot in seaborn
+sns.lineplot(x="total_bill", y="tip",
+                hue = 'sex', 
+                style = 'time',
+                data=bill,
+                palette = "hot")
+
+plt.xlabel("Total Bill")
+plt.ylabel("Tips")
+plt.title("Bill")
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create a lineplot in seaborn
+markers = {"Lunch": "s", "Dinner": "X"}
+fig_dims = (12, 9)
+
+fig, ax = plt.subplots(figsize=fig_dims)
+sns.lineplot(x="total_bill", y="tip",
+                hue = 'sex', 
+                style = 'time',
+                data=bill,
+                markers = markers,
+                ax=ax,
+                legend = "full",
+                palette = "hot")
+
+plt.xlabel("Total Bill")
+plt.ylabel("Tips")
+plt.title("Bill")
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import seaborn as sns
+sns.set(style='darkgrid')
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create a lineplot in seaborn
+markers = {"Lunch": "s", "Dinner": "X"}
+fig_dims = (12, 9)
+
+fig, ax = plt.subplots(figsize=fig_dims)
+sns.lineplot(x="total_bill", y="tip",
+                hue = 'sex', 
+                style = 'time',
+                data=bill,
+                markers = markers,
+                ax=ax,
+                legend = "full",
+                palette = "hot")
+
+plt.xlabel("Total Bill")
+plt.ylabel("Tips")
+plt.title("Bill")
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import seaborn as sns
+sns.set(style='darkgrid',palette='deep')
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create a lineplot in seaborn
+markers = {"Lunch": "s", "Dinner": "X"}
+fig_dims = (12, 9)
+
+fig, ax = plt.subplots(figsize=fig_dims)
+sns.scatterplot(x="total_bill", y="tip",
+                hue = 'sex', 
+                style = 'time',
+                data=bill,
+                markers = markers,
+                ax=ax,
+                legend = "full",
+                palette = "hot")
+
+plt.xlabel("Total Bill")
+plt.ylabel("Tips")
+plt.title("Bill")
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+-------------------------------------------------------------------------------------------------------------------------------
 
