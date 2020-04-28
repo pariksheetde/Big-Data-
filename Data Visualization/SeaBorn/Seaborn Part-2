@@ -6,9 +6,928 @@ sns.set()
 import matplotlib.pyplot as plt
 %matplotlib inline
 
+plt.figure(figsize = (12,9))
+
 tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
 # create bar plot on seaborn
 sns.barplot(x = tips["day"], y = tips["total_bill"],hue = tips["sex"])
+
+plt.xlabel("Day", fontsize = 20)
+plt.ylabel("Total Bill", fontsize = 20)
+plt.title("Tip's chart based on Gender", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create bar plot on seaborn
+sns.barplot(x = tips["day"], y = tips["total_bill"],hue = tips["sex"], palette = "winter_r")
+
+plt.xlabel("Day", fontsize = 20)
+plt.ylabel("Total Bill", fontsize = 20)
+plt.title("Tip's chart based on Gender", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create bar plot on seaborn
+sns.barplot(x = tips["day"], y = tips["total_bill"],hue = tips["smoker"], palette = "winter_r")
+
+plt.xlabel("Day", fontsize = 20)
+plt.ylabel("Total Bill", fontsize = 20)
+plt.title("Tip's chart based on Gender", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create bar plot on seaborn
+sns.barplot(x = tips["total_bill"] , y = tips["day"],hue = tips["smoker"], palette = "winter_r",
+            order = ["Thur","Fri","Sat","Sun"],
+            estimator = np.mean)
+
+plt.xlabel("Average Bill", fontsize = 20)
+plt.ylabel("Day", fontsize = 20)
+plt.title("Tip's chart based on Gender", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create bar plot on seaborn
+sns.barplot(x = tips["total_bill"] , y = tips["day"],hue = tips["smoker"], palette = "coolwarm",
+            order = ["Thur","Fri","Sat","Sun"],
+            estimator = np.mean)
+
+plt.xlabel("Average Bill", fontsize = 20)
+plt.ylabel("Day", fontsize = 20)
+plt.title("Tip's chart based on Gender", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create bar plot on seaborn
+sns.barplot(x = tips["day"], y = tips["total_bill"],hue = tips["smoker"], palette = "coolwarm",
+            order = ["Thur","Fri","Sat","Sun"],
+            estimator = np.mean,
+            capsize = 0.3)
+
+plt.xlabel("Day", fontsize = 20)
+plt.ylabel("Average Bill", fontsize = 20)
+plt.title("Tip's chart based on Gender", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create bar plot on seaborn
+sns.barplot(x = tips["size"], y = tips["tip"], 
+            hue = tips["sex"],
+            palette = "coolwarm",
+            estimator = np.mean,
+            capsize = 0.1)
+
+plt.xlabel("Number of visitors", fontsize = 20)
+plt.ylabel("Average Tip", fontsize = 20)
+plt.title("Tip's chart based on Gender", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+num = np.random.randn(150)
+
+sns.distplot(num, color = "red")
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create box plot on seaborn
+sns.boxplot(x = tips["total_bill"])
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create box plot on seaborn
+sns.boxplot(x = tips["sex"], y = tips["total_bill"], data = tips)
+
+plt.xlabel("Gender", fontsize = 20)
+plt.ylabel("Total Bill", fontsize = 20)
+plt.title("Gender wise Bill", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create box plot on seaborn
+sns.boxplot(x = tips["sex"], y = tips["total_bill"], 
+            hue = "smoker",
+            data = tips)
+
+plt.xlabel("Gender", fontsize = 20)
+plt.ylabel("Total Bill", fontsize = 20)
+plt.title("Gender wise Bill", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create box plot on seaborn
+sns.boxplot(x = tips["day"], y = tips["total_bill"], 
+#             hue = "sex",
+            data = tips)
+
+plt.xlabel("Day", fontsize = 20)
+plt.ylabel("Total Bill", fontsize = 20)
+plt.title("Gender wise Bill", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create box plot on seaborn
+sns.boxplot(x = tips["day"], y = tips["total_bill"], 
+            hue = "sex",
+            hue_order = ["Male","Female"],
+            data = tips)
+
+plt.xlabel("Day", fontsize = 20)
+plt.ylabel("Total Bill", fontsize = 20)
+plt.title("Gender wise Bill", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create box plot on seaborn
+sns.boxplot(x = tips["day"], y = tips["total_bill"], 
+            hue = "day",
+            hue_order = ["Thur","Fri","Sat","Sun"],
+            data = tips)
+
+plt.xlabel("Day", fontsize = 20)
+plt.ylabel("Total Bill", fontsize = 20)
+plt.title("Gender wise Bill", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create box plot on seaborn
+sns.boxplot(x = tips["day"], y = tips["total_bill"], 
+            hue = "day",
+            hue_order = ["Thur","Fri","Sat","Sun"],
+            palette = "twilight_r",
+            data = tips)
+
+plt.xlabel("Day", fontsize = 20)
+plt.ylabel("Total Bill", fontsize = 20)
+plt.title("Gender wise Bill", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create box plot on seaborn
+sns.boxplot(x = tips["sex"], y = tips["total_bill"], 
+            hue_order = ["Thur","Fri","Sat","Sun"],
+            hue = "day",
+            palette = "twilight_r",
+            data = tips)
+
+plt.xlabel("Gender", fontsize = 20)
+plt.ylabel("Tips", fontsize = 20)
+plt.title("Gender wise Bill", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create box plot on seaborn
+sns.boxplot(x = tips["day"], y = tips["total_bill"], 
+            order = ["Thur","Fri","Sat","Sun"],
+            hue = "sex",
+            palette = "twilight_r",
+            data = tips)
+
+plt.xlabel("Gender", fontsize = 20)
+plt.ylabel("Tips", fontsize = 20)
+plt.title("Gender wise Bill", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+iris = pd.read_csv("D:\Code\DataSet\PythonDataSet\Iris.csv")
+# create box plot on seaborn
+sns.boxplot(data = iris, palette = "twilight")
+
+# plt.xlabel("Description in Lenth", fontsize = 20)
+# plt.ylabel("Tips", fontsize = 20)
+plt.title("Iris Description", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+iris = pd.read_csv("D:\Code\DataSet\PythonDataSet\Iris.csv")
+# create box plot on seaborn
+sns.boxplot(data = iris, palette = "twilight", orient="h")
+
+# plt.xlabel("Description in Lenth", fontsize = 20)
+# plt.ylabel("Tips", fontsize = 20)
+plt.title("Iris Description", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create box plot on seaborn
+sns.boxplot(x = tips["day"], y = tips["total_bill"], 
+            order = ["Thur","Fri","Sat","Sun"],
+            hue = "sex",
+            palette = "twilight_r",
+            data = tips)
+sns.swarmplot(x = tips["day"], y = tips["total_bill"],
+             data = tips)
+
+plt.xlabel("Day", fontsize = 20)
+plt.ylabel("Tips", fontsize = 20)
+plt.title("Gender wise Bill", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create strip plot on seaborn
+sns.stripplot(x = tips["day"], y = tips["total_bill"], 
+            order = ["Thur","Fri","Sat","Sun"],
+            hue = "sex",
+            palette = "twilight_r",
+            data = tips)
+
+plt.xlabel("Day", fontsize = 20)
+plt.ylabel("Total Bill", fontsize = 20)
+plt.title("Gender wise Bill", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create strip plot on seaborn
+sns.stripplot(x = tips["day"], y = tips["total_bill"], 
+            order = ["Thur","Fri","Sat","Sun"],
+            hue = "sex",
+            palette = "twilight_r",
+            jitter = True,
+            data = tips)
+
+plt.xlabel("Day", fontsize = 20)
+plt.ylabel("Total Bill", fontsize = 20)
+plt.title("Gender wise Bill", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create strip plot on seaborn
+sns.stripplot(x = tips["day"], y = tips["total_bill"], 
+            order = ["Thur","Fri","Sat","Sun"],
+            hue = "smoker",
+            palette = "twilight_r",
+            color = ["orange","blue"], 
+            jitter = True,
+            data = tips)
+
+plt.xlabel("Day", fontsize = 20)
+plt.ylabel("Total Bill", fontsize = 20)
+plt.title("Gender wise Bill", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create strip plot on seaborn
+sns.stripplot(x = tips["total_bill"], y = tips["day"], 
+            order = ["Thur","Fri","Sat","Sun"],
+            hue = "smoker",
+            palette = "twilight_r",
+            orient = "h",
+            color = ["orange","blue"], 
+            jitter = True,
+            data = tips)
+
+plt.xlabel("Total Bill", fontsize = 20)
+plt.ylabel("Day", fontsize = 20)
+plt.title("Gender wise Bill", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create strip plot on seaborn
+sns.stripplot(x = tips["total_bill"], y = tips["day"], 
+            order = ["Thur","Fri","Sat","Sun"],
+            hue = "smoker",
+            palette = "twilight_r",
+            orient = "h",
+            marker = "D", 
+            jitter = True,
+            data = tips)
+
+plt.xlabel("Total Bill", fontsize = 20)
+plt.ylabel("Day", fontsize = 20)
+plt.title("Gender wise Bill", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create strip plot on seaborn
+sns.stripplot(x = tips["day"], y = tips["total_bill"], 
+            order = ["Thur","Fri","Sat","Sun"],
+            hue = "sex",
+            palette = "twilight_r",
+            orient = "v",
+            marker = "D", 
+            jitter = True,
+            data = tips)
+
+plt.xlabel("Day", fontsize = 20)
+plt.ylabel("Total Bill", fontsize = 20)
+plt.title("Gender wise Bill", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create strip plot on seaborn
+sns.stripplot(x = tips["day"], y = tips["total_bill"], 
+            order = ["Thur","Fri","Sat","Sun"],
+            hue = "sex",
+            palette = "twilight",
+            orient = "v",
+            marker = "D", 
+            jitter = True,
+            data = tips)
+# create boxplot plot on seaborn
+sns.boxplot(x = tips["day"], y = tips["total_bill"], 
+            order = ["Thur","Fri","Sat","Sun"],
+            hue = "smoker",
+            palette = "twilight",
+            data = tips)
+
+plt.xlabel("Day", fontsize = 20)
+plt.ylabel("Total Bill", fontsize = 20)
+plt.title("Gender wise Bill", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create box plot on seaborn
+sns.boxplot(x = tips["day"], y = tips["total_bill"], 
+            order = ["Thur","Fri","Sat","Sun"],
+            hue = "sex",
+            palette = "twilight",
+            data = tips)
+# create violin plot plot on seaborn
+sns.violinplot(x = tips["day"], y = tips["total_bill"], 
+            order = ["Thur","Fri","Sat","Sun"],
+            hue = "smoker",
+            palette = "twilight",
+            data = tips)
+
+plt.xlabel("Day", fontsize = 20)
+plt.ylabel("Total Bill", fontsize = 20)
+plt.title("Gender wise Bill", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create strip plot on seaborn
+sns.stripplot(x = tips["day"], y = tips["total_bill"], 
+            order = ["Thur","Fri","Sat","Sun"],
+            hue = "sex",
+            palette = "twilight",
+            orient = "v",
+            marker = "D", 
+            jitter = True,
+            data = tips)
+# create boxplot plot on seaborn
+sns.violinplot(x = tips["day"], y = tips["total_bill"], 
+            order = ["Thur","Fri","Sat","Sun"],
+            hue = "smoker",
+            palette = "twilight",
+            data = tips)
+
+plt.xlabel("Day", fontsize = 20)
+plt.ylabel("Total Bill", fontsize = 20)
+plt.title("Gender wise Bill", fontsize = 20)
+plt.show()
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create stripplot on seaborn
+sns.stripplot(y = tips["day"], x = tips["total_bill"], 
+            order = ["Thur","Fri","Sat","Sun"],
+            hue = "sex",
+            palette = "twilight",
+            jitter = True,
+            data = tips)
+# create violinplot plot on seaborn
+sns.violinplot(y = tips["day"], x = tips["total_bill"], 
+            order = ["Thur","Fri","Sat","Sun"],
+            hue = "smoker",
+            palette = "twilight",
+            data = tips)
+
+plt.xlabel("Total Bill", fontsize = 20)
+plt.ylabel("Day", fontsize = 20)
+plt.title("Gender wise Bill", fontsize = 20)
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+iris = pd.read_csv("D:\Code\DataSet\PythonDataSet\Iris.csv")
+# create pair grid on seaborn
+df = sns.PairGrid(data = iris)
+df = df.map(plt.scatter)
+
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+iris = pd.read_csv("D:\Code\DataSet\PythonDataSet\Iris.csv")
+# create pair grid with scatter plot on seaborn
+df = sns.PairGrid(data = iris)
+df = df.map_diag(plt.hist)
+df = df.map_offdiag(plt.scatter)
+
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+iris = pd.read_csv("D:\Code\DataSet\PythonDataSet\Iris.csv")
+# create pair grid with scatter plot on seaborn
+df = sns.PairGrid(data = iris, hue = "species")
+df = df.map_diag(plt.hist)
+df = df.map_offdiag(plt.scatter)
+df = df.add_legend()
+
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+iris = pd.read_csv("D:\Code\DataSet\PythonDataSet\Iris.csv")
+# create pair grid with scatter plot on seaborn
+df = sns.PairGrid(data = iris, hue = "species", palette = "winter")
+df = df.map_diag(plt.hist)
+df = df.map_offdiag(plt.scatter)
+df = df.add_legend()
+
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+iris = pd.read_csv("D:\Code\DataSet\PythonDataSet\Iris.csv")
+# create pair grid with scatter plot on seaborn
+df = sns.PairGrid(data = iris, hue = "species", palette = "winter")
+df = df.map_diag(plt.hist, histtype = "step")
+df = df.map_offdiag(plt.scatter)
+df = df.add_legend()
+
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+iris = pd.read_csv("D:\Code\DataSet\PythonDataSet\Iris.csv")
+# create pair grid with scatter plot on seaborn
+df = sns.PairGrid(data = iris, vars = ["petal_length","petal_width"], palette = "winter")
+# df = df.map_diag(plt.hist, histtype = "step", linewidth = 1)
+df = df.map(plt.scatter)
+df = df.add_legend()
+
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+iris = pd.read_csv("D:\Code\DataSet\PythonDataSet\Iris.csv")
+# create pair grid with scatter plot on seaborn
+df = sns.PairGrid(data = iris, vars = ["petal_length","petal_width"], palette = "winter")
+
+df = df.map_diag(plt.hist)
+df = df.map_offdiag(plt.scatter)
+df = df.add_legend()
+
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+iris = pd.read_csv("D:\Code\DataSet\PythonDataSet\Iris.csv")
+# create pair grid with scatter plot on seaborn
+df = sns.PairGrid(data = iris, vars = ["petal_length","petal_width"], hue = "species", palette = "cool_r")
+
+df = df.map_diag(plt.hist, edgecolor = "black")
+df = df.map_offdiag(plt.scatter)
+df = df.add_legend()
+
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.figure(figsize = (12,9))
+
+iris = pd.read_csv("D:\Code\DataSet\PythonDataSet\Iris.csv")
+# create pair grid with scatter plot on seaborn
+df = sns.PairGrid(data = iris, vars = ["petal_length","petal_width"], hue = "species", palette = "cool_r")
+
+df = df.map_diag(plt.hist, edgecolor = "orange")
+df = df.map_offdiag(plt.scatter, edgecolor = "black")
+df = df.add_legend()
+
 plt.show()
 
 -------------------------------------------------------------------------------------------------------------------------------
@@ -16,6 +935,22 @@ plt.show()
 
 
 
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
 -------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -34,25 +969,8 @@ plt.show()
 
 
 
--------------------------------------------------------------------------------------------------------------------------------
 
 
-
-
-
--------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
--------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
--------------------------------------------------------------------------------------------------------------------------------
 
 
 
