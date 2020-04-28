@@ -267,17 +267,365 @@ plt.show()
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+import pandas as pd
+import seaborn as sns
+sns.set()
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create a histogram
+sns.distplot(bill["total_bill"], bins = 20, hist = True)
+plt.show()
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+import pandas as pd
+import seaborn as sns
+sns.set()
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create a histogram on seaborn
+sns.distplot(bill["total_bill"], bins = 20, hist = True, kde = True, color = "orange", axlabel = "Total_Bill")
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import seaborn as sns
+sns.set()
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create a histogram on seaborn
+sns.distplot(bill["total_bill"], bins = 20, hist = True, kde = True, color = "orange", axlabel = "Total_Bill",
+            label = "Bill")
+plt.legend()
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import seaborn as sns
+sns.set()
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create a histogram on seaborn
+sns.distplot(bill["total_bill"], bins = 20, hist = True, kde = True, color = "orange", axlabel = "Total_Bill",
+            label = "Bill")
+plt.title("Histogram of Total Bill")
+plt.legend()
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+plt.figure(figsize = (20,9))
+# create a histogram on seaborn
+sns.distplot(bill["total_bill"], bins = 20, hist = True, kde = True, color = "orange", axlabel = "Total_Bill",
+            label = "Bill")
+plt.xlabel("Total_Bill", fontsize = 30)
+plt.title("Histogram of Total Bill", fontsize = 30)
+plt.legend()
+
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+plt.figure(figsize = (20,9))
+bins = [0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100]
+# create a histogram on seaborn
+sns.distplot(bill["total_bill"], bins = bins, hist = True, kde = True, color = "orange", axlabel = "Total_Bill",
+            label = "Bill")
+plt.xlabel("Total_Bill", fontsize = 30)
+plt.title("Histogram of Total Bill", fontsize = 30)
+plt.legend()
+
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+plt.figure(figsize = (20,9))
+bins = [0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100]
+# create a histogram on seaborn
+sns.distplot(bill["total_bill"], bins = bins, hist = True, kde = True, color = "orange", axlabel = "Total_Bill",
+            label = "Bill")
+plt.xlabel("Total_Bill", fontsize = 30)
+plt.xticks(bins)
+plt.title("Histogram of Total Bill", fontsize = 30)
+plt.legend()
+
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+plt.figure(figsize = (20,9))
+bins = [0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100]
+# create a histogram on seaborn
+sns.distplot(bill["total_bill"], bins = bins, hist = True, kde = True, color = "orange", axlabel = "Total_Bill",
+            label = "Bill",
+            hist_kws = {"color" : "orange", "edgecolor" : "black"})
+plt.xlabel("Total_Bill", fontsize = 30)
+plt.xticks(bins)
+plt.title("Histogram of Total Bill", fontsize = 30)
+plt.legend()
+
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+plt.figure(figsize = (20,9))
+bins = [0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100]
+# create a histogram on seaborn
+sns.distplot(bill["total_bill"], bins = bins, hist = True, kde = True, color = "orange", axlabel = "Total_Bill",
+            label = "Bill",
+            hist_kws = {"color" : "orange", "edgecolor" : "black"},
+            kde_kws = {"color" : "blue"})
+plt.xlabel("Total_Bill", fontsize = 30)
+plt.xticks(bins)
+plt.title("Histogram of Total Bill", fontsize = 30)
+plt.legend()
+
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+plt.figure(figsize = (20,9))
+bins = [0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100]
+# create a histogram on seaborn
+sns.distplot(bill["total_bill"], bins = bins, hist = True, kde = True, color = "orange", axlabel = "Total_Bill",
+            label = "Bill",
+            hist_kws = {"color" : "orange", "edgecolor" : "black"},
+            kde_kws = {"color" : "blue"})
+plt.xlabel("Total_Bill", fontsize = 30)
+plt.xticks(bins)
+plt.title("Histogram of Total Bill", fontsize = 30)
+plt.legend(fontsize = 20)
+
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+plt.figure(figsize = (20,9))
+
+# create a histogram on seaborn
+sns.distplot(bill["size"], hist = True, bins = 9, color = "orange", axlabel = "Size",
+            label = "Size")
+
+sns.distplot(bill["tip"],  hist = True, bins = 9,  color = "c", axlabel = "Tip",
+            label = "Tip")
+
+plt.xlabel("Total Bill", fontsize = 30)
+plt.xticks(bins)
+plt.title("Histogram of Total Bill", fontsize = 30)
+plt.legend(fontsize = 20)
+
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+plt.figure(figsize = (20,9))
+
+# create a bar graph on seaborn
+sns.barplot(x= bill["total_bill"],
+            y = bill["day"],
+            hue = bill["sex"],
+            order = ["Thur","Fri","Sat","Sun"]
+            )
+
+plt.xlabel("Total Bill", fontsize = 30)
+plt.ylabel("Day", fontsize = 30)
+plt.title("Total Bill Chart for Gender", fontsize = 30)
+
+plt.show()
 
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
 
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+plt.figure(figsize = (20,9))
+
+# create a bar graph on seaborn. By default mean / avg is calculated
+sns.barplot(x= bill["total_bill"],
+            y = bill["day"],
+            hue = bill["sex"],
+            order = ["Thur","Fri","Sat","Sun"],
+            estimator = np.sum)
+
+plt.xlabel("Total Bill", fontsize = 30)
+plt.ylabel("Day", fontsize = 30)
+plt.title("Total Bill Chart for Gender", fontsize = 30)
+
+plt.show()
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+plt.figure(figsize = (20,9))
+
+# create a bar graph on seaborn. By default mean / avg is calculated
+sns.barplot(x= bill["total_bill"],
+            y = bill["day"],
+            hue = bill["sex"],
+            order = ["Thur","Fri","Sat","Sun"],
+            estimator = np.sum,
+            ci = 95,
+            orient = "h")
+
+plt.xlabel("Total Bill", fontsize = 30)
+plt.ylabel("Day", fontsize = 30)
+plt.title("Total Bill Chart for Gender", fontsize = 30)
+
+plt.show()
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+
+bill = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+plt.figure(figsize = (20,9))
+
+# create a bar graph on seaborn. By default mean / avg is calculated
+sns.barplot(y= bill["total_bill"],
+            x = bill["day"],
+            hue = bill["sex"],
+            order = ["Thur","Fri","Sat","Sun"],
+            estimator = np.mean,
+            ci = 95,
+            orient = "v")
+
+plt.xlabel("Day", fontsize = 30)
+plt.ylabel("Total Bill", fontsize = 30)
+plt.title("Total Bill Chart for Gender", fontsize = 30)
+
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+
+ship = pd.read_csv("D:\Code\DataSet\PythonDataSet\Titanic.csv")
+plt.figure(figsize = (20,9))
+
+# create a scatter plot on seaborn. By default mean / avg is calculated
+sns.scatterplot(x = "age",
+               y = "fare",
+               hue = "sex",
+               style = "who",
+               data = ship)
+
+plt.xlabel("Age", fontsize = 30)
+plt.ylabel("Fare", fontsize = 30)
+plt.title("Total Fare Chart for Titanic \nThe Ship that never sinks", fontsize = 30)
+
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+
+ship = pd.read_csv("D:\Code\DataSet\PythonDataSet\Titanic.csv")
+plt.figure(figsize = (20,9))
+
+# create a scatter plot on seaborn. By default mean / avg is calculated
+sns.scatterplot(x = "age",
+               y = "fare",
+               hue = "alive",
+               style = "who",
+               size = "who",
+               sizes = (75,150),
+               palette = "inferno_r",
+               data = ship)
+
+plt.xlabel("Age", fontsize = 30)
+plt.ylabel("Fare", fontsize = 30)
+plt.title("Total Fare Chart for Titanic \nThe Ship that never sinks", fontsize = 30)
+
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------------------
