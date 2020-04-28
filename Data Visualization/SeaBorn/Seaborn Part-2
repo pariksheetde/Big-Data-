@@ -1,5 +1,15 @@
+import pandas as pd
+import numpy as np
+import seaborn as sns
+sns.set(style='darkgrid')
+sns.set()
+import matplotlib.pyplot as plt
+%matplotlib inline
 
-
+tips = pd.read_csv("D:\Code\DataSet\PythonDataSet\Bills.csv")
+# create bar plot on seaborn
+sns.barplot(x = tips["day"], y = tips["total_bill"],hue = tips["sex"])
+plt.show()
 
 -------------------------------------------------------------------------------------------------------------------------------
 
