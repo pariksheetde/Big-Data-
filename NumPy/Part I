@@ -1,0 +1,551 @@
+import numpy as np
+arr = np.array([1,2])
+arr
+
+-------------------------------------------------------------------------------------------------------------------------------
+import numpy as np
+distance = [10,20.2,15,25,14.21]
+dist_arr = np.array(distance)
+
+# Return the data type of the array
+print(type(dist_arr))
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import numpy as np
+age = np.array(12, dtype = float)
+
+# convert the int to float
+print(age)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import numpy as np
+distance = [10,20.2,15,25,14.21]
+time = [1.2,.30,.45,1,2]
+
+# convert the list to numpy array
+dist_arr = np.array(distance)
+time_arr = np.array(time)
+
+# calculate the speed
+speed = (dist_arr / time_arr)
+print("The speed is",speed)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import numpy as np
+distance = [10,20.2,15,25,14.21]
+time = [1.2,.30,.45,1,2]
+
+# convert the list to numpy array
+dist_arr = np.array(distance)
+time_arr = np.array(time)
+
+# calculate the speed
+speed = (dist_arr / time_arr)
+print("The speed of 1st calculation is",speed[0])
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import numpy as np
+
+# arange function in numpy
+age = np.arange(0,20)
+print(age)
+
+
+import numpy as np
+
+# arange function in numpy
+age = np.arange(0,20,1.5)
+print(age)
+
+import numpy as np
+
+# arange function in numpy
+age = np.arange(1,22,3)
+print(age)
+
+import numpy as np
+
+# arange function in numpy
+age = np.arange(1,11,2)
+print(age)
+
+import numpy as np
+
+# arange function in numpy
+age = np.arange(20, dtype = float)
+print(age)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import numpy as np
+
+# zeros function in numpy
+age = np.zeros(10, dtype = float)
+print(age)
+
+import numpy as np
+
+# zeros function in numpy tuple
+age = np.zeros((2,3), dtype = int)
+print(age)
+
+import numpy as np
+
+# zeros function in numpy list
+age = np.zeros([2,3], dtype = int)
+print(age)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import numpy as np
+
+# ones function in numpy list
+age = np.ones([2,3], dtype = int)
+print(age)
+
+import numpy as np
+
+# ones function in numpy tuple
+age = np.ones((2,3), dtype = int)
+print(age)
+
+import numpy as np
+
+# ones function in numpy
+age = np.ones(11, dtype = int)
+print(age)
+
+import numpy as np
+
+# ones function in numpy tuple
+age = np.ones((3,4), dtype = float)
+print(age)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import numpy as np
+
+# empty function in numpy returns any number of elements defined in the parameter
+num = np.empty(5)
+print(num)
+
+import numpy as np
+
+# empty function in numpy returns any number of elements defined in the parameter
+num = np.empty([5,4])
+print(num)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import numpy as np
+
+# linspace function returns elements
+num = np.linspace(0,10,20)
+print(num)
+
+import numpy as np
+
+# linspace function returns elements
+num = np.linspace(0,10,5)
+print(num)
+
+import numpy as np
+
+# linspace function returns elements
+num = np.linspace(0,10,5, retstep = True)
+print(num)
+
+import numpy as np
+
+# linspace function returns elements
+num = np.linspace(1,100,5, retstep = True)
+print(num)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import numpy as np
+
+# rand(), randn(), random_sample(), randint()
+age = np.random.rand(3,2)
+print(age)
+
+import numpy as np
+
+# rand(), randn(), random_sample(), randint()
+age = np.random.randn(3,2)
+print(age)
+
+import numpy as np
+
+# rand(), randn(), random_sample(), randint()
+age = np.random.random_sample(5)
+print(age)
+
+import numpy as np
+
+# rand(), randn(), random_sample(), randint()
+age = np.random.randint(0,5,4)
+print(age)
+
+import numpy as np
+
+# rand(), randn(), random_sample(), randint()
+age = np.random.randint(2)
+print(age)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import numpy as np
+age = np.array([10,15,20,25,30,35])
+
+# ndim attribute returns the number of dimension
+print("The number of Dimensions:",age.ndim)
+
+import numpy as np
+age = np.array([
+                [[10,15,20,25,30,35],
+                [10,20]]
+               ])
+# ndim attribute returns the number of dimension
+print("The number of Dimensions:",age.ndim)
+
+
+import numpy as np
+age = np.array([10,15,20,25,30,35])
+
+# shape attribute returns the number of rows, columns
+print("The shape:",age.shape)
+
+import numpy as np
+age = np.array([10,15,20,25,30,35])
+
+# size attribute returns the number of elements
+print("The Sizw:",age.size)
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import numpy as np
+age = np.array([
+                [[10,15,20,25,30,35],
+                [10,20]]
+               ])
+# dtype attribute returns the data type
+print("The data type:",age.dtype)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+# Indexing
+
+import numpy as np
+age = np.array([
+                [10,11],
+                [22,20]
+              ])
+print(age[0][0])
+
+import numpy as np
+age = [
+        [10,11,20,22]
+      ]
+# convert the list into numpy array
+age_array = np.array(age)
+print(age_array[0][2])
+
+import numpy as np
+marks = [[[1,2,3,4],[5,6,7,8],[9,10,11,12]],
+         [[13,14,15,16],[17,18,19,20],[21,22,23,24]]
+        ]
+marks_array = np.array(marks)
+print(marks_array[0][1:2][0][1:3])
+
+import numpy as np
+marks = [[[1,2,3,4],[5,6,7,8],[9,10,11,12]],
+         [[13,14,15,16],[17,18,19,20],[21,22,23,24]]
+        ]
+marks_array = np.array(marks)
+print(marks_array[0][0][1])
+
+import numpy as np
+marks = [[[1,2,3,4],[5,6,7,8],[9,10,11,12]],
+         [[13,14,15,16],[17,18,19,20],[21,22,23,24]]
+        ]
+marks_array = np.array(marks)
+print(marks_array[1][0][-1])
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+# Slicing
+
+import numpy as np
+marks = [[[1,2,3,4],[5,6,7,8],[9,10,11,12]],
+         [[13,14,15,16],[17,18,19,20],[21,22,23,24]]
+        ]
+marks_array = np.array(marks)
+print(marks_array[1][0:2,2:])
+
+import numpy as np
+age = [[1,2],
+       [3,4],
+       [5,6]
+      ]
+age_a = np.array(age)
+print(age_a[1:,1:])
+print(age_a[0:2,0])
+
+import numpy as np
+marks = [[1,2,3,4],[5,6,7,8],[20,30,40,50]]
+
+marks_array = np.array(marks)
+print(marks_array[1:,1:3])
+
+import numpy as np
+marks = [[1,2,3,4],[5,6,7,8],[20,30,40,50]]
+
+marks_array = np.array(marks)
+print(marks_array[1:,1:])
+
+import numpy as np
+marks = [[1,2,3,4],[5,6,7,8],[20,30,40,50]]
+
+marks_array = np.array(marks)
+print(marks_array[::,::2])
+
+import numpy as np
+marks = [[1,2,3,4],[5,6,7,8],[20,30,40,50]]
+
+marks_array = np.array(marks)
+print(marks_array[:,:2,])
+
+import numpy as np
+marks = [[[1,2,3,4],[5,6,7,8],[9,10,11,12]],
+         [[13,14,15,16],[17,18,19,20],[21,22,23,24]]
+        ]
+marks_array = np.array(marks)
+print(marks_array[:,:,:1])
+
+import numpy as np
+marks = [[[1,2,3,4],[5,6,7,8],[9,10,11,12]],
+         [[13,14,15,16],[17,18,19,20],[21,22,23,24]]
+        ]
+marks_array = np.array(marks)
+print(marks_array[:,1:,::2])
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+# Advance Indexing
+
+import numpy as np
+age = np.array([
+                [1,2,3],
+                [4,5,6],
+                [7,8,9]
+])
+age[[0,2],[2,0]]
+
+import numpy as np
+age = np.array([
+                [1,2,3],
+                [4,5,6],
+                [7,8,9]
+])
+
+import numpy as np
+age = np.array([
+                [1,2,3],
+                [4,5,6],
+                [7,8,9]
+])
+age[[1,1,2],[0,2,1]]
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+# Mathematical Calculation on Numpy Array
+
+import numpy as np
+a = np.array([10,15,20])
+b = np.array([20,15,10])
+print(a + b)
+print(a - b)
+print(a * b)
+print(a / b)
+print(a % b)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+# Broadcasting in Numpy Array
+
+import numpy as np
+
+# Broadcasting in Numpy Arrays
+a = np.array([[10,11],
+             [20,25],
+             [26,27]
+             ])
+b = np.array([10,11])
+a + b
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import numpy as np
+a = np.arange(1,11)
+
+# reshape function
+a.reshape(2,5)
+
+import numpy as np
+a = np.arange(1,10)
+
+# reshape function
+a.reshape(3,3)
+
+import numpy as np
+a = np.arange(1,10)
+
+# reshape function
+b = a.reshape(3,3)
+print("The shape of B",b)
+
+import numpy as np
+a = np.arange(1,10)
+
+# resize function
+b = np.resize(a,(4,10))
+print("The shape of B",b)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+# flatten function converts the ndim array into 1D array
+
+import numpy as np
+a = [
+      [1,2,3],
+      [4,5,6],
+      [7,8,9]
+    ]
+
+# flatten function converts the ndim array into 1D array. It creates a new copy and does't change the original array
+a_array = np.array(a)
+a_array
+a_array.ndim
+a_array.flatten()
+a
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+# transpose function in Numpy array
+
+import numpy as np
+a = np.array([
+              [10,20],
+              [30,40],
+              [50,60]
+            ])
+
+# transpose function converts the rows into columns and columns into rows
+a.transpose()
+
+
+import numpy as np
+a = np.array([
+              [10,20],
+              [30,40],
+              [50,60]
+            ])
+
+# transpose function converts the rows into columns and columns into rows
+np.transpose(a)
+
+
+import numpy as np
+a = np.array([[
+              [10,20],
+              [30,40],
+              [50,60]
+            ]])
+
+# transpose function converts the rows into columns and columns into rows
+a.transpose()
+
+
+import numpy as np
+a = np.array([[
+              [10,20],
+              [30,40],
+              [50,60]
+            ]])
+
+# swapaxes function swaps the rows into columns and columns into rows
+np.swapaxes(a, 0, 1)
+np.swapaxes(a, 1, 0)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+# concatenate the Numpy arrays
+
+import numpy as np
+a = [10,20]
+b = [30,40,50]
+
+a_array = np.array(a)
+b_array = np.array(b)
+
+# concatenate Numpy arrays
+np.concatenate((a_array, b_array))
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import numpy as np
+x = np.arange(10)
+y = np.ones(5, dtype = int)
+z = np.zeros(4, dtype = int)
+
+# concatenate 1D Numpy arrays
+np.concatenate((x,y,z))
+
+
+import numpy as np
+x = np.arange(10).reshape(2,5)
+y = np.ones((3,5), dtype = int)
+z = np.zeros((4,5), dtype = int)
+
+np.concatenate((x,y,z))
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+# vstack 1D Numpy arrays
+
+import numpy as np
+x = np.arange(10).reshape(2,5)
+y = np.ones((3,5), dtype = int)
+z = np.zeros((4,5), dtype = int)
+
+# vstack 1D Numpy arrays
+np.vstack((x,y,z))
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+# Array Manipulation
+
+import numpy as np
+a = np.arange(1,11)
+
+# insert function inserts elements into an array
+np.insert(a, 1, 10)
+
+
+import numpy as np
+a = np.array([
+              [1,11],
+              [2,22]      
+            ])
+
+# insert function inserts elements into an 2D array
+b = np.insert(a, 1, 10)
+b
+
+-------------------------------------------------------------------------------------------------------------------------------
