@@ -1,0 +1,1956 @@
+import pandas as pd
+pd.options.display.max_rows = 10000
+pd.options.display.max_columns = 1000
+pd.get_option("max_columns")
+pd.get_option("max_rows")
+
+pd.set_option("max_columns",100)
+pd.set_option("max_rows",1000)
+------------------------------------------------------------------------------------------------------------------------------------
+##Changing the configuration of jupyter notebook
+
+%%HTML
+<style type="text/css">
+table.dataframe td, table.dataframe th {
+    border-style: solid;
+}
+------------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+pd.__version__
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##Create a list in python
+a = [1.2,55,'Pariksheet']
+a
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##Create a list in python
+a = [1.2,55,'Pariksheet']
+##Show the number of elements
+len(a)
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##Create a list in python
+a = [1.2,55,'Pariksheet']
+##Show a data type
+type(a)
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##Create a list in python
+a = [1.2,55,'Pariksheet',True]
+a
+##Return the element in the nth position
+a[2]
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##Create a dictionary
+Technology = {
+    'Database' : ['Oracle','MySQL','MS SQL Server'],
+    'ETL' : ['Informatica PowerCenter','Ab Initio','Oracle Data Integrator','Talend'],
+    'Language' : ['Python','Java','R','Scala']
+}
+Technology
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##Create a dictonary
+Technology = {
+    'Database' : ['Oracle','MySQL','MS SQL Server'],
+    'ETL' : ['Informatica PowerCenter','Ab Initio','Oracle Data Integrator','Talend'],
+    'Language' : ['Python','Java','R','Scala']
+}
+##Pass a key to dictionary
+Technology['Database']
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##Create a Series in Python Pandas
+
+import pandas as pd
+ice_cream = ['Chocolate','Vanilla','Black Current','Dark Forest']
+##Create a Series
+pd.Series(ice_cream)
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+ice_cream = ['Chocolate','Vanilla','Black Current','Dark Forest']
+##Show the element from the Series
+pd.Series(ice_cream[2])
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+##Create a dictionary
+Technology = {
+    'Database' : ['Oracle','MySQL','MS SQL Server'],
+    'ETL' : ['Informatica PowerCenter','Ab Initio','Oracle Data Integrator','Talend'],
+    'Language' : ['Python','Java','R','Scala']
+}
+##Pass a key to dictionary
+pd.Series(Technology)
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+##Create a dictionary
+Technology = {
+    'Database' : ['Oracle','MySQL','MS SQL Server'],
+    'ETL' : ['Informatica PowerCenter','Ab Initio','Oracle Data Integrator','Talend'],
+    'Language' : ['Python','Java','R','Scala']
+}
+##Pass a key to dictionary
+pd.Series(Technology['Database'])
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+dollar = [10.25,22.16,12.66,14.67]
+##Create a series from the list
+dollar = pd.Series(dollar)
+##Sum the elements from the Series
+dollar.sum()
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+dollar = [10,22,12,14]
+##Create a series from the list
+dollar = pd.Series(dollar)
+##Multiply the elements from the Series
+dollar.product()
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+ice_cream = ['Chocolate','Vanilla','Black Current','Dark Forest','Strawberry']
+days = ['Monday','Tuesday','Wednesday','Thursday','Friday']
+##Create Index from a Series
+pd.Series(data = ice_cream,index = days)
+
+import pandas as pd
+ice_cream = ['Chocolate','Vanilla','Black Current','Dark Forest','Strawberry']
+days = ['Monday','Tuesday','Wednesday','Thursday','Friday']
+##Create Index from a Series
+pd.Series(index = ice_cream,data = days)
+
+import pandas as pd
+ice_cream = ['Chocolate','Vanilla','Black Current','Dark Forest','Strawberry','Banana']
+days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Friday']
+##Create Index from a Series
+pd.Series(data = ice_cream,index = days)
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+##Import 2 different csv files
+google = pd.read_csv('D:\Code\Python\DataSet\google_stock_price.csv')
+pokemon = pd.read_csv('D:\Code\Python\DataSet\pokemon.csv',usecols = ['Pokemon','Type'],squeeze = True)
+google
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+##Import 2 different csv files
+google = pd.read_csv('D:\Code\Python\DataSet\google_stock_price.csv')
+pokemon = pd.read_csv('D:\Code\Python\DataSet\pokemon.csv',usecols = ['Pokemon','Type'],squeeze = True)
+##Return the max value from the data set
+google.max()
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+##Import 2 different csv files
+google = pd.read_csv('D:\Code\Python\DataSet\google_stock_price.csv')
+pokemon = pd.read_csv('D:\Code\Python\DataSet\pokemon.csv',usecols = ['Pokemon','Type'],squeeze = True)
+##Series attribute
+pokemon.values
+pokemon.ndim
+type(pokemon)
+pokemon.index
+pokemon.shape
+pokemon.describe
+pokemon.head(5)
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##sort_values()
+
+import pandas as pd
+google = pd.read_csv('D:\Code\Python\DataSet\google_stock_price.csv')
+pokemon = pd.read_csv('D:\Code\Python\DataSet\pokemon.csv')
+pokemon.sort_values('Type')
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##sort_values
+
+import pandas as pd
+google = pd.read_csv('D:\Code\Python\DataSet\google_stock_price.csv')
+pokemon = pd.read_csv('D:\Code\Python\DataSet\pokemon.csv')
+pokemon.sort_values('Type')
+
+
+import pandas as pd
+google = pd.read_csv('D:\Code\Python\DataSet\google_stock_price.csv')
+pokemon = pd.read_csv('D:\Code\Python\DataSet\pokemon.csv')
+pokemon.sort_values('Type').head(5)
+
+
+import pandas as pd
+google = pd.read_csv('D:\Code\Python\DataSet\google_stock_price.csv')
+pokemon = pd.read_csv('D:\Code\Python\DataSet\pokemon.csv')
+google.sort_values('Stock Price',ascending = True).head(5)
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##inplace
+
+import pandas as pd
+google = pd.read_csv('D:\Code\Python\DataSet\google_stock_price.csv')
+pokemon = pd.read_csv('D:\Code\Python\DataSet\pokemon.csv')
+df = google.sort_values('Stock Price',ascending = True)
+df.sort_index(ascending = False)
+
+
+
+import pandas as pd
+google = pd.read_csv('D:\Code\Python\DataSet\google_stock_price.csv')
+pokemon = pd.read_csv('D:\Code\Python\DataSet\pokemon.csv')
+df = google.sort_values('Stock Price',ascending = True)
+df.sort_index(inplace = True)
+df.tail()
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##in
+
+10 in [10,20,30] --- True
+100 in [10,20,30] --- False
+
+import pandas as pd
+google = pd.read_csv('D:\Code\Python\DataSet\google_stock_price.csv')
+pokemon = pd.read_csv('D:\Code\Python\DataSet\pokemon.csv')
+100 in pokemon.index
+
+
+import pandas as pd
+google = pd.read_csv('D:\Code\Python\DataSet\google_stock_price.csv')
+pokemon = pd.read_csv('D:\Code\Python\DataSet\pokemon.csv')
+pokemon.values
+'Grass' in pokemon.values ------- True
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##Extract Series by Index position
+
+import pandas as pd
+google = pd.read_csv('D:\Code\Python\DataSet\google_stock_price.csv')
+pokemon = pd.read_csv('D:\Code\Python\DataSet\pokemon.csv')
+pokemon.head(6)
+pokemon[4] --- Returns the value of 4th index
+pokemon[0:11] --- Returns the value from 0th till 10 index
+pokemon[[5,10]] --- Returns the value for 5th, 10th index value
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##Extract Series by Index Label
+
+import pandas as pd
+google = pd.read_csv('D:\Code\Python\DataSet\google_stock_price.csv')
+pokemon = pd.read_csv('D:\Code\Python\DataSet\pokemon.csv',index_col = 'Type')
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##get()
+
+import pandas as pd
+df = pd.read_csv('D:\Code\Python\DataSet\pokemon.csv',index_col = 'Pokemon',squeeze = True)
+df.sort_index(inplace = True)
+df.get('Abra')
+
+
+import pandas as pd
+df = pd.read_csv('D:\Code\Python\DataSet\pokemon.csv',index_col = 'Pokemon',squeeze = True)
+df.sort_index(inplace = True)
+df.get(['Abra','Abomasnow','Moltres'])
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##Maths method on Series Object
+
+import pandas as pd
+google = pd.read_csv('D:\Code\Python\DataSet\google_stock_price.csv',squeeze = True)
+google.max()
+google.mean()
+google.min()
+google.mode()
+google.count()
+google.describe()
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##idxmax() and idxmin()
+
+import pandas as pd
+google = pd.read_csv('D:\Code\Python\DataSet\google_stock_price.csv',squeeze = True)
+google.max()
+google.min()
+
+google.idxmax()
+google.idxmin()
+
+google[google.idxmax()]
+google[google.idxmin()]
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##value_counts()
+import pandas as pd
+df = pd.read_csv('D:\Code\Python\DataSet\pokemon.csv',index_col = 'Pokemon',squeeze = True)
+df.value_counts()
+df.value_counts().sum()
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##map() in Series
+import pandas as pd
+df_ind = pd.read_csv('D:\Code\Python\DataSet\pokemon.csv',index_col = 'Pokemon',squeeze = True)
+##df_ind.head()
+df
+
+import pandas as pd
+df_sr = pd.read_csv('D:\Code\Python\DataSet\pokemon.csv',usecols = ['Pokemon'],squeeze = True)
+df_sr
+
+df_sr.map(df_ind)
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+df_sr = pd.read_csv('D:\Code\Python\DataSet\pokemon.csv',usecols = ['Pokemon'],squeeze = True)
+##Convert the Series into Dictionaries
+df_sr.to_dict()
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##DataFrame
+
+import pandas as pd
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv')
+nba.index  ----- Retuns the last index (stop = 450, step = 1)
+nba.values ----- Retuns the data set
+nba.shape  ----- Retuns number of rows and columns
+nba.dtypes ----- Retuns the data type of every columns
+nba.axes
+nba.info() ----- Retuns the information about the dataframe
+nba.get_dtype_counts() ----- Returns number of data types for the columns in dataframe
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+rev = pd.read_csv('D:/Code/Python/DataSet/revenue.csv',index_col = 'Date')
+rev
+rev.sum()
+rev.sum(axis = 1)
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##Selecting a single columns
+
+import pandas as pd
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv')
+##Selecting 1 single column "Name"
+nba.Name
+
+
+import pandas as pd
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv')
+##Selecting 2 or more columns
+nba[['Name','Salary']].head()
+
+
+import pandas as pd
+##Selecting 2 or more columns
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv', usecols = ['Name','Salary'])
+nba
+
+import pandas as pd
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv')
+##Selecting 2 or more columns
+df = nba[['Name','Team']]
+##Create the index on Team column
+df.set_index('Team')
+
+import pandas as pd
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv')
+##Adding a column and assign a default value
+nba['Sports'] = 'Basketball'
+nba
+
+import pandas as pd
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv')
+##Adding 2 columns and assign a default value
+nba['Sports'] = 'Basketball'
+nba['League'] = 'Basketball Championship'
+nba
+
+import pandas as pd
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv')
+##Adding a new column
+nba.insert(2,column = 'Sports',value = 'Basketball')
+nba.head()
+
+
+import pandas as pd
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv')
+##Adding 2 new columns
+nba.insert(2,column = 'Sports',value = 'Basketball')
+nba.insert(5,column = 'League',value = 'Basketball Championship')
+nba.head(5)
+
+##Broadcasting operation
+import pandas as pd
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv')
+##Adding 2 new columns and perform the calculation
+nba['Weight in KG'] = nba['Weight'].mul(0.453592)
+nba.head(6)
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##value_counts
+
+import pandas as pd
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv')
+##Find the number of counts in each team
+nba['Team'].value_counts()
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##NaN - Find missing values
+
+import pandas as pd
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv')
+##Find the number of non-NaN in each column
+nba.dropna()
+
+import pandas as pd
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv')
+##Find the number of non-NaN in each column
+nba.dropna(how = 'all')
+
+import pandas as pd
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv')
+##Find the number of non-NaN in salary,college column
+nba.dropna(subset = ['Salary','College'])
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##fillna()
+
+import pandas as pd
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv')
+nba.fillna(0)
+
+import pandas as pd
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv')
+##fillna() only salary column
+nba['Salary'].fillna(0,inplace = True)
+nba
+
+
+import pandas as pd
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv')
+##fillna() only salary column, college column
+nba['Salary'].fillna(0,inplace = True)
+nba['College'].fillna('No College',inplace = True)
+nba
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##astype()
+
+import pandas as pd
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv').dropna(how = 'all')
+nba['Salary'].fillna(0, inplace = True)
+nba['College'].fillna('No College', inplace = True)
+nba.head()
+
+import pandas as pd
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv').dropna(how = 'all')
+##Convert the data type from float to int
+nba['Age'] = nba['Age'].astype(int)
+nba['Number'] = nba['Number'].astype(int)
+nba
+
+import pandas as pd
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv').dropna(how = 'all')
+##Convert the data type from float to int
+##Convert the NaN values to default value
+nba['Salary'].fillna(0, inplace =True)
+nba['College'].fillna('No College', inplace =True)
+nba['Age'] = nba['Age'].astype(int)
+nba['Number'] = nba['Number'].astype(int)
+nba
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##sort_values
+
+import pandas as pd
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv')
+##Sort the Age by ascending
+nba.sort_values('Age', ascending = True)
+
+import pandas as pd
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv')
+##Sort the dataset by 2 columns Age,Height
+nba.sort_values(['Age','Height'], ascending = True)
+
+
+import pandas as pd
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv')
+nba.sort_values(['Age','Height'], ascending = [True,True])
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##sort_index
+
+import pandas as pd
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv')
+##Sort the dataframe in asc order based on 2 columns Age,Salary
+nba.sort_values(['Name','Salary'],inplace = True)
+
+nba
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+
+import pandas as pd
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv')
+##Sort the dataframe in asc order based on 2 columns Age,Salary
+nba.sort_values(['Name','Salary'],inplace = True)
+nba.sort_index(ascending = True,inplace = True)
+
+nba
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##rank()
+
+import pandas as pd
+nba = pd.read_csv('D:/Code/Python/DataSet/nba.csv').dropna(how = 'all')
+nba['Salary'].fillna(0, inplace = True)
+nba['College'].fillna('No College', inplace = True)
+nba['Salary_Rnk'] = nba['Salary'].rank().astype(int)
+nba.sort_values('Salary', ascending = False)
+nba
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##Filter the data set using filter()
+
+import pandas as pd
+##Parse the date type column into date data type
+emp = pd.read_csv('D:/Code/Python/DataSet/employees.csv',parse_dates = ['Start Date','Last Login Time'])
+emp.head()
+
+
+
+import pandas as pd
+emp = pd.read_csv('D:/Code/Python/DataSet/employees.csv',parse_dates = ['Start Date','Last Login Time'])
+##Filter the dataset where Gender is Male
+emp.loc[emp['Gender']=='Male']
+
+
+import pandas as pd
+emp = pd.read_csv('D:/Code/Python/DataSet/employees.csv',parse_dates = ['Start Date','Last Login Time'])
+##Filter the Gender which is Male
+emp[emp['Gender'] == 'Male']
+
+import pandas as pd
+emp = pd.read_csv('D:/Code/Python/DataSet/employees.csv',parse_dates = ['Start Date','Last Login Time'])
+##Filter the salary which is greater than 100000
+emp[emp['Salary'] >= 101004]
+
+
+import pandas as pd
+emp = pd.read_csv('D:/Code/Python/DataSet/employees.csv',parse_dates = ['Start Date','Last Login Time'])
+##Filter the Start Date which is earlier than 1990-01-01
+emp[emp['Start Date'] < '1990-01-01']
+
+
+import pandas as pd
+emp = pd.read_csv('D:/Code/Python/DataSet/employees.csv',parse_dates = ['Start Date','Last Login Time'])
+emp['Gender'] = emp['Gender'].astype('category')
+emp.head()
+
+import pandas as pd
+emp = pd.read_csv('D:/Code/Python/DataSet/employees.csv',parse_dates = ['Start Date','Last Login Time'])
+emp['Gender'] = emp['Gender'].astype('category')
+##Filter where Gender is Male
+sex = emp['Gender'] == 'Male'
+##Filter where Team is Finance
+dept = emp['Team'] == 'Finance'
+##Both the condition should be True
+emp[sex & dept]
+
+import pandas as pd
+emp = pd.read_csv('D:/Code/Python/DataSet/employees.csv',parse_dates = ['Start Date','Last Login Time'])
+emp['Gender'] = emp['Gender'].astype('category')
+##Filter where Gender is Male
+sex = emp['Gender'] == 'Male'
+##Filter where Team is Finance
+dept = emp['Team'] == 'Finance'
+##Bonus is less than 
+bonus = emp['Bonus %'] < 1.5
+##All the condition should be True
+emp[sex & dept & bonus]
+
+import pandas as pd
+emp = pd.read_csv('D:/Code/Python/DataSet/employees.csv',parse_dates = ['Start Date','Last Login Time'])
+emp['Gender'] = emp['Gender'].astype('category')
+##Filter where Gender is Male
+sex = emp['Gender'] == 'Male'
+##Filter where Team is Finance
+dept = emp['Team'] == 'Finance'
+##Bonus is less than 
+bonus = emp['Bonus %'] < 1.5
+##sex and dept conditions are evaluated first followed by bonus
+emp[(sex & dept) | bonus]
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##isin()
+
+import pandas as pd
+emp = pd.read_csv('D:/Code/Python/DataSet/employees.csv',parse_dates = ['Start Date','Last Login Time'])
+emp['Gender'] = emp['Gender'].astype('category')
+emp
+##Filter the dataset where Team is ('Marketing')
+df = emp['Team'].isin(['Marketing'])
+emp[df]
+
+
+import pandas as pd
+emp = pd.read_csv('D:/Code/Python/DataSet/employees.csv',parse_dates = ['Start Date','Last Login Time'])
+emp['Gender'] = emp['Gender'].astype('category')
+emp
+##Filter the dataset where Team is (['Marketing','Legal'])
+df = emp['Team'].isin(['Marketing','Legal'])
+emp[df]
+
+
+import pandas as pd
+emp = pd.read_csv('D:/Code/Python/DataSet/employees.csv',parse_dates = ['Start Date','Last Login Time'])
+emp['Gender'] = emp['Gender'].astype('category')
+emp
+##Filter the dataset where Team is (['Marketing','Legal'])
+df = emp['Team'].isin(['Marketing'])
+##Filter the dataset where Gender is Female
+sex = emp['Gender'].isin(['Female'])
+emp[df & sex]
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##isnull() and notnull()
+
+import pandas as pd
+emp = pd.read_csv('D:/Code/Python/DataSet/employees.csv',parse_dates = ['Start Date','Last Login Time'])
+emp['Gender'] = emp['Gender'].astype('category')
+##Find all the Team values which has NaN
+df = emp['Team'].isnull()
+emp[df]
+
+import pandas as pd
+emp = pd.read_csv('D:/Code/Python/DataSet/employees.csv',parse_dates = ['Start Date','Last Login Time'])
+emp['Gender'] = emp['Gender'].astype('category')
+##Find all the Team values which has Not Null
+df = emp['Team'].notnull()
+emp[df]
+
+import pandas as pd
+emp = pd.read_csv('D:/Code/Python/DataSet/employees.csv',parse_dates = ['Start Date','Last Login Time'])
+emp['Gender'] = emp['Gender'].astype('category')
+##Find all the Team values which has Not Null
+df_Team = emp['Team'].notnull()
+##Find all the Senior Management values which has Not Null
+df_Mnt = emp['Senior Management'].notnull()
+emp[df_Team & df_Mnt]
+
+import pandas as pd
+emp = pd.read_csv('D:/Code/Python/DataSet/employees.csv',parse_dates = ['Start Date','Last Login Time'])
+emp['Gender'] = emp['Gender'].astype('category')
+##Filter the dataset where gender is null
+sex = emp['Gender'].isnull()
+emp[sex]
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##between()
+import pandas as pd
+emp = pd.read_csv('D:/Code/Python/DataSet/employees.csv',parse_dates = ['Start Date','Last Login Time'])
+emp['Gender'] = emp['Gender'].astype('category')
+##salary between 600000 and 70000
+sal = emp['Salary'].between(60000,70000)
+emp[sal]
+
+
+
+import pandas as pd
+emp = pd.read_csv('D:/Code/Python/DataSet/employees.csv',parse_dates = ['Start Date','Last Login Time'])
+emp['Gender'] = emp['Gender'].astype('category')
+##salary between 600000 and 70000
+sal = emp['Salary'].between(60000,70000)
+##bonus between 1.0 and 1.99
+bonus = emp['Bonus %'].between(1.0,1.99)
+emp[sal & bonus]
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##duplicate()
+
+import pandas as pd
+emp = pd.read_csv('D:/Code/Python/DataSet/employees.csv',parse_dates = ['Start Date','Last Login Time'])
+emp['Gender'] = emp['Gender'].astype('category')
+emp.sort_values('First Name',inplace = True)
+##Remove the duplicates
+emp.drop_duplicates('First Name',keep = 'first')
+
+
+import pandas as pd
+emp = pd.read_csv('D:/Code/Python/DataSet/employees.csv',parse_dates = ['Start Date','Last Login Time'])
+emp['Gender'] = emp['Gender'].astype('category')
+emp.sort_values('First Name',inplace = True)
+##Remove the duplicates
+emp.drop_duplicates('First Name',keep = 'last')
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+unique() and nunique()
+
+import pandas as pd
+emp = pd.read_csv('D:/Code/Python/DataSet/employees.csv',parse_dates = ['Start Date','Last Login Time'])
+emp['Gender'] = emp['Gender'].astype('category')
+##Find the unique values
+emp['Team'].unique()
+
+
+import pandas as pd
+emp = pd.read_csv('D:/Code/Python/DataSet/employees.csv',parse_dates = ['Start Date','Last Login Time'])
+emp['Gender'] = emp['Gender'].astype('category')
+##Find the count of unique values
+emp['Team'].nunique()
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##set_index() and reset_index()
+
+import pandas as pd
+bond = pd.read_csv('D:\Code\Python\DataSet/jamesbond.csv')
+##Filter the DataFrame where Actor is Pierce Brosnan
+bond[bond['Actor'] == 'Pierce Brosnan']
+
+import pandas as pd
+bond = pd.read_csv('D:\Code\Python\DataSet/jamesbond.csv')
+##Set the index
+bond.set_index('Actor',inplace = True)
+bond
+##Reset the index
+bond.reset_index()
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+#index label with loc()
+
+import pandas as pd
+bond = pd.read_csv('D:\Code\Python\DataSet/jamesbond.csv', index_col = 'Film')
+bond.sort_index(inplace = True)
+bond['Bond Actor Salary'].fillna(0, inplace = True)
+##Filter the index
+bond.loc[['Casino Royale','Die Another Day']]
+
+
+import pandas as pd
+bond = pd.read_csv('D:\Code\Python\DataSet/jamesbond.csv', index_col = 'Film')
+bond.sort_index(inplace = True)
+bond['Bond Actor Salary'].fillna(0, inplace = True)
+#bond.loc[['Casino Royale','Die Another Day']]
+bond.loc['Casino Royale' : 'Moonraker']
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##index position iloc()
+
+import pandas as pd
+bond = pd.read_csv('D:\Code\Python\DataSet/jamesbond.csv', index_col = 'Film',squeeze = True)
+##Retuns the 5th index position
+bond.iloc[5]
+
+import pandas as pd
+bond = pd.read_csv('D:\Code\Python\DataSet/jamesbond.csv')
+##Return the 15th, 20th index position
+bond.iloc[[15,20]]
+
+import pandas as pd
+bond = pd.read_csv('D:\Code\Python\DataSet/jamesbond.csv')
+##Return the index position from 4th to 7th
+bond.iloc[4:8]
+
+import pandas as pd
+bond = pd.read_csv('D:\Code\Python\DataSet/jamesbond.csv')
+##Return the index position from 20th till last
+bond.iloc[20:]
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##Catch-All.ix[]
+
+import pandas as pd
+bond = pd.read_csv('D:\Code\Python\DataSet/jamesbond.csv',index_col = ['Film'])
+bond.ix['Dr. No']
+
+
+import pandas as pd
+bond = pd.read_csv('D:\Code\Python\DataSet/jamesbond.csv',index_col = ['Film'])
+bond.ix[['Dr. No','Casino Royale']]
+
+import pandas as pd
+bond = pd.read_csv('D:\Code\Python\DataSet/jamesbond.csv',index_col = ['Film'])
+bond.sort_index(inplace = True)
+##Returns the value of Actor for the index location 'Casino Royale'
+bond.ix['Casino Royale','Actor']
+
+import pandas as pd
+bond = pd.read_csv('D:\Code\Python\DataSet/jamesbond.csv',index_col = ['Film'])
+bond.sort_index(inplace = True)
+##Returns the value of Actor, Year, Director for the index location 'Casino Royale'
+bond.ix['Casino Royale',['Actor','Year','Director']]
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##Renaming the index
+
+import pandas as pd
+bond = pd.read_csv('D:\Code\Python\DataSet/jamesbond.csv',index_col = ['Film'])
+bond.sort_index(inplace = True)
+##Renaming the column
+bond.rename(columns = {'Year' : 'Release','Budget':'Revenue','Bond Actor Salary': 'Salary'},inplace = True)
+bond
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##drop()
+
+import pandas as pd
+bond = pd.read_csv('D:\Code\Python\DataSet/jamesbond.csv',index_col = ['Film'])
+bond.sort_index(inplace = True)
+##Drop one or more rows
+bond.drop(labels = ['A View to a Kill','Casino Royale','Goldfinger'])
+
+
+import pandas as pd
+bond = pd.read_csv('D:\Code\Python\DataSet/jamesbond.csv',index_col = ['Film'])
+bond.sort_index(inplace = True)
+##Drop one or more columns
+bond.drop(columns = ['Bond Actor Salary','Year'])
+
+
+import pandas as pd
+bond = pd.read_csv('D:\Code\Python\DataSet/jamesbond.csv',index_col = ['Film'])
+bond.sort_index(inplace = True)
+##Drop one or more rows
+col = bond.drop(labels = ['A View to a Kill','Casino Royale','Diamonds Are Forever'],inplace = True)
+##Drop one or more columns
+row = bond.drop(columns = ['Bond Actor Salary','Box Office'],inplace = True)
+bond
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##sample()
+
+import pandas as pd
+bond = pd.read_csv('D:\Code\Python\DataSet/jamesbond.csv',index_col = ['Film'])
+bond.sort_index(inplace = True)
+##Randomly select any 2 records
+bond.sample(n = 2)
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##nsmallest() & nlargest()
+
+import pandas as pd
+bond = pd.read_csv('D:\Code\Python\DataSet/jamesbond.csv',index_col = ['Film'])
+##Return the highest Box Office
+bond.nlargest(1,'Box Office')
+
+
+import pandas as pd
+bond = pd.read_csv('D:\Code\Python\DataSet/jamesbond.csv',index_col = ['Film'])
+##Return the lowest Box Office
+bond.nsmallest(1,'Box Office')
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##where()
+
+import pandas as pd
+bond = pd.read_csv('D:\Code\Python\DataSet/jamesbond.csv',index_col = ['Film'])
+mask = bond['Actor'] == 'Daniel Craig'
+rev = bond['Box Office'] > 800
+##Return the dataset where Actor is Daniel Craig and Box Office > 800
+bond.where(mask & rev)
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##query()
+import pandas as pd
+cols = ['Movies','Year','Actor','Director','Revenue','Budget','Salary']
+bond = pd.read_csv('D:\Code\Python\DataSet/jamesbond.csv',names = cols,header = 0)
+##Set a new Index
+bond.set_index('Movies',inplace = True)
+##Apply a where clause with single condition
+bond.query('Actor == "Pierce Brosnan"')
+
+
+import pandas as pd
+cols = ['Movies','Year','Actor','Director','Revenue','Budget','Salary']
+bond = pd.read_csv('D:\Code\Python\DataSet/jamesbond.csv',names = cols,header = 0)
+##Set a new Index
+bond.set_index('Movies',inplace = True)
+##Apply a where clause with multiple condition
+bond.query('Actor == "Pierce Brosnan" and Revenue > 500')
+
+import pandas as pd
+cols = ['Movies','Year','Actor','Director','Revenue','Budget','Salary']
+bond = pd.read_csv('D:\Code\Python\DataSet/jamesbond.csv',names = cols,header = 0)
+##Set a new Index
+bond.set_index('Movies',inplace = True)
+##Apply a where clause with multiple condition
+bond.query('Actor in ["Pierce Brosnan","Daniel Craig"]')
+
+import pandas as pd
+cols = ['Movies','Year','Actor','Director','Revenue','Budget','Salary']
+bond = pd.read_csv('D:\Code\Python\DataSet/jamesbond.csv',names = cols,header = 0)
+##Set a new Index
+bond.set_index('Movies',inplace = True)
+##Apply a where clause with multiple condition
+bond.query('Actor in ["Pierce Brosnan","Daniel Craig"] and Revenue > 500')
+
+import pandas as pd
+cols = ['Movies','Year','Actor','Director','Revenue','Budget','Salary']
+bond = pd.read_csv('D:\Code\Python\DataSet/jamesbond.csv',names = cols,header = 0)
+##Set a new Index
+bond.set_index('Movies',inplace = True)
+##Apply a where clause with multiple condition
+bond.query('Actor not in ["Pierce Brosnan","Daniel Craig"] and Revenue > 500')
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##apply()
+
+def good_movie(row):
+    Budget = row[5]
+    if Budget >= 10 and Budget <= 100:
+         return  '*'
+    elif Budget >=101 and Budget <= 150:
+         return  '**'
+    elif Budget <= 151 and Budget <= 200:
+         return  '***'
+    else:
+         return '****'
+		 
+bond.apply(good_movie, axis = 'columns')
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+df = pd.read_csv('D:\Code\Python\DataSet\chicago.csv',index_col = 'Position Title',squeeze = True)
+##Find the number of unique values in Department column
+df['Department'].nunique()
+##Find the number of records in Departments column
+df['Department'].count()
+
+
+
+import pandas as pd
+df = pd.read_csv('D:\Code\Python\DataSet\chicago.csv',index_col = 'Position Title',squeeze = True)
+df['Department'] = df['Department'].astype('category')
+df
+df.info()
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##lower() upper() len() title()
+
+import pandas as pd
+df = pd.read_csv('D:\Code\Python\DataSet\chicago.csv',squeeze = True)
+df['Department'] = df['Department'].astype('category')
+##lower() upper() len() title()
+df['Name'].str.lower()
+
+
+import pandas as pd
+df = pd.read_csv('D:\Code\Python\DataSet\chicago.csv',squeeze = True)
+df['Department'] = df['Department'].astype('category')
+##str.lower() str.upper() str.len() str.title()
+df['Name'] = df['Name'].str.title()
+df['Position Title'] = df['Position Title'].str.title()
+df['Department'] = df['Department'].str.title()
+df
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##replace()
+
+import pandas as pd
+df = pd.read_csv('D:\Code\Python\DataSet\chicago.csv',squeeze = True).dropna(how = 'all')
+df['Department'] = df['Department'].astype('category')
+##replace function. Replace POLICE OFFICER with COP
+df['Position Title'] = df['Position Title'].replace('POLICE OFFICER','COP').str.title()
+df
+
+
+import pandas as pd
+df = pd.read_csv('D:\Code\Python\DataSet\chicago.csv',squeeze = True).dropna(how = 'all')
+df['Department'] = df['Department'].astype('category')
+##replace function. Replace POLICE OFFICER with COP
+df['Position Title'] = df['Position Title'].replace('POLICE OFFICER','COP').str.title()
+##replace function. Replace WATER MGMNT with WATER MANAGEMENT
+df['Department'] = df['Department'].str.replace('WATER MGMNT','WATER MANAGEMENT').str.title()
+df
+
+
+import pandas as pd
+df = pd.read_csv('D:\Code\Python\DataSet\chicago.csv',squeeze = True).dropna(how = 'all')
+df['Department'] = df['Department'].astype('category')
+##replace function. Replace POLICE OFFICER with COP
+df['Position Title'] = df['Position Title'].replace('POLICE OFFICER','COP').str.title()
+##replace function. Replace WATER MGMNT with WATER MANAGEMENT
+df['Department'] = df['Department'].str.replace('WATER MGMNT','WATER MANAGEMENT').str.title()
+##replace function. Replace $ with ''
+df['Employee Annual Salary'] = df['Employee Annual Salary'].str.replace('$','').astype(float)
+df
+
+##contains()
+
+import pandas as pd
+df = pd.read_csv('D:\Code\Python\DataSet\chicago.csv',squeeze = True)
+df.dropna(how = 'all', inplace = True)
+##Search all the 'Position Title' which has 'WATER' in the string
+mask = df['Position Title'].str.contains('WATER')
+df[mask]
+
+##startswith()
+
+import pandas as pd
+df = pd.read_csv('D:\Code\Python\DataSet\chicago.csv',squeeze = True)
+df.dropna(how = 'all', inplace = True)
+##Search all the 'Position Title' which has 'WATER' in the begining
+mask = df['Position Title'].str.startswith('WATER')
+df[mask]
+
+##endswith()
+
+import pandas as pd
+df = pd.read_csv('D:\Code\Python\DataSet\chicago.csv',squeeze = True)
+df.dropna(how = 'all', inplace = True)
+##Search all the 'Position Title' which has 'WATER' in the end
+mask = df['Position Title'].str.endswith('IST')
+df[mask]
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##strip() lstrip() rstrip()
+
+import pandas as pd
+df = pd.read_csv('D:\Code\Python\DataSet\chicago.csv',squeeze = True)
+df.dropna(how = 'all', inplace = True)
+##Remove whitespaces from Name column
+df['Name'] = df['Name'].str.strip()
+##Remove whitespaces from Position Title column
+df['Position Title'] = df['Position Title'].str.strip()
+df
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##String methods on index and columns
+
+import pandas as pd
+df = pd.read_csv('D:\Code\Python\DataSet\chicago.csv',index_col = 'Name',squeeze = True)
+df.dropna(how = 'all', inplace = True)
+df
+
+
+import pandas as pd
+df = pd.read_csv('D:\Code\Python\DataSet\chicago.csv',index_col = 'Name',squeeze = True)
+df.dropna(how = 'all', inplace = True)
+##Strip the index value
+df.index = df.index.str.strip().str.title()
+df
+
+
+import pandas as pd
+df = pd.read_csv('D:\Code\Python\DataSet\chicago.csv',index_col = 'Name',squeeze = True)
+df.dropna(how = 'all', inplace = True)
+##Strip the index value
+df.index = df.index.str.strip().str.title()
+##Return only 2 columns
+df[['Position Title','Department']]
+
+
+import pandas as pd
+col = ['NAME','POSITION','DEPARTMENT','SALARY']
+df = pd.read_csv('D:\Code\Python\DataSet\chicago.csv',index_col = 'NAME',squeeze = True, header = 1,names = col)
+##Strip the index value
+df.index = df.index.str.strip().str.title()
+##Strip and lower the value for the POSITION column
+df['POSITION'] = df['POSITION'].str.title()
+df
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+df = pd.read_csv('D:\Code\Python\DataSet\chicago.csv',index_col = 'Name').dropna(how = 'all')
+df['Department'] = df['Department'].astype('category')
+##Strip() on index
+df.index = df.index.str.strip().str.title()
+df.head(5)
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+df = pd.read_csv('D:\Code\Python\DataSet\chicago.csv').dropna(how = 'all')
+df['Department'] = df['Department'].astype('category')
+##Split() the first name from name column
+df['Name'].str.split(',').str.get(0).str.title()
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+df = pd.read_csv('D:\Code\Python\DataSet\chicago.csv').dropna(how = 'all')
+df['Department'] = df['Department'].astype('category')
+##Count the number of first name
+df['Name'].str.split(',').str.get(0).str.title().value_counts()
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+df = pd.read_csv('D:\Code\Python\DataSet\chicago.csv').dropna(how = 'all')
+df['Department'] = df['Department'].astype('category')
+##Count the number of first name
+df['Name'].str.split(',').str.get(0).str.title().value_counts()
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+df = pd.read_csv('D:\Code\Python\DataSet\chicago.csv').dropna(how = 'all')
+df['Department'] = df['Department'].astype('category')
+##Split() the last name from name column
+df['Name'].str.split(',').str.get(1).str.strip().str.split().str.get(0)
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+df = pd.read_csv('D:\Code\Python\DataSet\chicago.csv').dropna(how = 'all')
+df['Department'] = df['Department'].astype('category')
+df[['First_Name','Last_Name']] = df['Name'].str.title().str.split(',',expand = True)
+##Split the first_name and last_name from the dataframe
+df.head()
+
+------------------------------------------------------------------------------------------------------------------------------------
+##Multi Index
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/bigmac.csv',index_col = ['Country'],parse_dates = ['Date'])
+df
+
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/bigmac.csv',parse_dates = ['Date'])
+##set_index(keys = 'Country')
+df
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/bigmac.csv',parse_dates = ['Date'])
+##multi index
+df.set_index(keys = ['Date','Country'])
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/bigmac.csv',parse_dates = ['Date'])
+##multi index
+df.set_index(keys = ['Date','Country'],inplace = True)
+df
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/bigmac.csv',parse_dates = ['Date'])
+##multi index
+df.set_index(keys = ['Date','Country'],inplace = True)
+##Sort the index ascending order
+df.sort_index().head()
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/bigmac.csv',parse_dates = ['Date'])
+##multi index
+df.set_index(keys = ['Date','Country'],inplace = True)
+##Sort the index ascending order
+df.sort_index(inplace = True)
+df.head()
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/bigmac.csv',parse_dates = ['Date'],index_col = ['Date','Country'])
+df.head()
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/bigmac.csv',parse_dates = ['Date'],index_col = ['Date','Country'])
+##Change the name of multi index column
+df.index.set_names(['Date','Location'], inplace = True)
+df.head()
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/bigmac.csv',parse_dates = ['Date'],index_col = ['Date','Country'])
+##Chane the name of index column
+df.index.set_names(['Date','Location'], inplace = True)
+##Sort the index column
+df.sort_index(ascending = [True,False], inplace = True)
+df
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/bigmac.csv',parse_dates = ['Date'],index_col = ['Date','Country'])
+##Filter the index column where Date = '2010-01-01'
+df.ix[("2010-01-01")]
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/bigmac.csv',parse_dates = ['Date'],index_col = ['Date','Country'])
+##Transpose()
+df.transpose()
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/bigmac.csv',parse_dates = ['Date'],index_col = ['Date','Country'])
+##Transpose() function. Transpose() function does not overite the previos data frame not it has inplace = True. 
+##Create a new data frame
+df = df.transpose()
+df.head()
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/bigmac.csv',parse_dates = ['Date'],index_col = ['Date','Country'])
+##Transpose() function. Transpose() function does not overite the previos data frame not it has inplace = True. 
+##Create a new data frame
+df = df.transpose()
+##Filter the index column where Date = '2010-01-01'
+df.ix["Price in US Dollars",('2010-01-01')]
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/bigmac.csv',parse_dates = ['Date'],index_col = ['Date','Country'])
+##Transpose() function. Transpose() function does not overite the previos data frame not it has inplace = True. 
+##Create a new data frame
+df = df.transpose()
+##Filter the index column where Date = '2010-01-01' and Country = Australia
+df.ix["Price in US Dollars",('2010-01-01','Australia')]
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/bigmac.csv',parse_dates = ['Date'],index_col = ['Date','Country'])
+##swaplevel()
+df = df.swaplevel()
+df.head()
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/worldstats.csv',index_col = ['country','year'])
+##stack() & to_frame()
+df= df.stack().to_frame()
+df
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/worldstats.csv',index_col = ['country','year'])
+##stack()
+df = df.stack()
+##unstack()
+df = df.unstack().unstack().unstack()
+df
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/worldstats.csv',index_col = ['country','year'])
+##stack()
+df = df.stack()
+##unstack()
+df.unstack("country")
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/worldstats.csv',index_col = ['country','year'])
+##stack()
+df = df.stack()
+##unstack()
+df.unstack(level = [1,0])
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/worldstats.csv',index_col = ['country','year'])
+##stack()
+df = df.stack()
+##unstack(), convert NaN as 0
+df = df.unstack("year",fill_value = 0)
+df.head()
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/salesmen.csv',parse_dates = ['Date'])
+df['Salesman'] = df['Salesman'].astype('category')
+##pivot()
+df.pivot(index = 'Date',columns = 'Salesman')
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/salesmen.csv',parse_dates = ['Date'])
+df['Salesman'] = df['Salesman'].astype('category')
+##pivot()
+df = df.pivot(index = 'Date',columns = 'Salesman')
+df.head()
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/foods.csv')
+##pivot_table
+df.pivot_table(values = 'Spend',index = 'Gender',aggfunc = 'mean')
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/foods.csv')
+##pivot_table
+df.pivot_table(values = 'Spend',index = ['Frequency','City'],aggfunc = 'sum')
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/foods.csv')
+##pivot_table
+df = df.pivot_table(values = 'Spend',index = ['City','Frequency'],aggfunc = 'mean')
+df
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/foods.csv')
+##pivot_table
+df = df.pivot_table(values = 'Spend',index = ['City','Frequency','Gender'],aggfunc = 'mean')
+df
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/foods.csv')
+##pivot_table
+df = df.pivot_table(values = 'Spend',index = ['Frequency','Gender'],columns = 'City',aggfunc = 'mean')
+df
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/foods.csv')
+##pivot_table
+df = df.pivot_table(values = 'Spend',index = ['Item','Gender'],columns = ['Frequency','City'],aggfunc = 'mean')
+df
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/foods.csv')
+##pivot_table
+df = df.pivot_table(values = 'Spend',index = ['Item','Gender'],columns = ['City'],aggfunc = 'mean')
+df
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/foods.csv')
+##pivot_table
+df = df.pivot_table(values = 'Spend',index = ['Item','Gender'],columns = ['City'],aggfunc = 'count')
+df
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/foods.csv')
+##pivot_table
+df = df.pivot_table(values = 'Spend',index = ['Gender','Item'],columns = ['City'],aggfunc = 'max')
+df
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/quarters.csv')
+##melt()
+df = df.melt(id_vars = 'Salesman')
+##sort_values
+df.sort_values('Salesman')
+
+import pandas as pd
+##index_col is used
+df = pd.read_csv('D:/Code/Python/DataSet/quarters.csv')
+##melt()
+df = df.melt(id_vars = 'Salesman',var_name = "Quarter",value_name = "Revenue")
+##sort_values
+df.sort_values('Salesman')
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##Group by
+
+import pandas as pd
+df = pd.read_csv('D:/Code/Python/DataSet/fortune1000.csv',index_col = ['Rank'])
+grp = df.groupby(by = 'Sector')
+##Find the count of unique values
+df['Sector'].nunique()
+
+import pandas as pd
+df = pd.read_csv('D:/Code/Python/DataSet/fortune1000.csv',index_col = ['Rank'])
+grp = df.groupby(by = 'Sector')
+##Find the count of unique values
+df['Sector'].nunique()
+##Number of counts under each sector
+grp.size()
+
+import pandas as pd
+df = pd.read_csv('D:/Code/Python/DataSet/fortune1000.csv',index_col = ['Rank'])
+grp = df.groupby(by = 'Sector')
+##Find the count of unique values
+df['Sector'].nunique()
+##Number of counts under each sector
+grp.size()
+##Return the first record from each Sector
+grp.first()
+
+import pandas as pd
+df = pd.read_csv('D:/Code/Python/DataSet/fortune1000.csv',index_col = ['Rank'])
+grp = df.groupby(by = 'Sector')
+##Find the count of unique values
+df['Sector'].nunique()
+##Number of counts under each sector
+grp.size()
+##Return the last record from each Sector
+grp.last()
+
+import pandas as pd
+df = pd.read_csv('D:/Code/Python/DataSet/fortune1000.csv',index_col = ['Rank'])
+grp = df.groupby(by = 'Sector')
+##Find the count of unique values
+df['Sector'].nunique()
+##Number of counts under each sector
+grp.size()
+##Return the last record from each Sector
+grp.last()
+##The groups attribute will return the row number from each group/sector
+grp.groups
+df.loc[56]
+
+import pandas as pd
+df = pd.read_csv('D:/Code/Python/DataSet/fortune1000.csv',index_col = ['Rank'])
+grp = df.groupby(by = 'Sector')
+##Filter the group data where sector = 'Business Services'
+grp.get_group('Business Services')
+
+import pandas as pd
+df = pd.read_csv('D:/Code/Python/DataSet/fortune1000.csv',index_col = ['Rank'])
+grp = df.groupby(by = 'Sector')
+##Returns the max from each group
+grp.max()
+
+import pandas as pd
+df = pd.read_csv('D:/Code/Python/DataSet/fortune1000.csv',index_col = ['Rank'])
+grp = df.groupby(by = 'Sector')
+##Returns the sum of Revenue column from each group
+grp['Revenue'].sum()
+
+import pandas as pd
+df = pd.read_csv('D:/Code/Python/DataSet/fortune1000.csv',index_col = ['Rank'])
+grp = df.groupby(by = 'Sector')
+##Returns the sum of Employees column from each group
+grp['Employees'].sum()
+
+import pandas as pd
+df = pd.read_csv('D:/Code/Python/DataSet/fortune1000.csv',index_col = ['Rank'])
+grp = df.groupby(by = 'Sector')
+##Returns the max() of Revenue,Profits column from each group
+grp[['Revenue','Profits']].max()
+
+import pandas as pd
+df = pd.read_csv('D:/Code/Python/DataSet/fortune1000.csv',index_col = ['Rank'])
+##Multi column group by
+grp = df.groupby(['Sector','Industry'])
+grp.size()
+##Returns the sum() of Revenue,Profits column from each group
+grp.sum()
+
+import pandas as pd
+df = pd.read_csv('D:/Code/Python/DataSet/fortune1000.csv',index_col = ['Rank'])
+##Multi column group by
+grp = df.groupby(['Sector','Industry'])
+grp.size()
+##Returns the sum() of Revenue,Profits column from each group
+grp.sum()
+##Returns the sum() of revenue 
+grp['Revenue'].sum()
+
+import pandas as pd
+df = pd.read_csv('D:/Code/Python/DataSet/fortune1000.csv',index_col = ['Rank'])
+##Create a groupby
+grp = df.groupby('Sector')
+##Multi column group by using agg()
+grp.agg({'Revenue'  :'sum',
+       'Profits'   : 'max',
+       'Employees' : 'max'})
+	   
+import pandas as pd
+df = pd.read_csv('D:/Code/Python/DataSet/fortune1000.csv',index_col = ['Rank'])
+##Create a groupby
+grp = df.groupby('Sector')
+##Multi column group by using agg()
+grp.agg({'Revenue'  :'sum',
+       'Profits'   : 'max',
+       'Employees' : 'max',
+       'Employees' : 'count'})
+
+import pandas as pd
+df = pd.read_csv('D:/Code/Python/DataSet/fortune1000.csv',index_col = ['Rank'])
+##Create a groupby
+grp = df.groupby('Sector')
+##Multi column group by using agg()
+grp.agg({'Revenue'  :'sum',
+       'Profits'   : 'max',
+       'Employees' : 'max',
+       'Employees' : 'size'})
+##Create a multi column combination of agg
+grp.agg(['size','sum','mean'])
+
+import pandas as pd
+df = pd.read_csv('D:/Code/Python/DataSet/fortune1000.csv',index_col = ['Rank'])
+##Create a groupby
+grp = df.groupby('Sector')
+##Multi column group by using agg()
+grp.agg({'Revenue'  :['sum','mean'],
+       'Profits'   :  'max',
+       'Employees' :  'max',
+       'Employees' : 'size'
+        })
+##Create a multi column combination of agg
+##grp.agg(['size','sum','mean'])
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##Merging, Joining and concatenating DataFrame
+
+import pandas as pd
+week1 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 1 Sales.csv')
+week1
+week2 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 2 Sales.csv')
+week2
+cust = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Customers.csv')
+cust
+food = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Foods.csv')
+food
+
+##concat()
+
+import pandas as pd
+week1 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 1 Sales.csv')
+week1
+week2 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 2 Sales.csv')
+week2
+cust = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Customers.csv')
+cust
+food = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Foods.csv')
+food
+##concat 2 dataframes
+res = pd.concat([week1,week2],ignore_index = True)
+res
+
+import pandas as pd
+week1 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 1 Sales.csv')
+week1
+week2 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 2 Sales.csv')
+week2
+cust = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Customers.csv')
+cust
+food = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Foods.csv')
+food
+##concat 2 dataframes. Identifing which dataframe contains the actual data
+sales = pd.concat([week1,week2],keys = ['A ','B'])
+sales
+
+import pandas as pd
+week1 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 1 Sales.csv')
+week1
+week2 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 2 Sales.csv')
+week2
+cust = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Customers.csv')
+cust
+food = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Foods.csv')
+food
+##concat 2 dataframes. Identifing which dataframe contains the actual data
+sales = pd.concat([week1,week2],keys = ['A','B'])
+##Filter only the index
+sales.ix['A']
+
+import pandas as pd
+week1 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 1 Sales.csv')
+week1
+week2 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 2 Sales.csv')
+week2
+cust = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Customers.csv')
+cust
+food = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Foods.csv')
+food
+##concat 2 dataframes. Identifing which dataframe contains the actual data
+sales = pd.concat([week1,week2],keys = ['A ','B'])
+##Flter the index 
+sales.ix[('B',240)]
+
+import pandas as pd
+week1 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 1 Sales.csv')
+week1
+week2 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 2 Sales.csv')
+week2
+cust = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Customers.csv')
+cust
+food = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Foods.csv')
+food
+##concat 2 dataframes. Identifing which dataframe contains the actual data
+sales = pd.concat([week1,week2],keys = ['A ','B'])
+##Flter the index 
+sales.ix[('B',240),'Customer ID']
+
+##append()
+
+import pandas as pd
+week1 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 1 Sales.csv')
+week1
+week2 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 2 Sales.csv')
+week2
+cust = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Customers.csv')
+cust
+food = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Foods.csv')
+food
+##append 2 dataframes. Identifing which dataframe contains the actual data
+sales = week2.append(week1,ignore_index = True)
+sales
+
+import pandas as pd
+week1 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 1 Sales.csv')
+week1
+week2 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 2 Sales.csv')
+week2
+cust = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Customers.csv')
+cust
+food = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Foods.csv')
+food
+##Merger / Inner Join 2 DataFrame on Customer ID
+sales = week1.merge(week2, how = 'inner', on = ['Customer ID','Food ID'],suffixes = ['_A','_B'])
+sales
+
+import pandas as pd
+week1 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 1 Sales.csv')
+week1
+week2 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 2 Sales.csv')
+week2
+cust = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Customers.csv')
+cust
+food = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Foods.csv')
+food
+##Merger / Outer Join 2 DataFrame on Customer ID
+sales = week1.merge(week2, how = 'outer', on = ['Customer ID'],suffixes = ['- Week1','- Week2'])
+sales
+
+import pandas as pd
+week1 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 1 Sales.csv')
+week1
+week2 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 2 Sales.csv')
+week2
+cust = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Customers.csv')
+cust
+food = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Foods.csv')
+food
+##Merger / Outer Join 2 DataFrame on Customer ID, indicator = True
+sales = week1.merge(week2, how = 'outer', on = ['Customer ID'],suffixes = ['- Week1','- Week2'], indicator = True)
+sales
+
+import pandas as pd
+week1 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 1 Sales.csv')
+week1
+week2 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 2 Sales.csv')
+week2
+cust = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Customers.csv')
+cust
+food = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Foods.csv')
+food
+##Merger / Outer Join 2 DataFrame on Customer ID
+sales = week1.merge(week2, how = 'outer', on = ['Customer ID'],suffixes = ['- Week1','- Week2'], indicator = True)
+sales
+##Find the number of valid values from left or right column
+sales['_merge'].value_counts()
+
+import pandas as pd
+week1 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 1 Sales.csv')
+week1
+week2 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 2 Sales.csv')
+week2
+cust = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Customers.csv')
+cust
+food = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Foods.csv')
+food
+##Merger / Outer Join 2 DataFrame on Customer ID
+sales = week1.merge(week2, how = 'outer', on = ['Customer ID'],suffixes = ['- Week1','- Week2'], indicator = True)
+sales
+##Find the valid values from right column
+sales[sales['_merge'] == 'right_only']
+
+import pandas as pd
+week1 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 1 Sales.csv')
+week1
+week2 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 2 Sales.csv')
+week2
+cust = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Customers.csv')
+cust
+food = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Foods.csv')
+food
+##Merger / Outer Join 2 DataFrame on Customer ID
+sales = week1.merge(week2, how = 'outer', on = ['Customer ID'],suffixes = ['- Week1','- Week2'], indicator = True)
+sales
+##Find the valid values from left column
+sales[sales['_merge'] == 'left_only']
+
+import pandas as pd
+week1 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 1 Sales.csv')
+week1
+week2 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 2 Sales.csv')
+week2
+cust = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Customers.csv')
+cust
+food = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Foods.csv')
+food
+##Merger / Outer Join 2 DataFrame on Food ID, sort = True
+sales = week1.merge(food, how = 'right', on = ['Food ID'],sort = True)
+sales
+
+import pandas as pd
+week1 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 1 Sales.csv')
+week1
+week2 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 2 Sales.csv')
+week2
+cust = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Customers.csv')
+cust
+food = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Foods.csv')
+food
+##Merger / Left Outer Join, Right Outer Join 2 DataFrame on Food ID, sort = True, drop the columns
+sales = week2.merge(cust, how = 'left',left_on = 'Customer ID', right_on = 'ID').drop('ID', axis = 'columns')
+sales
+
+import pandas as pd
+week1 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 1 Sales.csv')
+week1
+week2 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 2 Sales.csv')
+week2
+cust = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Customers.csv', index_col = 'ID')
+cust
+food = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Foods.csv', index_col = 'Food ID')
+food
+##Join Column with Index using Merge
+sales = week1.merge(cust, how = 'left',left_on = 'Customer ID',right_index = True)
+sales
+
+import pandas as pd
+week1 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 1 Sales.csv')
+week1
+week2 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 2 Sales.csv')
+week2
+cust = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Customers.csv', index_col = 'ID')
+cust
+food = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Foods.csv', index_col = 'Food ID')
+food
+##Join Column with Index using Merge
+sales = week1.merge(cust, how = 'left',left_on = 'Customer ID',right_index = True)
+##Join DataFrame with the result of Merge
+sales = sales.merge(food, how = 'left',left_on = 'Food ID',right_index = True)
+sales
+
+import pandas as pd
+week1 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 1 Sales.csv')
+week1
+week2 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 2 Sales.csv')
+week2
+cust = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Customers.csv', index_col = 'ID')
+cust
+food = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Foods.csv', index_col = 'Food ID')
+food
+rating = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 1 Satisfaction.csv')
+##Join to perform 2 DataFrame
+week1.join(rating)
+
+import pandas as pd
+week1 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 1 Sales.csv')
+week1
+week2 = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Week 2 Sales.csv')
+week2
+cust = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Customers.csv')
+cust
+food = pd.read_csv('D:/Code/Python/DataSet/Restaurant - Foods.csv')
+food
+##Pandas merge
+pd.merge(week1, cust, how = 'inner', left_on = 'Customer ID', right_on = 'ID')
+
+------------------------------------------------------------------------------------------------------------------------------------
+##input and output
+
+import pandas as pd
+df = pd.read_csv('D:\Code\Python\DataSet\Popular_Baby_Names.csv')
+##convert the series to data frame
+df["Child's First Name"].to_frame()
+
+import pandas as pd
+##Read the excel dataset
+df = pd.read_excel('D:\Code\Python\DataSet\sample_data.xlsx',sheet_name = [0])
+ax = df[0]
+ax
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##Pandas visualization
+
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+appl = pd.read_csv('D:/Code/Python/DataSet/apple.csv',parse_dates = ['Date'],index_col = ['Date'])
+appl[['Open','High','Close']].plot()
+appl.columns
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+appl = pd.read_csv('D:/Code/Python/DataSet/apple.csv',parse_dates = ['Date'],index_col = ['Date'])
+appl[['Open','High','Low','Close']].plot()
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+appl = pd.read_csv('D:/Code/Python/DataSet/apple.csv',parse_dates = ['Date'],index_col = ['Date'])
+plt.style.use('fivethirtyeight')
+appl[['Open','High','Close']].plot()
+plt.style.available
+
+------------------------------------------------------------------------------------------------------------------------------------
+##kind = bar
+
+def performance(stock_price):
+    if stock_price <=40000:
+        return "Poor"
+    elif stock_price > 40000 and stock_price <= 75000:
+        return "Satisfactory"
+    elif stock_price > 75000:
+        return "Outstanding"
+		
+
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+appl = pd.read_csv('D:/Code/Python/DataSet/apple.csv',parse_dates = ['Date'],index_col = ['Date'])
+appl['Volume'].apply(performance).value_counts().plot(kind = 'bar')
+
+------------------------------------------------------------------------------------------------------------------------------------
+##kind = barh
+
+def performance(stock_price):
+    if stock_price <=40000:
+        return "Poor"
+    elif stock_price > 40000 and stock_price <= 75000:
+        return "Satisfactory"
+    elif stock_price > 75000:
+        return "Outstanding"
+
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+appl = pd.read_csv('D:/Code/Python/DataSet/apple.csv',parse_dates = ['Date'],index_col = ['Date'])
+appl['Volume'].apply(performance).value_counts().plot(kind = 'barh')
+
+------------------------------------------------------------------------------------------------------------------------------------
+##kind = pie
+
+def performance(stock_price):
+    if stock_price <=40000:
+        return "Poor"
+    elif stock_price > 40000 and stock_price <= 75000:
+        return "Satisfactory"
+    elif stock_price > 75000:
+        return "Outstanding"
+
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+appl = pd.read_csv('D:/Code/Python/DataSet/apple.csv',parse_dates = ['Date'],index_col = ['Date'])
+appl['Volume'].apply(performance).value_counts().plot(kind = 'pie', legend = True)
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+def performance(stock_price):
+    return (stock_price / 100.0) * 100.0
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+appl = pd.read_csv('D:/Code/Python/DataSet/apple.csv',parse_dates = ['Date'],index_col = ['Date'])
+appl['Close'].apply(performance).plot(kind = 'hist', legend = True, bins = 30)
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##Random generated number
+
+import pandas as pd
+import numpy as np
+pd.options.display.max_rows = 100
+pd.options.display.max_columns = 1000
+
+pd.set_option('max_columns',1000)
+pd.set_option('max_rows',1000)
+
+data = np.random.randint(0,100,[1000,50])
+pd.DataFrame(data)
+
+##Display negative numbers
+
+import pandas as pd
+import numpy as np
+data = np.random.randn(5,5)
+pd.DataFrame(data)
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+##Time Series
