@@ -1,0 +1,135 @@
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+from pyspark.sql.types import DateType
+from pyspark.sql.functions import *
+
+lc = spark.read.format("csv").option("header", "true").option("inferSchema", "true").load("/FileStore/tables/LoanStats_2018Q4.csv")
+display(lc)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+lc.count()
+
+lc.printSchema()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+temp_table = "loan_stats"
+lc.createOrReplaceTempView(temp_table)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+%sql
+select * from loan_stats;
+
+%sql
+select count(*) from loan_stats;
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+display(lc.describe())
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+lc_sel = lc.select("term","loan_amnt","home_ownership","grade","purpose","int_rate","addr_state","loan_status","application_type","loan_amnt","emp_length","annual_inc","dti","delinq_2yrs","revol_util","total_acc","num_tl_90g_dpd_24m","dti_joint").show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+lc_sel = lc.select("term","loan_amnt","home_ownership","grade","purpose","int_rate","addr_state","loan_status","application_type","loan_amnt","emp_length","annual_inc","dti","delinq_2yrs","revol_util","total_acc","num_tl_90g_dpd_24m","dti_joint")
+display(lc_sel)
+
+lc_sel.cache()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql.functions import *
+
+regex_str = "years|year|\\+|\\<"
+lc_sel.select(regexp_replace(col("emp_length"),regex_str,"").alias("emplength_cleaned"),col("emp_length")).show(10)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql.functions import *
+
+regex_str = "\\d+"
+lc_sel.select(regexp_extract(col("emp_length"),regex_str,0).alias("empcleaned_lenght"),col("emp_length")).show(10)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+# rename the column
+lc_sel = lc_sel.withColumn("term_cleaned", regexp_replace(col("term"),"months","")).withColumn("empcleaned_lenght", regexp_extract(col("emp_length"),"\\d+",0))
+
+display(lc_sel)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+table_name = "loan_status_sel"
+
+lc_sel.createOrReplaceTempView(table_name)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+%sql
+select * from loan_status_sel
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+lc_sel.stat.cov("annual_inc","loan_amnt")
+
+lc_sel.stat.corr("annual_inc","loan_amnt")
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+# create a crosstab report
+
+freq = lc_sel.crosstab("loan_status","grade")
+display(freq)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+lc_sel.groupby("purpose").count().show()
+
+lc_sel.groupby("purpose").count().orderBy(col("count").desc()).show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+from pyspark.sql.functions import *
+qualtileProbs = [.25,.5, .75, .9]
+relErr = 0.0
+lc_sel.stat.approxQuantile("loan_amnt", qualtileProbs, relErr)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+# Check how many colums have NULL records
+from pyspark.sql.functions import *
+lc_sel.select([count(when(isnan(c) | col(c).isNull(), c)).alias(c)  for c in lc_sel.columns]).show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+%sql
+select loan_status, count(*) from loan_status_sel group by 1 order by 2 desc;
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+lc_sel = lc_sel.na.drop(how = "all", subset = ["loan_status"])
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+lc_sel.describe("dti","revol_util").show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+%sql
+select ceil(regexp_replace(revol_util,"\%","")) as revol_util, count(*) from loan_status_sel group by 1
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+# Clean the revol_util column using regexp_extract
+lc_sel = lc_sel.withColumn("revol_cleaned", regexp_extract(col("revol_util"),"\\d+",0))
+lc_sel.describe("dti","revol_cleaned").show()
+
+-------------------------------------------------------------------------------------------------------------------------------
+
