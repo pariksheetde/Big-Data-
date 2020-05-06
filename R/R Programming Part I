@@ -1,0 +1,49 @@
+age = 30
+salary = 10000L
+name = "Pariksheet"
+
+# L means integer type. If L (capital L) is omitted the the data
+# type id double
+typeof(age)
+typeof(salary)
+
+
+CTC = 12500.36
+typeof(CTC)
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+# create a double datatype
+x = 20
+
+# create a double datatype
+y = 20.0
+
+# create a double datatype
+z = (x + y)
+z
+
+# create a integer datatype
+a = 10L
+
+# create a character datatype
+name = "Pariksheet"
+
+typeof(x)
+typeof(y)
+typeof(z)
+typeof(name)
+typeof(a)
+
+# create a booean datatype
+
+alpha = TRUE
+typeof(alpha)
+
+# create a booean datatype
+
+beta = F
+typeof(beta)
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
