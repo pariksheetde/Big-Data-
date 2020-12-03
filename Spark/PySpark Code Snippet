@@ -20,10 +20,13 @@ sc = SparkSession.builder.appName("PysparkExample")\
 
 #JSON
 dataframe = sc.read.json('dataset/nyt2.json')
+
 #TXT FILES# 
 dataframe_txt = sc.read.text('text_data.txt')
+
 #CSV FILES# 
 dataframe_csv = sc.read.csv('csv_data.csv')
+
 #PARQUET FILES# 
 dataframe_parquet = sc.read.load('parquet_data.parquet')
 
