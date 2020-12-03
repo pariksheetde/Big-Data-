@@ -7,3 +7,180 @@ from pyspark.sql.functions
 import *from pyspark.sql.types 
 import *from datetime import date, timedelta, datetime
 import time
+
+# Initializing SparkSession
+
+sc = SparkSession.builder.appName("PysparkExample")\    
+.config ("spark.sql.shuffle.partitions", "50")\    .config("spark.driver.maxResultSize","5g")\    
+.config ("spark.sql.execution.arrow.enabled", "true")\    .getOrCreate()
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#Creates a spark data frame called as raw_data.
+
+#JSON
+dataframe = sc.read.json('dataset/nyt2.json')
+#TXT FILES# 
+dataframe_txt = sc.read.text('text_data.txt')
+#CSV FILES# 
+dataframe_csv = sc.read.csv('csv_data.csv')
+#PARQUET FILES# 
+dataframe_parquet = sc.read.load('parquet_data.parquet')
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Duplicate values in a table can be eliminated by using dropDuplicates() function
+
+dataframe = sc.read.json('dataset/nyt2.json') 
+dataframe.show(10)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# “Select” Operation
+
+#Show all entries in title column
+dataframe.select("author").show(10)
+
+#Show all entries in title, author, rank, price columns
+dataframe.select("author", "title", "rank", "price").show(10)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ # “When” Operation
+# Show title and assign 0 or 1 depending on title
+
+dataframe.select("title",when(dataframe.title != 'ODD HOURS', 1).otherwise(0)).show(10)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Show rows with specified authors if in the given options
+
+dataframe [dataframe.author.isin("John Sandford", 
+"Emily Giffin")].show(5)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# “Like” Operation
+
+# Show author and title is TRUE if title has " THE " word in titles
+dataframe.select("author", "title",
+dataframe.title.like("% THE %")).show(15)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ # “Startswith” — “ Endswith”
+# StartsWith scans from the beginning of word/content with specified criteria in the brackets. In parallel, 
+# EndsWith processes the word/content starting from the end. Both of the functions are case sensitive
+
+dataframe.select("author", "title", dataframe.title.startswith("THE")).show(5)
+dataframe.select("author", "title", dataframe.title.endswith("NT")).show(5)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# “Substring” Operation
+# Substring functions to extract the text between specified indexes. 
+# In the following examples, texts are extracted from the index numbers (1, 3), (3, 6) and (1, 6).
+
+dataframe.select(dataframe.author.substr(1, 3).alias("title")).show(5)
+dataframe.select(dataframe.author.substr(3, 6).alias("title")).show(5)
+dataframe.select(dataframe.author.substr(1, 6).alias("title")).show(5)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Add, Update & Remove Columns
+# Adding Columns
+
+# Lit() is required while we are creating columns with exact values.
+dataframe = dataframe.withColumn('new_column', 
+F.lit('This is a new column'))
+display(dataframe)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Updating Columns
+# For updated operations of DataFrame API, withColumnRenamed() function is used with two parameters.
+
+# Update column 'amazon_product_url' with 'URL'
+dataframe = dataframe.withColumnRenamed('amazon_product_url', 'URL')
+dataframe.show(5)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Removing Columns
+# Removal of a column can be achieved in two ways: adding the list of column names in the drop() function or specifying columns by pointing in the drop function. 
+# Both examples are shown below
+
+dataframe_remove = dataframe.drop("publisher", "published_date").show(5)
+dataframe_remove2 = dataframe \ .drop(dataframe.publisher).drop(dataframe.published_date).show(5)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Inspect Data
+
+# Returns dataframe column names and data types
+dataframe.dtypes
+
+# Displays the content of dataframe
+dataframe.show()
+
+# Return first n rows
+dataframe.head()
+
+# Returns first row
+dataframe.first()
+
+# Return first n rows
+dataframe.take(5)
+
+# Computes summary statistics
+dataframe.describe().show()
+
+# Returns columns of dataframe
+dataframe.columns
+
+# Counts the number of rows in dataframe
+dataframe.count()
+
+# Counts the number of distinct rows in dataframe
+dataframe.distinct().count()
+
+# Prints plans including physical and logical
+dataframe.explain(4)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# "GroupBy” Operation
+# The grouping process is applied with GroupBy() function by adding column name in function
+
+# Group by author, count the books of the authors in the groups
+dataframe.groupBy("author").count().show(10)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# “Filter” Operation
+# Filtering is applied by using filter() function with a condition parameter added inside of it. This function is case sensitive.
+
+dataframe.filter(dataframe["title"] == 'THE HOST').show(5)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
