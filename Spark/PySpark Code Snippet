@@ -221,6 +221,42 @@ from df").groupBy('Themes').count().show()
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+# Output
+# Converting dataframe into an RDD
+rdd_convert = dataframe.rdd
 
+# Converting dataframe into a RDD of string dataframe.toJSON().first()
+
+# Obtaining contents of df as Pandas 
+dataFramedataframe.toPandas()
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Write & Save to Files
+# Any data source type that is loaded to our code as data frames can easily be converted and saved into other types including .parquet and .json. 
+#For more save, load, write function details
+
+# Write & Save File in .parquet format
+
+dataframe.select("author", "title", "rank", "description") \
+.write \
+.save("Rankings_Descriptions.parquet")
+
+# Write & Save File in .json format
+dataframe.select("author", "title") \
+.write \
+.save("Authors_Titles.json",format="json")
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#Stopping SparkSession
+# Spark Session can be stopped by running stop() function as follows
+
+# End Spark Session
+sc.stop()
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
