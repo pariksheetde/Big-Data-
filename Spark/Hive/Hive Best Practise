@@ -1,1 +1,87 @@
-Hive Optimization
+                                                                Hive Optimization
+Visit the below link
+https://medium.com/swlh/hive-optimization-quick-refresher-5e596654bc1d
+
+# Partitioning & Bucketing.
+plays a crucial role in query performance. Depending upon whether you follow star schema or De-normalized(preferred) data warehouse.
+Partitioning and Bucketing helps in improving the query performance.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+SET hive.partition.pruning=strict;
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# File Format
+# Optimized Row Columnar (ORC) vs Parquet
+
+Columnar file formats allows you to reduce the read operations in queries by allowing each column to be accessed individually. 
+Both ORC and Parquet are good choice for different use cases. Do your benchmarks and zero-in on the best file format. 
+Hortonworks distribution lean towards ORC while CDH leans towards Parquet. Thumb rule start with ORC
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Execution Engine
+Tez data processing framework combines the MapReduce task as a node of DAG, enforcing concurrency and serialization
+
+SET hive.execution.engine=tez;
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Vectorization
+
+SET hive.vectorized.execution=true;
+SET hive.vectorized.execution.enabled=true;
+
+A standard query execution system processes one row at a time. This involves long code paths and significant metadata interpretation in the inner loop of execution. 
+Vectorized query execution streamlines operations by processing a block of 1024 rows at a time. Within the block, 
+each column is stored as a vector (an array of a primitive data type). Operations like arithmetic and comparisons are done by 
+quickly iterating through the vectors in a tight loop, with very few function calls. 
+So if your table have 5000 rows in the table and you are trying to do some string based filtering on some column, then you will see INPUT_RECORDS_PROCESSED is only 5.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Predicate push down
+
+SET hive.optimize.ppd=true;
+
+Basic idea of predicate pushdown is that, predicates of SQL query can be pushed closer to where the data lives. Meaning, we can run the predicates while reading the data. 
+With predicate pushdown, predicates (where condition) will be pushed further up in the query(while reading the data). 
+In simpler terms it tries to execute the expression as early as possible in plan.
+
+select a.*, b.* from a join b on (a.col1 = b.col1)
+where a.col1 > 20 and b.col2 > 40
+
+In the above case if we have predicate pushdown enabled, first the filtering on both the table will happen and then the join will be performed with smaller data set. 
+In absence of predicate pushdown it will first join the two tables and then do the filter the rows on where condition
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Enable compression of intermediate data
+
+Hive’s job invokes a lot of Map/Reduce and generates a lot of intermediate data, by setting the above parameter compresses the Hive’s intermediate data before writing it out.
+
+SET hive.exec.compress.intermediate=true;
+SET hive.intermediate.compression.codec =org.apache.hadoop.io.compress.SnappyCodec;
+SET hive.intermediate.compression.type=BLOCK;
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Join Optimizations
+
+If the other table in a join is small enough to fit into memory then Map joins are really efficient.
+
+SET hive.auto.convert.join=true;
+SET hive.auto.convert.join.noconditionaltask=true;
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
