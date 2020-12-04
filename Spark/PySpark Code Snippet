@@ -166,21 +166,58 @@ dataframe.filter(dataframe["title"] == 'THE HOST').show(5)
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+# Missing & Replacing Values
+# For every dataset, there is always a need for replacing, existing values, 
+# dropping unnecessary columns and filling missing values in data preprocessing stages
 
+# Replacing null values
+dataframe.na.fill()
+dataFrame.fillna()
+dataFrameNaFunctions.fill()
 
+# Returning new dataframe restricting rows with null valuesdataframe.na.drop()
+dataFrame.dropna()
+dataFrameNaFunctions.drop()
 
+# Return new dataframe replacing one value with another
+dataframe.na.replace(5, 15)
+dataFrame.replace()
+dataFrameNaFunctions.replace()
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+# Repartitioning
+It is possible to increase or decrease the existing level of partitioning in RDD Increasing can be actualized by using repartition(self, numPartitions) function which results 
+# in a new RDD that obtains same /higher number of partitions. 
+# Decreasing can be processed with coalesce(self, numPartitions, shuffle=False) function that results in new RDD with a reduced number of partitions to a specified number
 
+# Dataframe with 10 partitions
+dataframe.repartition(10).rdd.getNumPartitions()
 
-
+# Dataframe with 1 partition
+dataframe.coalesce(1).rdd.getNumPartitions()
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+# Running SQL Queries Programmatically
+# Raw SQL queries can also be used by enabling the “sql” operation on our SparkSession to run SQL queries programmatically 
+# and return the result sets as DataFrame structures
 
+# Registering a table
+dataframe.registerTempTable("df")
 
-
+sc.sql("select * from df").show(3)
+sc.sql("select \               
+CASE WHEN description LIKE '%love%' THEN 'Love_Theme' \ 
+     WHEN description LIKE '%hate%' THEN 'Hate_Theme' \ 
+     WHEN description LIKE '%happy%' THEN 'Happiness_Theme' \ 
+     WHEN description LIKE '%anger%' THEN 'Anger_Theme' \ 
+     WHEN description LIKE '%horror%' THEN 'Horror_Theme' \ 
+     WHEN description LIKE '%death%' THEN 'Criminal_Theme' \ 
+     WHEN description LIKE '%detective%' THEN 'Mystery_Theme' \ 
+     ELSE 'Other_Themes' \ 
+     END Themes \       
+from df").groupBy('Themes').count().show()
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
