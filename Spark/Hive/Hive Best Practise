@@ -3,10 +3,9 @@ Visit the below link
 https://medium.com/swlh/hive-optimization-quick-refresher-5e596654bc1d
 
 # Partitioning & Bucketing.
+
 plays a crucial role in query performance. Depending upon whether you follow star schema or De-normalized(preferred) data warehouse.
 Partitioning and Bucketing helps in improving the query performance.
-
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 SET hive.partition.pruning=strict;
 
