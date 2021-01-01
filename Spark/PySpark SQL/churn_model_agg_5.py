@@ -14,7 +14,7 @@ if __name__ == "__main__":
 spark = SparkSession.builder.appName("Churn Modeling").master("local[3]").getOrCreate()
 
 # read the datafile from the location
-churn = spark.read.csv(r"D:\Code\DataSet\SparkDataSet\ChurnModeling.csv", header=True)
+churn = spark.read.csv(r"D:\Code\DataSet\SparkDataSet\ChurnModeling.csv", inferSchema=True, header=True)
 churn.show(5, truncate=False)
 
 # select the required columns
