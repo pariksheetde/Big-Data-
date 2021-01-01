@@ -21,12 +21,15 @@ churn.show(5, truncate=False)
 churn = churn.selectExpr("CustomerId", "Surname", "CreditScore", "Geography", "Gender", "Age", "Tenure") \
     .filter((churn.Geography.isin("France", "Spain")) & (churn.Gender == "Male")) \
     .where(churn.Age >= 18) \
-    .orderBy(asc("Age"))
+    .where(churn.HasCrCard == 1) \
+    .where(churn.IsActiveMember == 0) \
+    .groupBy("Geography", "Gender") \
+    .agg(avg("Age").alias("Avg_Age")) \
+    .orderBy(asc("Avg_Age"))
 
 # \
-# .where(churn.Geography == "France") \
 #     .groupBy("Geography", "Gender") \
-#     .agg(avg("Age").alias("Avg_Age")) \
+#
 #
 
 churn.show(15)
