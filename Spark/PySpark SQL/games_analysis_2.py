@@ -13,7 +13,7 @@ if __name__ == "__main__":
 # set the SparkSession
 spark = SparkSession.builder.appName("Games Analysis").master("local[3]").getOrCreate()
 
-games = spark.read.csv(r"D:\Code\DataSet\SparkDataSet\NHL\game.csv", header=True)
+games = spark.read.csv(r"D:\Code\DataSet\SparkDataSet\NHL\game.csv", inferSchema=True, header=True)
 games.show(5, truncate=False)
 
 # drop unwanted columns from the DF
