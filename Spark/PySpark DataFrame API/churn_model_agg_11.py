@@ -14,9 +14,9 @@ if __name__ == "__main__":
 churn_df = SparkSession.builder.appName("Churn Modeling").master("local[3]").getOrCreate()
 
 # read the datafile from the location
-churn = churn_df.read.csv(r"D:\Code\DataSet\SparkDataSet\ChurnModeling.csv", header=True)
+churn = churn_df.read.csv(r"D:\Code\DataSet\SparkDataSet\ChurnModeling.csv", inferSchema=True, header=True)
 churn.show(5, truncate=False)
-
+, 
 # select the required columns
 churn = churn.selectExpr("CustomerId", "Surname", "CreditScore", "Geography", "Gender", "Age", "Tenure") \
     .filter((churn.Geography.isin("France", "Spain")) & (churn.Gender == "Male")) \
