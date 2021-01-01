@@ -24,7 +24,10 @@ churn = churn.selectExpr("CustomerId", "Balance", "Surname", "CreditScore", "Geo
     .filter((churn.Balance) != 0) \
     .sort("Age")
 
-churn_extr = churn.select("CustomerId", "Balance", "CreditScore", "Geography", "Age", rank().over(Window.partitionBy('Geography').orderBy(desc("Balance"))).alias("Dense_Rank"))
-churn_extr.show(300, truncate=False)
+churn_extr = churn.select("CustomerId", "Balance", "CreditScore", "Geography", "Age",
+                          rank().over(Window.partitionBy('Geography').orderBy(desc("Balance"))).alias("Rank"),
+                          dense_rank().over(Window.partitionBy('Geography').orderBy(desc("Balance"))).alias("Dense_Rank"),
+                          row_number().over(Window.partitionBy('Geography').orderBy(desc("Balance"))).alias("RNumber"))
+churn_extr.show(10, truncate=False)
 print(f'Records effected: {churn_extr.count()}')
 print(f"Number of Executor Partition: {churn_extr.rdd.getNumPartitions()}")
