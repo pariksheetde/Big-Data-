@@ -1,0 +1,70 @@
+import sys
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+from pyspark.sql.types import *
+from pyspark.sql.types import DateType
+from pyspark.sql.functions import *
+from pyspark.sql.window import Window
+from pyspark.sql.functions import spark_partition_id
+
+if __name__ == "__main__":
+    print("Games Analysis")
+
+# set the SparkSession
+spark = SparkSession.builder.appName("Games Analysis").master("local[3]").getOrCreate()
+
+# define schema for games df
+games_schema = StructType(
+                          [
+                           StructField("game_id", IntegerType(), False),
+                           StructField("season", IntegerType(), False),
+                           StructField("type", StringType(), False),
+                           StructField("date_time", StringType(), False),
+                           StructField("date_time_GMT", TimestampType(), False),
+                           StructField("away_team_id", StringType(), False),
+                           StructField("home_team_id", IntegerType(), False),
+                           StructField("away_goals", IntegerType(), False),
+                           StructField("home_goals", IntegerType(), False),
+                           StructField("outcome", StringType(), False),
+                           StructField("home_rink_side_start", StringType(), False),
+                           StructField("venue", StringType(), False),
+                           StructField("venue_link", StringType(), False),
+                           StructField("venue_time_zone_id", StringType(), False),
+                           StructField("venue_time_zone_offset", IntegerType(), False),
+                           StructField("venue_time_zone_tz", StringType(), False)
+                           ]
+                         )
+
+# read the datafile from the location
+games = spark.read.csv(r"D:\Code\DataSet\SparkDataSet\NHL\game.csv", schema=games_schema, header=True)
+
+# select the required columns
+games_cols = games.select("game_id", "season", "type", "date_time", "away_team_id", "home_team_id", "away_goals", "home_goals", "home_rink_side_start", "venue")
+games_cols.show(5, truncate=False)
+
+# define schema for games df
+games_shift_schema = StructType(
+                          [
+                           StructField("game_id", IntegerType(), False),
+                           StructField("player_id", IntegerType(), False),
+                           StructField("period", IntegerType(), False),
+                           StructField("shift_start", IntegerType(), False),
+                           StructField("shift_end", IntegerType(), False)
+                           ]
+                         )
+
+# read the datafile from the location
+game_shift = spark.read.csv(r"D:\Code\DataSet\SparkDataSet\NHL\game_shifts_info.csv", schema=games_shift_schema, header = True)
+
+# select the required columns
+games_shift_cols = game_shift.select("game_id", "player_id", "period", "shift_start", "shift_end")
+games_shift_cols.show(5, truncate=False)
+
+# join 2 dataframes (games_cols, games_shift_cols)
+join_df = games_cols.join(games_shift_cols, on="game_id", how='inner') \
+                     .select("game_id", "player_id", "season", "type", "date_time",
+                             "away_team_id", "home_team_id", "away_goals", "home_goals", "home_rink_side_start",
+                             "venue", "period", "shift_start", "shift_end"
+                             )
+join_df.show(10, truncate=False)
+print(f'Recods returnd: {join_df.count()}')
