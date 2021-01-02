@@ -5,7 +5,7 @@ from pyspark.sql.types import *
 from pyspark.sql.types import DateType
 from pyspark.sql.functions import *
 from pyspark.sql.window import Window
-
+from pyspark.sql.functions import spark_partition_id
 
 if __name__ == "__main__":
     print("Games Analysis")
@@ -35,6 +35,13 @@ games_lim = games_agg.select("game_id", "season", "type", "away_goals", "home_go
                     .where("sum_away_goals > sum_home_goals") \
                     .where("venue like '%Arena'")
 
-games_lim.show(10, truncate = False)
-print(f"Records Effected: {games_lim.count()}")
-print(f"Number of partition: {games_lim.rdd.getNumPartitions()}")
+games_df = games_lim.select("game_id", "season", "type", "away_goals", "home_goals", "venue",
+                             "outcome", "home_rink_side_start","sum_away_goals", "sum_home_goals") \
+                             .withColumn("partitionId", spark_partition_id()) \
+                             .groupBy("partitionId") \
+                             .count() \
+                             .orderBy(asc("count"))
+
+games_df.show(10, truncate = False)
+print(f"Records Effected: {games_df.count()}")
+print(f"Number of partition: {games_df.rdd.getNumPartitions()}")
