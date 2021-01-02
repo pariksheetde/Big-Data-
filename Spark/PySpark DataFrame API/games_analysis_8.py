@@ -32,7 +32,8 @@ games_agg = games_sel.select("game_id", "season", "type", "away_goals", "home_go
                              )
 games_lim = games_agg.select("game_id", "season", "type", "away_goals", "home_goals", "venue",
                              "outcome", "home_rink_side_start","sum_away_goals", "sum_home_goals") \
-                    .where("sum_away_goals > sum_home_goals")
+                    .where("sum_away_goals > sum_home_goals") \
+                    .where("venue like '%Arena'")
 
 games_lim.show(10, truncate = False)
 print(f"Records Effected: {games_lim.count()}")
