@@ -72,7 +72,7 @@ game_shift.show(5, truncate=False)
 
 # join 2 dataframes (games_cols, games_shift_cols)
 join_df = games.join(game_shift, on="game_id", how='inner') \
-                     .select("game_id", "player_id", "season", "type", "date_time", "date_time_GMT",
+                     .select("game_id", "player_id", "season", "type", "date_time", "date_time_GMT", "home_goals", "away_goals", "period",
                              "away_team_id", "home_team_id"
                              )
 # get year. month, date_format from date_time column
@@ -88,10 +88,12 @@ SQL_tab = games_res.createOrReplaceTempView("Player_Status")
 SQL_qry = spark.sql("""select
                             game_id,
                             player_id,
+                            period,
                             date, month, year,
                             season,
                             type,
-                            count(type) over(partition by game_id order by player_id asc) as cnt
+                            sum(home_goals) over (partition by season order by game_id asc) as sum_home_goals,
+                            sum(away_goals) over (partition by season order by game_id asc) as sum_away_goals
                             from Player_Status
                             where type = 'P'
                             """)
