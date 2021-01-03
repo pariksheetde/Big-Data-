@@ -83,10 +83,11 @@ join_df_res = join_df.selectExpr("game_id", "player_id", "period",  "season", "d
                           .withColumn('year',year(join_df.date_time_GMT)) \
                           .withColumn('month', month(join_df.date_time_GMT))
 
-
+# Window partition and rows unbounded preceeing and current row
 w2=Window().partitionBy("season").orderBy("game_id").rowsBetween(Window.unboundedPreceding,Window.currentRow)
 join_res = join_df_res.select("game_id", "player_id", "period",  "season", "date", "month", "year", "type", "home_goals", "away_goals",
                               sum("home_goals").over(w2).alias("sum_home_goals"),
                               sum("away_goals").over(w2).alias("sum_away_goals")
                              )
 join_res.show(10, truncate=False)
+print(f'Records returned: {join_res.count()}')
