@@ -68,3 +68,21 @@ join_df = games_cols.join(games_shift_cols, on="game_id", how='inner') \
                              )
 join_df.show(10, truncate=False)
 print(f'Recods returnd: {join_df.count()}')
+
+print('----------------------------------------------------------------------------------------------------------------------------------------')
+
+# get count of each partition
+df_with_id = join_df.withColumn("partitionId", spark_partition_id())
+SQL_part_ID = df_with_id.createOrReplaceTempView("partition_dtls")
+
+part_cal = spark.sql("""select partitionId, count(1) as num_records
+                               from partition_dtls
+                               group by partitionId
+                               order by num_records asc
+                               """)
+
+part_cal.show(10, truncate = False)
+print(f"Records Effected: {part_cal.count()}")
+print(f"Number of records in each partition: {part_cal.rdd.getNumPartitions()}")
+
+print('----------------------------------------------------------------------------------------------------------------------------------------')
