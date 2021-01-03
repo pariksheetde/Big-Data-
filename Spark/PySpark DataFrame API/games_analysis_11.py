@@ -95,6 +95,5 @@ SQL_qry = spark.sql("""select
                             from Player_Status
                             where type = 'P'
                             """)
-#
 SQL_qry.show(10, truncate=False)
 print(f'Records returned: {SQL_qry.count()}')
