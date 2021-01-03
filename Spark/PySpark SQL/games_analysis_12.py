@@ -89,8 +89,10 @@ SQL_qry = spark.sql("""select
                             date_format(date_time_GMT,'MM') as month,
                             date_format(date_time_GMT,'yyyy') as year,
                             type,
-                            sum(home_goals) over (partition by season order by game_id asc) as sum_home_goals,
-                            sum(away_goals) over (partition by season order by game_id asc) as sum_away_goals
+                            home_goals,
+                            away_goals,
+                            sum(home_goals) over (partition by season order by game_id asc ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) as sum_home_goals,
+                            sum(away_goals) over (partition by season order by game_id asc ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) as sum_away_goals
                             from Player_Status
                             where type = 'P'
                             """)
