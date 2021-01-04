@@ -28,4 +28,7 @@ loc_rename = locations.withColumnRenamed("_c0", "loc_id").withColumnRenamed("loc
                       .withColumnRenamed("postal_code", "native").withColumnRenamed("city", "state").withColumnRenamed("state_province", "country") \
                       .select("loc_id", "address", "code", "native", "state", "country")
 
-loc_rename.show(15, truncate=False)
+loc_df = loc_rename.selectExpr("loc_id as location_id", "address as street_address", "code as postal_code", "native as city",
+                               "state as state_province", "country as country_id")
+loc_df.show(10, truncate=False)
+# loc_rename.show(15, truncate=False)
