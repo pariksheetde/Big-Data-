@@ -32,4 +32,6 @@ object ipl_analysis_1 extends App {
 
   val ipl_sel_df = ipl_df.selectExpr("city","date", "winner", "venue as stadium", "team1", "team2",  "result", "neutral_venue")
     .show(20, truncate = false)
+  
+  spark.stop()
 }
