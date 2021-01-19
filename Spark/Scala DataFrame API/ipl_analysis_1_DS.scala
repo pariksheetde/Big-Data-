@@ -27,6 +27,7 @@ object ipl_analysis_1 extends App {
   val ipl_df  = spark.read
     .option("header", "true")
     .option("inferSchema", "true")
+    .option("escape", '\"')
     .option("mode", "FAILFAST") // PERMISSIVE, DROPMALFORMED, FAILFAST
     .csv("D:/Code/DataSet/SparkDataSet/IndianPremierLeague.csv").as[ipl]
 
