@@ -17,4 +17,5 @@ object HelloWorld extends App {
 //val sqlContext = new org.apache.spark.sql.SQLContext(sc)
 val churn = spark.read.option("inferSchema", "true").option("header", "true").csv("D:/Code/DataSet/SparkDataSet/ChurnModeling.csv")
   churn.show(10, truncate = false)
+
 }
