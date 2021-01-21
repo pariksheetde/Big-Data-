@@ -53,9 +53,9 @@ object flight_data_analysis_6 extends App {
     .mode(SaveMode.Overwrite)
 //    .partitionBy("Airline")
     .bucketBy(4, "Airline")
+    .sortBy("Airline")
     .saveAsTable("flight_tbl")
 
   spark.catalog.listTables("AIRLINE_DB").show()
-  
   spark.stop()
 }
