@@ -46,5 +46,5 @@ object flight_data_analysis_3 extends App {
     .save()
 
   spark.stop()
-
+  
 }
