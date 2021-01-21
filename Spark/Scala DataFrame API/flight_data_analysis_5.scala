@@ -45,6 +45,7 @@ object flight_data_analysis_5 extends App {
   spark.sql("CREATE DATABASE IF NOT EXISTS AIRLINE_DB")
   spark.catalog.setCurrentDatabase("AIRLINE_DB")
 
+//  save the dataframe output to spark managed table
   fil_flight.write
     .mode(SaveMode.Overwrite)
     .partitionBy("Airline")
