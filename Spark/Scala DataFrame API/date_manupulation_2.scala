@@ -19,7 +19,7 @@ import org.apache.spark.sql.functions.count
 //import spark.implicits._
 import java.sql.Date
 
-object data_manupulation_2 extends App {
+object date_manupulation_2 extends App {
   println("Date Manupulation")
 
   def dateconversion(df: DataFrame, fmt: String, fld: String): DataFrame = {
