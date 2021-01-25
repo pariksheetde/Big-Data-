@@ -19,7 +19,7 @@ import org.apache.spark.sql.functions.count
 import java.sql.Date
 
 object date_manupulation_2 extends App {
-  println("Date Manupulation")
+  println("Date Manupulation using Seq")
 
   def dateconversion(df: DataFrame, fmt: String, fld: String): DataFrame = {
     df.withColumn(fld, to_date(col(fld),fmt))
