@@ -1,6 +1,5 @@
 package Bank
 
-import Bank.flight_data_analysis_6.sparkAppConfig
 import org.apache.spark.sql.DataFrame
 import org.apache.avro.generic.GenericData.StringType
 import org.apache.spark
@@ -8,7 +7,7 @@ import org.apache.spark.sql.{DataFrame, Dataset, Row, SQLContext, SaveMode, Spar
 import org.apache.spark.SparkContext
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.functions.{col, spark_partition_id, to_date}
-import org.apache.spark.sql.types.{IntegerType, StructField, StructType}
+import org.apache.spark.sql.types.{IntegerType, StringType, StructField, StructType}
 import org.apache.spark.sql.types._
 import org.apache.spark.sql.functions._
 
@@ -27,7 +26,7 @@ object date_manupulation_2 extends App {
   }
 
   val spark:SparkSession = SparkSession.builder()
-    .master("local[1]").appName("SparkByExamples.com")
+    .master("local[1]").appName("Date Formatting")
     .getOrCreate()
 
   import spark.implicits._
