@@ -58,4 +58,5 @@ object flight_data_analysis_6 extends App {
 
   spark.catalog.listTables("AIRLINE_DB").show()
   spark.stop()
+  
 }
