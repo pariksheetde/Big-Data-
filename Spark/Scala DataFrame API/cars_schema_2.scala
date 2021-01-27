@@ -35,4 +35,5 @@ object cars_schema_2 extends App {
     spark.sparkContext.parallelize(data),schema)
   df.printSchema()
   df.show()
+
 }
