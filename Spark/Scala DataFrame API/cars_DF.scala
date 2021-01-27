@@ -67,5 +67,4 @@ object cars_DF extends App {
     .show()
 
   spark.stop()
-
 }
