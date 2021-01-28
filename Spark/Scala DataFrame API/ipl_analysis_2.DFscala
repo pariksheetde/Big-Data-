@@ -65,7 +65,7 @@ object ipl_analysis_2 extends App {
 //    "else 'NoPlay' end")).show()
 
   // case expression using withColumn
-  val bat_bowl_df = ipl_sel.select(col("*"),expr("case when result = 'runs' then 'batting first'" +
-    "when result = 'wickets' then 'bowling first'" +
+  val bat_bowl_df = ipl_sel.select(col("*"),expr("case when result = 'runs' then 'batted first'" +
+    "when result = 'wickets' then 'fielded first'" +
     "else 'NoPlay' end").alias("bat_bowl")).show()
 }
