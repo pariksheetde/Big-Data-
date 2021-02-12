@@ -1,0 +1,1 @@
+spark-submit --master yarn-client --driver-memory 4g --executor-memory 10g --executor-cores 2 --num-executors 20 /home/svc-rdf-prod/uk_fact_py.py
