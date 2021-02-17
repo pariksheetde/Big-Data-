@@ -53,7 +53,7 @@ object Movies_Analysis_DF_7 extends App {
   )
   profit_rating_cln_df.show(false)
 
-//
+  println(s"Calculate Total Gross, Number of Movies and Avg(Rating) for each Director, Genre")
   val profit_rating_agg = profit_rating_cln_df.select(col("Director"), col("Major_Genre"),
      col("US_Gross"), col("Rating"), col("Title"), col("Profit"))
     .groupBy(col("Director"), col("Major_Genre"))
@@ -65,6 +65,6 @@ object Movies_Analysis_DF_7 extends App {
     .sort(col("Director").asc_nulls_last)
     .where("Director = 'Steven Spielberg'")
     .show(false)
-  
+
   spark.stop()
 }
