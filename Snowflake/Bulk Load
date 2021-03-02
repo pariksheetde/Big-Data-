@@ -2,21 +2,31 @@
 ------------------------------------------------------------------------------TABLE IS LOCATIONS------------------------------------------------------------------------------
 CREATE FILE FORMAT csv_file_fmt TYPE = "CSV" FIELD_DELIMITER= ','SKIP_HEADER = 1;
 CREATE OR REPLACE STAGE loc_stg FILE_FORMAT = csv_file_fmt;
-put file://C:\Users\pariksheet.d\Documents\SnowflakeTutorial\Dataset\locations.csv @%loc_stg;
+put file://C:\Users\pariksheet.d\Documents\DataSet\locations.csv @loc_stg;
+
+copy into locations
+from @loc_stg
+file_format = (type = csv)
+on_error = 'continue';
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------TABLE IS DEPARTMENTS------------------------------------------------------------------------------
 CREATE FILE FORMAT csv_file_fmt TYPE = "CSV" FIELD_DELIMITER= ','SKIP_HEADER = 1;
 CREATE OR REPLACE STAGE dept_stg FILE_FORMAT = csv_file_fmt;
-put file://C:\Users\pariksheet.d\Documents\SnowflakeTutorial\Dataset\departments.csv @%dept_stg;
+put file://C:\Users\pariksheet.d\Documents\DataSet\departments.csv @dept_stg;
+
+copy into departments
+from @dept_stg
+file_format = (type = csv)
+on_error = 'continue';
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+create database rpt;
+create schema hr;
 grant usage on database rpt to role sysadmin;
 grant usage on database rpt to role accountadmin;
-grant usage on database rpt to role analyst;
-
 grant usage, create file format, create stage, create table on schema rpt.hr to role sysadmin;
 grant usage, create file format, create stage, create table on schema rpt.hr to role  accountadmin;
 
