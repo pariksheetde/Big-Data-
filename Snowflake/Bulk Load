@@ -13,6 +13,7 @@ grant usage, create file format, create stage, create table on schema rpt.hr to 
 CREATE FILE FORMAT csv_file_fmt TYPE = "CSV" FIELD_DELIMITER= ','SKIP_HEADER = 1;
 CREATE OR REPLACE STAGE loc_stg FILE_FORMAT = csv_file_fmt;
 put file://C:\Users\pariksheet.d\Documents\DataSet\locations.csv @loc_stg;
+list @loc_stg;
 
 copy into locations
 from @loc_stg
@@ -25,6 +26,7 @@ on_error = 'continue';
 CREATE FILE FORMAT csv_file_fmt TYPE = "CSV" FIELD_DELIMITER= ','SKIP_HEADER = 1;
 CREATE OR REPLACE STAGE dept_stg FILE_FORMAT = csv_file_fmt;
 put file://C:\Users\pariksheet.d\Documents\DataSet\departments.csv @dept_stg;
+list @dept_stg;
 
 copy into departments
 from @dept_stg
