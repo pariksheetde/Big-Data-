@@ -1,0 +1,9 @@
+USE ROLE SYSADMIN;
+
+CREATE WAREHOUSE ETL_Load
+WAREHOUSE_SIZE = XSMALL
+AUTO_SUSPEND = 300 -- automatically suspend the virtual warehouse after 5 minutes of inactivity
+AUTO_RESUME = TRUE
+INITIALLY_SUSPENDED = TRUE -- create the virtual warehouse in a suspended state
+COMMENT = 'X-Small virtual warehouse for ETL load operation';
+
