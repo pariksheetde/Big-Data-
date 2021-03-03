@@ -2,7 +2,7 @@
 ------------------------------------------------CREATE DATABASE, SCHEMA, GRANT PRIVILEGES TO DATABASE.SCHEMA------------------------------------------------------------------------------
 
 create database rpt;
-create schema hr;
+create schema rpt.hr;
 grant usage on database rpt to role sysadmin;
 grant usage on database rpt to role accountadmin;
 grant usage, create file format, create stage, create table on schema rpt.hr to role sysadmin;
@@ -11,7 +11,7 @@ grant usage, create file format, create stage, create table on schema rpt.hr to 
 
 ------------------------------------------------------------------------------TABLE IS LOCATIONS------------------------------------------------------------------------------
 CREATE FILE FORMAT csv_file_fmt TYPE = "CSV" FIELD_DELIMITER= ','SKIP_HEADER = 1;
-CREATE OR REPLACE STAGE loc_stg FILE_FORMAT = csv_file_fmt;
+CREATE OR REPLACE STAGE loc_stg;
 put file://C:\Users\pariksheet.d\Documents\DataSet\locations.csv @loc_stg;
 list @loc_stg;
 
