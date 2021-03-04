@@ -39,6 +39,9 @@ on_error = 'continue';
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+------------------------------------------------------------------------------TABLE IS EMPLOYEES------------------------------------------------------------------------------
+
+
 CREATE FILE FORMAT csv_file_fmt TYPE = "CSV" FIELD_DELIMITER= ','SKIP_HEADER = 1;
 CREATE OR REPLACE STAGE empt_stg FILE_FORMAT = csv_file_fmt;
 put file://C:\Users\pariksheet.d\Documents\DataSet\employees.csv @dept_stg;
