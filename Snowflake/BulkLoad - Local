@@ -19,7 +19,7 @@ list @loc_stg;
 
 copy into locations
 from @loc_stg
-// pattern = '.*.csv'
+-- pattern = '.*.csv'
 file_format = (type = csv)
 on_error = 'continue';
 
@@ -33,11 +33,19 @@ list @dept_stg;
 
 copy into departments
 from @dept_stg
-// pattern = '.*.csv'
+-- pattern = '.*.csv'
 file_format = (type = csv)
 on_error = 'continue';
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+CREATE FILE FORMAT csv_file_fmt TYPE = "CSV" FIELD_DELIMITER= ','SKIP_HEADER = 1;
+CREATE OR REPLACE STAGE empt_stg FILE_FORMAT = csv_file_fmt;
+put file://C:\Users\pariksheet.d\Documents\DataSet\employees.csv @dept_stg;
+list @dept_stg;
 
+copy into employees
+from @emp_stg
+file_format = (type = csv)
+on_error = 'continue';
 
