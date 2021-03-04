@@ -17,8 +17,8 @@ CREATE OR REPLACE STAGE loc_stg  FILE_FORMAT = csv_file_fmt;
 put file://C:\Users\pariksheet.d\Documents\DataSet\locations.csv @loc_stg;
 list @loc_stg;
 
-copy into locations
-from @loc_stg
+COPY INTO locations
+FROM @loc_stg
 -- pattern = '.*.csv'
 file_format = (type = csv)
 on_error = 'continue';
@@ -31,8 +31,8 @@ CREATE OR REPLACE STAGE dept_stg FILE_FORMAT = csv_file_fmt;
 put file://C:\Users\pariksheet.d\Documents\DataSet\departments.csv @dept_stg;
 list @dept_stg;
 
-copy into departments
-from @dept_stg
+COPY INTO departments
+FROM @dept_stg
 -- pattern = '.*.csv'
 file_format = (type = csv)
 on_error = 'continue';
@@ -41,14 +41,25 @@ on_error = 'continue';
 
 ------------------------------------------------------------------------------TABLE IS EMPLOYEES------------------------------------------------------------------------------
 
+CREATE OR REPLACE TABLE employees
+(
+employee_id int not null,
+f_name varchar(30),
+l_name varchar(30),
+manager_id int,
+department_id int,
+salary number(12,2)
+)
+cluster by (department_id);
 
 CREATE FILE FORMAT csv_file_fmt TYPE = "CSV" FIELD_DELIMITER= ','SKIP_HEADER = 1;
-CREATE OR REPLACE STAGE empt_stg FILE_FORMAT = csv_file_fmt;
+CREATE OR REPLACE STAGE emp_stg FILE_FORMAT = csv_file_fmt;
 put file://C:\Users\pariksheet.d\Documents\DataSet\employees.csv @dept_stg;
-list @dept_stg;
+list @emp_stg;
 
-copy into employees
-from @emp_stg
+COPY INTO Employees
+FROM @emp_stg
 file_format = (type = csv)
 on_error = 'continue';
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
