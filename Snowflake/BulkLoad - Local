@@ -19,7 +19,7 @@ list @loc_stg;
 
 copy into locations
 from @loc_stg
-pattern = '.*.csv'
+// pattern = '.*.csv'
 file_format = (type = csv)
 on_error = 'continue';
 
@@ -33,7 +33,7 @@ list @dept_stg;
 
 copy into departments
 from @dept_stg
-pattern = '.*.csv'
+// pattern = '.*.csv'
 file_format = (type = csv)
 on_error = 'continue';
 
