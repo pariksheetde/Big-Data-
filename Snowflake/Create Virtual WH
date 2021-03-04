@@ -1,9 +1,29 @@
 USE ROLE SYSADMIN;
 
 CREATE WAREHOUSE ETL_Load
-WAREHOUSE_SIZE = XSMALL
+WITH WAREHOUSE_SIZE = XSMALL
 AUTO_SUSPEND = 300 -- automatically suspend the virtual warehouse after 5 minutes of inactivity
 AUTO_RESUME = TRUE
 INITIALLY_SUSPENDED = TRUE -- create the virtual warehouse in a suspended state
 COMMENT = 'X-Small virtual warehouse for ETL load operation';
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CREATE WAREHOUSE ETL_Load
+WITH WAREHOUSE_SIZE = XSMALL
+MIN_CLUSTER_COUNT = 1
+MAX_CLUSTER_COUNT = 4
+SCALING_POLICY = 'STANDARD'
+AUTO_SUSPEND = 300
+AUTO_RESUME = TRUE
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CREATE ROLE data_engineer;
+GRANT USAGE ON WAREHOUSE ETL_Load to role data_engineer;
+GRANT USAGE ON SCHEMA rpt.hr TO data_engineer;
+GRANT SELECT ON TABLE rpt.hr.locations TO data_engineer;
+GRANT SELECT ON TABLE rpt.hr.departments TO data_engineer;
+GRANT SELECT ON TABLE rpt.hr.employees TO data_engineer;
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
