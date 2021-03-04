@@ -3,8 +3,8 @@
                                                           DATA LOAD FROM LOCAL
 ------------------------------------------------CREATE DATABASE, SCHEMA, GRANT PRIVILEGES TO DATABASE.SCHEMA------------------------------------------------------------------------------
 
-create database rpt;
-create schema rpt.hr;
+CREATE DATABASE rpt;
+CREATE SCHEMA rpt.hr;
 grant usage on database rpt to role sysadmin;
 grant usage on database rpt to role accountadmin;
 grant usage, create file format, create stage, create table on schema rpt.hr to role sysadmin;
@@ -19,6 +19,7 @@ list @loc_stg;
 
 copy into locations
 from @loc_stg
+pattern = '.*.csv'
 file_format = (type = csv)
 on_error = 'continue';
 
@@ -32,6 +33,7 @@ list @dept_stg;
 
 copy into departments
 from @dept_stg
+pattern = '.*.csv'
 file_format = (type = csv)
 on_error = 'continue';
 
