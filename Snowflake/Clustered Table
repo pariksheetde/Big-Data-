@@ -1,0 +1,12 @@
+CREATE OR REPLACE TABLE employees
+(
+employee_id int not null,
+f_name varchar(30),
+l_name varchar(30),
+manager_id int,
+department_id int,
+salary number(12,2)
+)
+cluster by (department_id);
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
