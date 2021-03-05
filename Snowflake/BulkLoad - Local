@@ -54,7 +54,7 @@ cluster by (department_id);
 
 CREATE FILE FORMAT csv_file_fmt TYPE = "CSV" FIELD_DELIMITER= ','SKIP_HEADER = 1;
 CREATE OR REPLACE STAGE emp_stg FILE_FORMAT = csv_file_fmt;
-put file://C:\Users\pariksheet.d\Documents\DataSet\employees.csv @dept_stg;
+put file://C:\Users\pariksheet.d\Documents\DataSet\employees.csv @emp_stg;
 list @emp_stg;
 
 COPY INTO Employees
