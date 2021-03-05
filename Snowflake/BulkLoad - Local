@@ -17,6 +17,13 @@ CREATE OR REPLACE STAGE loc_stg  FILE_FORMAT = csv_file_fmt;
 put file://C:\Users\pariksheet.d\Documents\DataSet\locations.csv @loc_stg;
 list @loc_stg;
 
+CREATE OR REPLACE TABLE locations
+(
+loc_id int not null,
+loc_name varchar(20) not null
+);
+  
+
 COPY INTO locations
 FROM @loc_stg
 -- pattern = '.*.csv'
@@ -30,6 +37,14 @@ CREATE FILE FORMAT csv_file_fmt TYPE = "CSV" FIELD_DELIMITER= ','SKIP_HEADER = 1
 CREATE OR REPLACE STAGE dept_stg FILE_FORMAT = csv_file_fmt;
 put file://C:\Users\pariksheet.d\Documents\DataSet\departments.csv @dept_stg;
 list @dept_stg;
+
+CREATE OR REPLACE TABLE departments
+(
+department_id int not null,
+department_name varchar(50) not null,
+location_id int
+);
+  
 
 COPY INTO departments
 FROM @dept_stg
