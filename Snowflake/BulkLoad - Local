@@ -65,7 +65,7 @@ manager_id int,
 department_id int,
 salary number(12,2)
 )
-cluster by (department_id);
+CLUSTER BY (department_id);
 
 CREATE FILE FORMAT csv_file_fmt TYPE = "CSV" FIELD_DELIMITER= ','SKIP_HEADER = 1;
 CREATE OR REPLACE STAGE emp_stg FILE_FORMAT = csv_file_fmt;
