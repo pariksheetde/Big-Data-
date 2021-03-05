@@ -78,3 +78,7 @@ file_format = (type = csv)
 on_error = 'continue';
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--QUERY STORAGE THAT HAS BEEN USED
+SELECT * FROM SNOWFLAKE.ACCOUNT_USAGE.STORAGE_USAGE ORDER BY USAGE_DATE ASC;
+  
