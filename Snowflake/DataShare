@@ -19,3 +19,9 @@ ALTER SHARE share_rpt_tables ADD ACCOUNT = HVA96903;
 
 USE ROLE ACCOUNTADMIN;
 CREATE USER monica password = 'bellucci' MUST_CHANGE_PASSWORD = FALSE;
+
+CREATE WAREHOUSE marketing_wh WITH WAREHOUSE_SIZE = 'XSMALL' WAREHOUSE_TYPE = 'STANDARD' AUTO_SUSPEND = 300 AUTO_RESUME = TRUE;
+GRANT IMPORTED PRIVILEGES ON DATABASE MARKETING TO ROLE public;
+GRANT USAGE ON WAREHOUSE marketing_wh TO ROLE public;
+
+-------------------------------------------------------------------------------END-----------------------------------------------------------------------------------------------
