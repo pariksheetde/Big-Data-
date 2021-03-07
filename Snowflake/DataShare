@@ -25,3 +25,4 @@ GRANT IMPORTED PRIVILEGES ON DATABASE MARKETING TO ROLE public;
 GRANT USAGE ON WAREHOUSE marketing_wh TO ROLE public;
 
 -------------------------------------------------------------------------------END-----------------------------------------------------------------------------------------------
+
