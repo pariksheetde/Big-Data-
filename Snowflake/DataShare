@@ -1,3 +1,5 @@
+---------------------------------------------------------USE THE BELOW STEPS TO SET UP NON-SNOWFLAKE USER ACCOUNT----------------------------------------------------------------
+
 USE ROLE ACCOUNTADMIN;
 CREATE MANAGED ACCOUNT guest ADMIN_NAME = guest_admin, ADMIN_PASSWORD = 'guest_ADMIN@123', TYPE = READER;
 
@@ -10,3 +12,10 @@ GRANT USAGE ON SCHEMA RPT.HR TO SHARE share_rpt_tables;
 GRANT SELECT ON ALL TABLES IN SCHEMA RPT.HR to share share_rpt_tables;
 SHOW GRANTS TO SHARE share_rpt_tables;
 ALTER SHARE share_rpt_tables ADD ACCOUNT = HVA96903;
+
+-------------------------------------------------------------------------------END-----------------------------------------------------------------------------------------------
+
+---------------------------------------------------------USE THE BELOW STEPS TO SET UP ACCOUNT FROM NON-SNOWFLAKE USERS----------------------------------------------------------------
+
+USE ROLE ACCOUNTADMIN;
+CREATE USER monica password = 'bellucci' MUST_CHANGE_PASSWORD = FALSE;
