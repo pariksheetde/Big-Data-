@@ -5,10 +5,10 @@
 
 CREATE DATABASE rpt;
 CREATE SCHEMA rpt.hr;
-grant usage on database rpt to role sysadmin;
-grant usage on database rpt to role accountadmin;
-grant usage, create file format, create stage, create table on schema rpt.hr to role sysadmin;
-grant usage, create file format, create stage, create table on schema rpt.hr to role  accountadmin;
+GRANT USAGE ON DATABASE rpt to role sysadmin;
+GRANT USAGE ON DATABASE rpt to role accountadmin;
+GRANT USAGE, CREATE FILE FORMAT, CREATE STAGE, CREATE TABLE ON schema rpt.hr to role sysadmin;
+GRANT USAGE, CREATE FILE FORMAT, CREATE STAGE, CREATE TABLE ON schema rpt.hr to role  accountadmin;
 
 
 ------------------------------------------------------------------------------TABLE IS LOCATIONS------------------------------------------------------------------------------
