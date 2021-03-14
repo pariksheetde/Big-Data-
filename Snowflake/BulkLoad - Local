@@ -94,19 +94,21 @@ SELECT * FROM SNOWFLAKE.ACCOUNT_USAGE.STORAGE_USAGE ORDER BY USAGE_DATE ASC;
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+------------------------------------------------------------------------------TABLE IS CUSTOMERS_RECEIPT----------------------------------------------------------------------------
+
 USE DATABASE SALES;
 USE SCHEMA SALES;
 CREATE OR REPLACE TABLE customers_receipt
 (
 cust_key int,
-  cust_id int,
-  cust_f_name varchar(30),
-  cust_l_name varchar(30),
-  country varchar(20),
-  state varchar(20),
-  city varchar(10),
-  zip varchar(20),
-  DOB date
+cust_id float,
+cust_f_name varchar(30),
+cust_l_name varchar(30),
+country varchar(40),
+state varchar(40),
+city varchar(40),
+zip varchar(40),
+DOB varchar(20)
 );
 
 CREATE OR REPLACE FILE FORMAT csv_file_fmt TYPE = "CSV" FIELD_DELIMITER= ','SKIP_HEADER = 1;
