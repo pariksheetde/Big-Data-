@@ -91,4 +91,30 @@ on_error = 'continue';
 
 --QUERY STORAGE THAT HAS BEEN USED
 SELECT * FROM SNOWFLAKE.ACCOUNT_USAGE.STORAGE_USAGE ORDER BY USAGE_DATE ASC;
-  
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+USE DATABASE SALES;
+USE SCHEMA SALES;
+CREATE OR REPLACE TABLE customers_receipt
+(
+cust_key int,
+  cust_id int,
+  cust_f_name varchar(30),
+  cust_l_name varchar(30),
+  country varchar(20),
+  state varchar(20),
+  city varchar(10),
+  zip varchar(20),
+  DOB date
+);
+
+CREATE OR REPLACE FILE FORMAT csv_file_fmt TYPE = "CSV" FIELD_DELIMITER= ','SKIP_HEADER = 1;
+CREATE OR REPLACE STAGE cust_stg;
+put file://C:\Users\pariksheet.d\Documents\DataSet\HR\customers_receipt.csv @cust_stg;
+COPY INTO SALES.SALES.customers_receipt
+FROM @cust_stg
+file_format = csv_file_fmt
+on_error = 'continue';
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
