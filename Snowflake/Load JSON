@@ -1,0 +1,12 @@
+USE ROLE ACCOUNTADMIN;
+USE DATABASE SALES;
+USE SCHEMA SALES;
+CREATE OR REPLACE TABLE contacts_temp_json (
+  json_data_raw VARIANT
+);
+
+CREATE OR REPLACE STAGE contacts_json_stg;
+put file://C:\Users\pariksheet.d\Documents\DataSet\HR\contacts.json @contacts_json_stg;
+COPY INTO contacts_temp_json
+  FROM @contacts_json_stg
+  file_format = (type = json);
