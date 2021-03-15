@@ -8,5 +8,5 @@ CREATE OR REPLACE TABLE movies_temp_json (
 CREATE OR REPLACE STAGE contacts_json_stg;
 put file://C:\Users\pariksheet.d\Documents\DataSet\HR\movies.json @contacts_json_stg;
 COPY INTO movies_temp_json
-  FROM @contacts_json_stg\movies.json
+  FROM @contacts_json_stg/movies.json
   file_format = (type = json);
