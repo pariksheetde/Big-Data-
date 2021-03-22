@@ -45,3 +45,4 @@ JSON_DATA_RAW:writer AS writer
 FROM
 movies_temp_json
 WHERE title is not null;
+
