@@ -60,6 +60,8 @@ SELECT
   A.Customer_DOB
 FROM CUSTOMER A CROSS JOIN CUSTOMER B CROSS JOIN CUSTOMER C CROSS JOIN (SELECT TOP 20 * FROM CUSTOMER) D;
 
+--------------------------------------------------------------CREATE MULTI CLUSTER WAREHOUSE----------------------------------------------------------------------------------
+
 CREATE WAREHOUSE ETL_WH
 WITH WAREHOUSE_SIZE = 'XSMAL'
 MIN_CLUSTER_COUNT = 1
@@ -67,3 +69,7 @@ MAX_CLUSTER_COUNT = 4
 SCALING_POLICY  = 'STANDARD'
 AUTO_SUSPEND = 300
 AUTO_RESUME = TRUE
+
+-------------------------------------------------------------------------END--------------------------------------------------------------------------------------------------
+
+
