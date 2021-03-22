@@ -10,3 +10,22 @@ put file://C:\Users\pariksheet.d\Documents\DataSet\HR\movies.json @contacts_json
 COPY INTO movies_temp_json
   FROM @contacts_json_stg/movies.json
   file_format = (type = json);
+  
+---------------------------------------------------------------------SQL SELECT STATEMENT--------------------------------------------------------------------------------------
+  
+SELECT
+TRIM(JSON_DATA_RAW:name,'"') AS title,
+JSON_DATA_RAW:cast AS cast,
+TRIM(JSON_DATA_RAW:description,'"') AS description,
+JSON_DATA_RAW:director AS director,
+JSON_DATA_RAW:genre AS genre,
+JSON_DATA_RAW:language AS language,
+JSON_DATA_RAW:rating AS rating,
+JSON_DATA_RAW:rating_cnt AS rating_cnt,
+TRIM(JSON_DATA_RAW:released,'{"$date":}') AS released_date,
+JSON_DATA_RAW:writer AS writer
+FROM
+movies_temp_json
+WHERE title is not null;
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
