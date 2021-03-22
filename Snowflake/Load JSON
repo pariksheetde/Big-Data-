@@ -28,4 +28,20 @@ FROM
 movies_temp_json
 WHERE title is not null;
 
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------SQL CTAS STATEMENT--------------------------------------------------------------------------------------
+
+CREATE TABLE SALES.SALES.movies AS
+SELECT
+TRIM(JSON_DATA_RAW:name,'"') AS title,
+JSON_DATA_RAW:cast AS cast,
+TRIM(JSON_DATA_RAW:description,'"') AS description,
+JSON_DATA_RAW:director AS director,
+JSON_DATA_RAW:genre AS genre,
+JSON_DATA_RAW:language AS language,
+JSON_DATA_RAW:rating AS rating,
+JSON_DATA_RAW:rating_cnt AS rating_cnt,
+TRIM(JSON_DATA_RAW:released,'{"$date":}') AS released_date,
+JSON_DATA_RAW:writer AS writer
+FROM
+movies_temp_json
+WHERE title is not null;
