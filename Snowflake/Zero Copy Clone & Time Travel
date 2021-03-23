@@ -1,13 +1,13 @@
-CLONE TABLE
+------------------------------------------------------------------------CLONE TABLE-------------------------------------------------------------------------------------------
 CREATE TABLE employees_cp CLONE employees;
 
-CLONE SCHEMA
+------------------------------------------------------------------------CLONE SCHEMA------------------------------------------------------------------------------------------
 CREATE SCHEMA HR_cp CLONE HR;
 
 TIME TRAVEL
 SELECT * FROM customers before (timestamp => '2020-01-01 15:26:31.855' :: timestamp)
 
-TIME TRAVEL
+------------------------------------------------------------------------TIME TRAVEL-------------------------------------------------------------------------------------------
 SELECT * FROM customers AT (offset => -60 *20)
 
 TIME TRAVEL
@@ -18,3 +18,5 @@ CREATE TABLE employees_cp CLONE employees before (timestamp => '2020-02-03 12:21
 
 CLONE TABLE WITH TIME TRAVEL 
 CREATE TABLE employees_cp CLONE employees  before(statement => [ENTER THE QUERY_ID]);
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
