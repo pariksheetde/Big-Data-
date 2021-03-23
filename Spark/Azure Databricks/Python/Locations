@@ -26,3 +26,4 @@ loc_df = spark.read.jdbc(url=connectionUrl, table = pdq_1 , properties = connect
 dept_df = spark.read.jdbc(url=connectionUrl, table = pdq_2 , properties = connectionProp)
 loc_df.show(10, False)
 dept_df.show(10, False)
+
