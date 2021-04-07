@@ -17,3 +17,23 @@ region 'ap-south-1'
 IGNOREHEADER 1
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------LOCATIONS TABLE-----------------------------------------------------------------------------
+
+create table locations
+(
+location_id INTEGER NOT NULL,
+location_name VARCHAR(20)
+)
+
+# load locations_cp.csv from s3 into departments table
+
+copy locations (location_id, location_name)
+from 's3://humanresource-lake/departments/locations_cp.csv'
+credentials 'aws_iam_role=arn:aws:iam::265475006349:role/RedshiftRole'
+FORMAT AS CSV
+region 'ap-south-1'
+IGNOREHEADER 1
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
