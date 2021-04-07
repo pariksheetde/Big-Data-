@@ -1,0 +1,19 @@
+--------------------------------------------------------------------DEPARTMENTS TABLE-----------------------------------------------------------------------------
+
+create table departments
+(
+dept_id int,
+dept_nm varchar(50),
+loc_id int
+);
+
+# load departments.csv from s3 into departments table
+
+copy departments (dept_id, dept_nm, loc_id)
+from 's3://humanresource-lake/departments/departments.csv'
+credentials 'aws_iam_role=arn:aws:iam::265475006349:role/RedshiftRole'
+FORMAT AS CSV
+region 'ap-south-1'
+IGNOREHEADER 1
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
