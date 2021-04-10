@@ -1,7 +1,7 @@
 -------------------------------------------------------LOAD DATA FROM S3 INTO REDSHIFT----------------------------------------------------------------------------
 ------------------------------------------------------------DEPARTMENTS TABLE-------------------------------------------------------------------------------------
 
-create table departments
+CREATE TABLE departments
 (
 dept_id int,
 dept_nm varchar(50),
@@ -19,7 +19,7 @@ IGNOREHEADER 1
 
 --------------------------------------------------------------------LOCATIONS TABLE-----------------------------------------------------------------------------
 
-create table locations
+CREATE TABLE locations
 (
 location_id INTEGER NOT NULL,
 location_name VARCHAR(20)
@@ -36,12 +36,12 @@ IGNOREHEADER 1
 
 ----------------------------------------------------------------------SQL STATEMENT START----------------------------------------------------------------------------
 
-select
+SELECT
 l.location_id,
 d.dept_id,
 d.dept_nm,
 l.location_name
-from
+FROM
 locations l join departments d
 on l.location_id = d.loc_id;
 
