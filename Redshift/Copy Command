@@ -47,5 +47,41 @@ on l.location_id = d.loc_id;
 
 ----------------------------------------------------------------------SQL STATEMENT END-------------------------------------------------------------------------------
 
+# CREATE EXTERNAL SCHEMA & DATABASE FOR REDSHIFT SPECTRUM
 
+CREATE EXTERNAL SCHEMA spectrum
+from data catalog
+database 'hrdb'
+iam_role 'arn:aws:iam::265475006349:role/RedshiftRole'
+create external database if not exists;
 
+SET AUTOCOMMIT = ON;
+CREATE EXTERNAL TABLE spectrum.customers
+(
+Emp_ID	int,
+F_Name varchar(30),
+L_Name varchar(30),
+Dept_ID int,
+Salary numeric(15,3),
+Manager_ID int
+)
+row format delimited
+fields terminated by ','
+STORED AS TEXTFILE
+location 's3://customersdatalake/customer/';
+
+---------------------------------------------------------------SQL QUERY FROM REDSHIFT & SPECTRUM---------------------------------------------------------------------
+
+SELECT
+c.emp_id,
+c.f_name||' '||c.l_name AS cust_name,
+l.loc_id,
+d.dept_id,
+d.dept_nm,
+l.loc_nm
+FROM
+locations l JOIN departments d
+ON l.loc_id = d.loc_id JOIN spectrum.customers c
+ON c.dept_id = d.dept_id;
+
+------------------------------------------------------------------------END-------------------------------------------------------------------------------------------
