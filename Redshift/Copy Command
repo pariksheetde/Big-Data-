@@ -15,7 +15,8 @@ from 's3://humanresource-lake/departments/departments.csv'
 credentials 'aws_iam_role=arn:aws:iam::265475006349:role/RedshiftRole'
 FORMAT AS CSV
 region 'ap-south-1'
-IGNOREHEADER 1
+IGNOREHEADER 1;
+COMMIT;
 
 --------------------------------------------------------------------LOCATIONS TABLE-----------------------------------------------------------------------------
 
@@ -32,7 +33,8 @@ from 's3://humanresource-lake/departments/locations_cp.csv'
 credentials 'aws_iam_role=arn:aws:iam::265475006349:role/RedshiftRole'
 FORMAT AS CSV
 region 'ap-south-1'
-IGNOREHEADER 1
+IGNOREHEADER 1;
+COMMIT;
 
 ----------------------------------------------------------------------SQL STATEMENT START----------------------------------------------------------------------------
 
