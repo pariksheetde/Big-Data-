@@ -36,7 +36,9 @@ object Dept_Emp_Analysis_5 extends App {
   import org.apache.spark.sql.functions.broadcast
   val dept_emp_join_df = Dept_ID_Renamed.join(read_emp_df, dept_emp_join_expr, "left")
     .withColumn("Commission_Pct", expr("coalesce(Commission_Pct, 1)"))
-    .selectExpr("Employee_ID as Emp_ID", "Dept_ID", "Department_Name as Dept_Nm", "Location_ID as Loc_ID", "First_Name as F_Name",
-      "Last_NaME as L_Name", "Email", "Phone_Number", "Hire_Date as Hire_Dt", "Job_ID", "Commission_Pct as Commission")
-    .show(false)
+    .selectExpr("Employee_ID as Emp_ID", "Dept_ID", "Dept_Name as Dept_Nm", "Loc_ID as Loc_ID", "First_Name as F_Name",
+      "Last_Name as L_Name", "Email", "Phone_Number", "Hire_Date as Hire_Dt", "Job_ID", "Commission_Pct as Commission")
+  dept_emp_join_df.show(false)
+
+  spark.stop()
 }
