@@ -10,6 +10,7 @@ import org.apache.spark.sql.functions.count
 
 object Dept_Emp_Analysis_1 extends App {
   println("Employees Analysis on Departments")
+    println("Dept_Emp_Analysis_1")
 
   val sparkAppConfig = new SparkConf()
 
