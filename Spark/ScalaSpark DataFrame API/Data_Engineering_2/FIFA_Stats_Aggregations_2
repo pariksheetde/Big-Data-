@@ -73,5 +73,7 @@ object FIFA_Stats_Aggregations_2 extends App {
 
   sum_goals_home_team.show(false)
   println(s"Records Effected: ${sum_goals_home_team.count()}")
+  
+  spark.stop()
 
 }
