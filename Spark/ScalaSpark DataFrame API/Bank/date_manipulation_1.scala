@@ -6,8 +6,9 @@ import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types.{IntegerType, StringType, StructField, StructType}
 import org.apache.spark.SparkConf
 
-object date_manupulation_1 extends App {
+object date_manipulation_1 extends App {
   println("Changing Data Format using StructType")
+  print("Date Manipulation 1")
 
   def dateconversion(df: DataFrame, fmt: String, fld: String): DataFrame = {
     df.withColumn(fld, to_date(col(fld),fmt))
