@@ -26,7 +26,7 @@ object Dept_Emp_Analysis_4 extends App {
     .getOrCreate()
 
   //  define case class for dept
-  case class dept_cc(Department_ID:Integer, Department_Name: String, Manager_ID:Integer, Location_ID: Integer)
+  case class dept_cc(Dept_ID:Integer, Dept_Name: String, Loc_ID: Integer)
 
   //  read the dept datafile from the location
   val dept_df : Dataset[Row] = spark.read
@@ -56,7 +56,7 @@ object Dept_Emp_Analysis_4 extends App {
 
   //  read the dept case class
   import spark.implicits._
-  val sel_dept : Dataset[dept_cc] = dept_df.select("Department_ID", "Department_Name", "Manager_ID", "Location_ID")
+  val sel_dept : Dataset[dept_cc] = dept_df.select("Dept_ID", "Dept_Name", "Loc_ID")
     .as[dept_cc]
 
   //  read the emp case class
@@ -70,7 +70,7 @@ object Dept_Emp_Analysis_4 extends App {
   spark.sql("USE DEPT_EMP_db")
   spark.sql("drop table if exists dept_emp_db.Departments")
   val buck_dept_df = sel_dept.write
-    .bucketBy(3, "Department_ID")
+    .bucketBy(3, "Dept_ID")
     .mode(SaveMode.Overwrite)
     .saveAsTable("Departments")
 
@@ -82,4 +82,6 @@ object Dept_Emp_Analysis_4 extends App {
     .bucketBy(3, "Department_ID")
     .mode(SaveMode.Overwrite)
     .saveAsTable("Employees")
+
+  spark.stop()
 }
