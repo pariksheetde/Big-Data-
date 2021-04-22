@@ -1,0 +1,3 @@
+-Dlog4j.configuration=file:log4j.properties
+-Dspark.yarn.app.container.log.dir=app-log
+-Dlogfile.name=date_manupulation_1
