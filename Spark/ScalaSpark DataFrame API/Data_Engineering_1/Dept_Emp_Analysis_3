@@ -22,7 +22,7 @@ object Dept_Emp_Analysis_3 extends App {
   val spark = SparkSession.builder.config(sparkAppConfig).getOrCreate()
 
   //  define case class for dept
-  case class dept_cc(Department_ID:Integer, Department_Name: String, Manager_ID:Integer, Location_ID: Integer)
+  case class dept_cc(Dept_ID:Integer, Dept_Name: String, Loc_ID: Integer)
 
   //  read the dept datafile from the location
   val dept_df : Dataset[Row] = spark.read
@@ -52,7 +52,7 @@ object Dept_Emp_Analysis_3 extends App {
 
   //  read the dept case class
   import spark.implicits._
-  val sel_dept : Dataset[dept_cc] = dept_df.select("Department_ID", "Department_Name", "Manager_ID", "Location_ID")
+  val sel_dept : Dataset[dept_cc] = dept_df.select("Dept_ID", "Dept_Name", "Loc_ID")
     .as[dept_cc]
 
   //  read the emp case class
@@ -71,9 +71,11 @@ object Dept_Emp_Analysis_3 extends App {
   import org.apache.spark.sql.functions.broadcast
   val dept_emp_join_df = broadcast(Dept_ID_Renamed).join(emp_df, dept_emp_join_expr, "right")
     .withColumn("COMMISSION_PCT", expr("coalesce(COMMISSION_PCT, 1)"))
-    .selectExpr("Employee_ID as Emp_ID", "Dept_ID", "Department_Name as Dept_Nm", "Location_ID as Loc_ID", "First_Name as F_Name",
+    .selectExpr("Employee_ID as Emp_ID", "Dept_ID", "Dept_Name as Dept_Nm", "Loc_ID as Loc_ID", "First_Name as F_Name",
       "Last_NaME as L_Name", "Email", "Phone_Number", "Hire_Date as Hire_Dt", "Job_ID", "Commission_Pct as Commission")
-  //    .show(false)
 
-  println(dept_emp_join_df.count()) // 107
+  dept_emp_join_df.show(false)
+
+  println(s"Record Count ${dept_emp_join_df.count()}") // 107
+  spark.stop()
 }
