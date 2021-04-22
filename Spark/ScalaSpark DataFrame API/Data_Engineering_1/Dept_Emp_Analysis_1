@@ -22,7 +22,7 @@ object Dept_Emp_Analysis_1 extends App {
   val spark = SparkSession.builder.config(sparkAppConfig).getOrCreate()
 
 //  define case class for dept
-  case class dept_cc(Department_ID:Integer, Department_Name: String, Manager_ID:Integer, Location_ID: Integer)
+  case class dept_cc(dept_id:Integer, dept_name: String, loc_id: Integer)
 
   //  read the dept datafile from the location
   val dept_df : Dataset[Row] = spark.read
@@ -52,22 +52,26 @@ object Dept_Emp_Analysis_1 extends App {
 
 //  read the dept case class
     import spark.implicits._
-    val sel_dept : Dataset[dept_cc] = dept_df.select("Department_ID", "Department_Name", "Manager_ID", "Location_ID")
+    val sel_dept : Dataset[dept_cc] = dept_df.select("Dept_ID", "Dept_Name", "Loc_ID")
     .as[dept_cc]
 
   //  read the emp case class
-  import spark.implicits._
-  val sel_emp : Dataset[emp_cc] = emp_df.select("Employee_ID", "First_Name", "Last_Name", "Email", "Phone_Number", "Hire_Date", "Job_ID",
-    "Salary", "Commission_Pct", "Manager_ID", "Department_ID").as[emp_cc]
+//  import spark.implicits._
+//  val sel_emp : Dataset[emp_cc] = emp_df.select("Employee_ID", "First_Name", "Last_Name", "Email", "Phone_Number", "Hire_Date", "Job_ID",
+//    "Salary", "Commission_Pct", "Manager_ID", "Department_ID").as[emp_cc]
 
 //  inner join sel_dept & sel_emp df
 //  define join expression
+
+
   val Dept_ID_Renamed = dept_df.withColumnRenamed("Department_ID", "Dept_ID")
   val dept_emp_join_expr = Dept_ID_Renamed.col("Dept_ID") === emp_df.col("Department_ID")
   val dept_emp_join_df = Dept_ID_Renamed.join(emp_df, dept_emp_join_expr, "inner")
-    .selectExpr("Employee_ID as Emp_ID", "Dept_ID", "Department_Name as Dept_Nm", "Location_ID as Loc_ID", "First_Name as F_Name",
-    "Last_NaME as L_Name", "Email", "Phone_Number", "Hire_Date as Hire_Dt", "Job_ID", "Commission_Pct as Commission")
-    .show(false)
+    .selectExpr("Employee_ID as Emp_ID", "Dept_ID", "Dept_Name", "Loc_ID", "First_Name as F_Name",
+    "Last_Name as L_Name", "Email", "Phone_Number", "Hire_Date as Hire_Dt", "Job_ID", "Commission_Pct as Commission")
+  dept_emp_join_df.show(false)
+//
+  println(s"Records Effected: ${dept_emp_join_df.count()}")
+  spark.stop()
 
-//  println(dept_emp_join_df.count())
 }
