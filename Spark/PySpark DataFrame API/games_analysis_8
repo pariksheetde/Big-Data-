@@ -45,4 +45,3 @@ games_df = games_lim.select("game_id", "season", "type", "away_goals", "home_goa
 games_df.show(10, truncate = False)
 print(f"Records Effected: {games_df.count()}")
 print(f"Number of partition: {games_df.rdd.getNumPartitions()}")
-
