@@ -8,6 +8,7 @@ import pyspark.sql.functions
 
 
 if __name__ == "__main__":
+    print("Spark SQL")
     print("Churn Modelling 3")
 
 # set the SparkSession
