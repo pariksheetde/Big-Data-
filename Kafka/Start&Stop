@@ -1,0 +1,11 @@
+---------------START THE DOCKER-------------------------------
+docker-compose -f docker-compose.yml up
+
+---------------STOP THE DOCKER--------------------------------
+docker ps
+
+---------------START THE DOCKER IN BACKGROUND-----------------
+docker-compose -f docker-compose.yml up -d
+
+---------------STOP AND DELETE THE DOCKER---------------------
+docker-compose down
