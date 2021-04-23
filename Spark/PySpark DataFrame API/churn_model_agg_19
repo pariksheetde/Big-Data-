@@ -1,0 +1,27 @@
+import sys
+from pyspark.sql import *
+import pyspark
+from pyspark.sql import SparkSession
+from pyspark.sql.types import *
+from pyspark.sql.functions import *
+import pyspark.sql.functions
+
+
+if __name__ == "__main__":
+    print("Churn Modelling 19")
+
+# set the SparkSession
+churn_df = SparkSession.builder.appName("Churn Modeling").master("local[3]").getOrCreate()
+
+# read the datafile from the location
+churn = churn_df.read.csv(r"D:\Code\DataSet\SparkDataSet\ChurnModeling.csv", header=True)
+churn.show(5, truncate=False)
+
+# select the required columns
+churn_agg = churn.select("CustomerId", "Surname", "CreditScore", "Geography", "Gender", "Age", "Tenure") \
+    .groupBy("Geography") \
+    .agg(count("CustomerId").alias("Cnt_CustID")) \
+    .orderBy("Cnt_CustID", ascending=False)
+
+churn_agg.show(15)
+print(f'Records: {churn.count()}')
