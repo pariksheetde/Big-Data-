@@ -8,7 +8,7 @@ import pyspark.sql.functions
 
 
 if __name__ == "__main__":
-    print("Churn Modelling")
+    print("Churn Modelling 1")
 
 # set the SparkSession
 churn_df = SparkSession.builder.appName("Churn Modeling").master("local[3]").getOrCreate()
