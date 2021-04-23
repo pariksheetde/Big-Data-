@@ -1,0 +1,17 @@
+from pyspark.sql import *
+import pyspark
+from pyspark.sql import SparkSession
+from pyspark.sql.types import *
+
+if __name__ == "__main__":
+    print("2019 Covid Cases")
+
+spark = SparkSession.builder.appName("2019 Covid Cases").master("local[3]").getOrCreate()
+covid_df = spark.read \
+    .option("header", "true") \
+    .option("inferSchema", "true") \
+    .csv(r"D:\Code\DataSet\SparkDataSet\Coronavirus\2019_Covid_Cases.csv") \
+    .show(10)
+
+# display the schema of the DataFrame
+# covid.printSchema()
