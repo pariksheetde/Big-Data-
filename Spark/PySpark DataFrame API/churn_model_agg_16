@@ -31,3 +31,4 @@ churn_extr = churn.select("CustomerId", "Balance", "CreditScore", "Geography", "
 churn_extr.show(10, truncate=False)
 print(f'Records effected: {churn_extr.count()}')
 print(f"Number of Executor Partition: {churn_extr.rdd.getNumPartitions()}")
+
