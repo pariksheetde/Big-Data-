@@ -2,6 +2,9 @@
 docker-compose -f docker-compose.yml up
 
 ---------------STOP THE DOCKER--------------------------------
+CTRL C
+
+---------------CHECK THE SERVICES RUNNING---------------------
 docker ps
 
 ---------------START THE DOCKER IN BACKGROUND-----------------
