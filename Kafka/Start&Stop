@@ -1,14 +1,17 @@
----------------START THE DOCKER-------------------------------
+------------------------------------START THE DOCKER----------------------------------------
 docker-compose -f docker-compose.yml up
 
----------------STOP THE DOCKER--------------------------------
+------------------------------------STOP THE DOCKER-----------------------------------------
 CTRL C
 
----------------CHECK THE SERVICES RUNNING---------------------
+------------------------------------CHECK THE SERVICES RUNNING------------------------------
 docker ps
 
----------------START THE DOCKER IN BACKGROUND-----------------
+------------------------------------START THE DOCKER IN BACKGROUND--------------------------
 docker-compose -f docker-compose.yml up -d
 
----------------STOP AND DELETE THE DOCKER---------------------
+------------------------------------STOP AND DELETE THE DOCKER------------------------------
 docker-compose down
+
+-----------------------START THE DOCKER FROM WINDOWS TERMINAL-------------------------------
+D:\Code\ScalaSpark\target>docker-compose -f docker-compose.yml up
