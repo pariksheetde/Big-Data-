@@ -1,0 +1,16 @@
+1-Change the execution to tez or spark
+2-Using Suitable file formats like Avro,Parquet or ORC
+3-Hive Partitioning
+4-Bucketing
+5-Vectorization in hive
+6-Cost Based Optimization in hive
+7-Keeping the Data in Denormalized way to avoid joins
+8-Hive Indexing
+9-Using Static Partitioning instead of Dynamic if possible
+10-Using Compression techniques which reduces disk seeks
+11-Map side join
+12-Bucket map side join
+13-Sort Merge Bucket join
+14-Using less number of join columns while doing join so that less number of map reduce jobs are triggered
+15-Use sort by instead of order by
+16-Use window functions for complex operations
