@@ -1,6 +1,6 @@
 import cx_Oracle
 
-# create Oracle DB connection
+# create Oracle DB connection 
 conn = cx_Oracle.connect("Dev/Dev@localhost:1521/prod")
 
 # create a cursor
