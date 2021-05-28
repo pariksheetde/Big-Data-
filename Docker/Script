@@ -1,0 +1,44 @@
+docker exec -it rockthejvm-sparkstreaming-kafka bash
+
+CREATE TOPIC
+kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic locations –config retention.ms=120000
+
+--CREATE PRODUCER
+cd /opt/kafka_2.13-2.7.0/
+kafka-console-producer.sh --broker-list localhost:9092 --topic locations
+
+--CREATE CONSUMER
+cd /opt/kafka_2.13-2.7.0/
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic locations
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+docker exec -it rockthejvm-sparkstreaming-kafka bash
+
+CREATE TOPIC
+kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic departments
+
+--CREATE PRODUCER
+cd /opt/kafka_2.13-2.7.0/
+kafka-console-producer.sh --broker-list localhost:9092 --topic departments
+
+--CREATE CONSUMER
+cd /opt/kafka_2.13-2.7.0/
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic departments
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+docker exec -it rockthejvm-sparkstreaming-kafka bash
+
+CREATE TOPIC
+kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic employees –config retention.ms=120000
+
+--CREATE PRODUCER
+cd /opt/kafka_2.13-2.7.0/
+kafka-console-producer.sh --broker-list localhost:9092 --topic employees 
+
+--CREATE CONSUMER
+cd /opt/kafka_2.13-2.7.0/
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic employees
+
+DELETE Kafka Topic
+kafka-topics.sh --zookeeper localhost:2181 --delete --topic locations
