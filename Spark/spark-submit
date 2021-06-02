@@ -6,3 +6,5 @@ spark-submit --master yarn-client --driver-memory 4g --executor-memory 10g --exe
 D:\Code\ScalaSpark>c:\spark\bin\spark-submit --class BigData.smart_phones_schema_design_1 d:\Code\ScalaSpark\out\artifacts\HelloSpark\HelloSpark.jar
 
 -------------------------------------------------------------EXECUTE SPARK JOB USING spark-submit-------------------------------------------------------------
+
+C:\sbt>sbt assembly
