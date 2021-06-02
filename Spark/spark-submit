@@ -1,1 +1,8 @@
 spark-submit --master yarn-client --driver-memory 4g --executor-memory 10g --executor-cores 2 --num-executors 20 /home/svc-rdf-prod/uk_fact_py.py
+
+
+-------------------------------------------------------------EXECUTE SPARK JOB USING spark-submit-------------------------------------------------------------
+
+D:\Code\ScalaSpark>c:\spark\bin\spark-submit --class BigData.smart_phones_schema_design_1 d:\Code\ScalaSpark\out\artifacts\HelloSpark\HelloSpark.jar
+
+-------------------------------------------------------------EXECUTE SPARK JOB USING spark-submit-------------------------------------------------------------
