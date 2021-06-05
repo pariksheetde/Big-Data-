@@ -1,0 +1,22 @@
+# CREATE EXTERNAL SCHEMA & DATABASE FOR REDSHIFT SPECTRUM
+
+CREATE EXTERNAL SCHEMA spectrum
+from data catalog
+database 'hrdb'
+iam_role 'arn:aws:iam::265475006349:role/RedshiftRole'
+create external database if not exists;
+
+SET AUTOCOMMIT = ON;
+CREATE EXTERNAL TABLE spectrum.customers
+(
+Emp_ID	int,
+F_Name varchar(30),
+L_Name varchar(30),
+Dept_ID int,
+Salary numeric(15,3),
+Manager_ID int
+)
+row format delimited
+fields terminated by ','
+STORED AS TEXTFILE
+location 's3://customersdatalake/customer/';
