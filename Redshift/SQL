@@ -1,0 +1,11 @@
+SELECT
+c.emp_id,
+c.f_name||' '||c.l_name AS cust_name,
+l.loc_id,
+d.dept_id,
+d.dept_nm,
+l.loc_nm
+FROM
+locations l JOIN departments d
+ON l.loc_id = d.loc_id JOIN spectrum.customers c
+ON c.dept_id = d.dept_id;
