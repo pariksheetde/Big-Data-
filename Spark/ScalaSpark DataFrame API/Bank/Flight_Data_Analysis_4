@@ -4,10 +4,9 @@ import org.apache.spark.sql.{SQLContext, SaveMode, SparkSession}
 import org.apache.spark.SparkContext
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.functions.spark_partition_id
-//import org.apache.spark.sql.SQLContext.implicits._
 import org.apache.spark.sql.functions.count
 
-object flight_data_analysis_4 extends App{
+object Flight_Data_Analysis_4 {
   println("Flight Data Analysis for all source")
   println("Flight Data Analysis 4")
 
@@ -26,26 +25,30 @@ object flight_data_analysis_4 extends App{
   val flight_df = spark.read
     .option("header", "true")
     .option("inferSchema", "true")
-    .csv("D:/Code/DataSet/SparkDataSet/flight.csv")
+    .csv("D:/DataSet/DataSet/SparkDataSet/flight.csv")
 
   //  repartition the dataframe
-  val flight_part = flight_df.repartition(1)
+  val flight_part = flight_df.repartition(10)
 
-  //  create a temp table
-  val SQL_tab = flight_part.createOrReplaceTempView("flight_analysis")
+  def compute() = {
+    val SQL_tab = flight_part.createOrReplaceTempView("flight_analysis")
 
-  //  query from temp table
-  val SQL_qry = spark.sql("select * from flight_analysis")
+    //  query from temp table
+    val SQL_qry = spark.sql("select * from flight_analysis")
 
-  //  count number of records in each partition
-  SQL_qry.groupBy(spark_partition_id()).count().show()
+    //  count number of records in each partition
+    SQL_qry.groupBy(spark_partition_id()).count().show()
 
-  SQL_qry.write
-    .format("csv")
-    .partitionBy("Source", "destination")
-    .mode(SaveMode.Overwrite)
-    .option("path", "H:/ScalaSparkOutput/flight_partition_sources/")
-    .save()
+    SQL_qry.write
+      .format("csv")
+      .partitionBy("Source", "destination")
+      .mode(SaveMode.Overwrite)
+      .option("path", "D:/DataSet/OutputDataset/flight_data/")
+      .save()
+  }
 
-  spark.stop()
+  def main(args: Array[String]): Unit = {
+    compute()
+    spark.stop()
+  }
 }
