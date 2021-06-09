@@ -4,14 +4,9 @@ import org.apache.spark.sql.SparkSession
 import org.apache.spark.SparkContext
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.SQLContext
-//import org.apache.spark.sql.SQLContext.implicits._
 import org.apache.spark.sql.functions.count
 
-
-//set sqlContext.setConf("spark.sql.shuffle.partitions", "300")
-//set sqlContext.setConf("")
-
-object flight_data_analysis_1 extends App {
+object Flight_Data_Analysis_1 {
   println("Flight Data Analysis 1")
 
   val sparkAppConfig = new SparkConf()
@@ -21,7 +16,7 @@ object flight_data_analysis_1 extends App {
 
   val spark = SparkSession.builder.config(sparkAppConfig).getOrCreate()
 
-//spark.sql.shuffle.partitions configures the number of partitions that are used when shuffling data for joins or aggregations.
+  //spark.sql.shuffle.partitions configures the number of partitions that are used when shuffling data for joins or aggregations.
   spark.conf.set("spark.sql.shuffle.partitions",100)
   spark.conf.set("spark.default.parallelism",100)
 
@@ -30,21 +25,28 @@ object flight_data_analysis_1 extends App {
   val flight_df = spark.read
     .option("header", "true")
     .option("inferSchema", "true")
-    .csv("D:/Code/DataSet/SparkDataSet/flight.csv")
+    .csv("D:/DataSet/DataSet/SparkDataSet/flight.csv")
 
-//  repartition the dataframe
+  def compute() = {
+
+// repartition the dataframe
   val flight_part = flight_df.repartition(10)
 
-//  where source is Kolkata
+// where source is Kolkata
   val flight_kol = flight_part.where("Source == 'Kolkata'")
-  println("1st Number of Partitions "+ flight_kol.rdd.getNumPartitions)
+//  println("1st Number of Partitions " + flight_kol.rdd.getNumPartitions)
 
-//  select the required columns
+// select the required columns
   val flight_kol_sel = flight_kol.select("Airline", "Date_Of_Journey", "Source", "Destination", "Route", "Duration")
-
   val flight_kol_cnt = flight_kol_sel.select("Airline", "Date_Of_Journey", "Source", "Destination", "Route", "Duration")
-    .groupBy("Destination")
-    .count()
-    .show()
-  spark.stop()
+      .groupBy("Destination")
+      .count()
+      .show()
+  }
+
+  def main(args: Array[String]): Unit = {
+    compute()
+    spark.stop()
+  }
 }
+
