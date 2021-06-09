@@ -5,11 +5,11 @@ import org.apache.spark.sql.{Dataset, Encoder, Encoders, SQLContext, SparkSessio
 import org.apache.spark.SparkContext
 import org.apache.spark.SparkConf
 import org.apache.spark.sql._
-//import org.apache.spark.sql.types.{StructType, StructField, DateType, StringType, IntegerType}
+import org.apache.spark.sql.types.{StructType, StructField, DateType, StringType, IntegerType}
 import org.apache.spark.sql.types._
 import java.util.Date
 
-object ipl_analysis_2 extends App {
+object IPL_Data_Analysis_2{
   println("Indian Premier League in DataSet API")
 
   val sparkAppConfig = new SparkConf()
@@ -29,15 +29,20 @@ object ipl_analysis_2 extends App {
   val ipl_df  = spark.read
     .option("header", "true")
     .option("inferSchema", "true")
-//    .schema(ipl_schema)
+//  .schema(ipl_schema)
     .option("dateFormat", "M/D/Y")
     .option("mode", "FAILFAST")
-    .csv("D:/Code/DataSet/SparkDataSet/IndianPremierLeague.csv")
+    .csv("D:/DataSet/DataSet/SparkDataSet/IndianPremierLeague.csv")
 
-  val ipl_sel_df = ipl_df.selectExpr("city","schedule", "winner", "venue as stadium", "team1", "team2",  "result", "neutral_venue")
-//    .show(20, truncate = false)
+  def compute() = {
+    val ipl_sel_df = ipl_df.selectExpr("city", "schedule", "winner", "venue as stadium", "team1", "team2", "result", "neutral_venue")
 
+    ipl_sel_df.show(20, truncate = false)
     ipl_sel_df.printSchema()
+  }
 
-  spark.stop()
+  def main(args: Array[String]): Unit = {
+    compute()
+    spark.stop()
+  }
 }
