@@ -1,16 +1,17 @@
 -------------------------------------------------------LOAD DATA FROM S3 INTO REDSHIFT----------------------------------------------------------------------------
 ------------------------------------------------------------DEPARTMENTS TABLE-------------------------------------------------------------------------------------
 
+DROP TABLE departments;
 CREATE TABLE departments
 (
-dept_id int,
-dept_nm varchar(50),
-loc_id int
+department_id int,
+department_name varchar(50),
+location_id int
 );
 
-# load departments.csv from s3 into departments table
+--load departments.csv from s3 into departments table
 
-copy departments (dept_id, dept_nm, loc_id)
+copy departments (department_id, department_name, location_id)
 from 's3://humanresource-lake/departments/departments.csv'
 credentials 'aws_iam_role=arn:aws:iam::265475006349:role/RedshiftRole'
 FORMAT AS CSV
@@ -18,23 +19,28 @@ region 'ap-south-1'
 IGNOREHEADER 1;
 COMMIT;
 
+select * from departments order by 1;
+
 --------------------------------------------------------------------LOCATIONS TABLE-----------------------------------------------------------------------------
 
+DROP TABLE locations;
 CREATE TABLE locations
 (
 location_id INTEGER NOT NULL,
 location_name VARCHAR(20)
 )
 
-# load locations_cp.csv from s3 into departments table
+--load locations_cp.csv from s3 into departments table
 
 copy locations (location_id, location_name)
-from 's3://humanresource-lake/departments/locations_cp.csv'
+from 's3://humanresource-lake/departments/locations.csv'
 credentials 'aws_iam_role=arn:aws:iam::265475006349:role/RedshiftRole'
 FORMAT AS CSV
 region 'ap-south-1'
 IGNOREHEADER 1;
 COMMIT;
+
+select * from locations order by 1;
 
 
 
