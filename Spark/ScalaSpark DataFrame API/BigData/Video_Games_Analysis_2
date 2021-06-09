@@ -9,7 +9,7 @@ import org.apache.spark.sql.types.DateType
 import org.apache.spark.sql.types.StringType
 import org.apache.spark.sql.functions.{col, column, expr}
 
-object video_games_analysis_2 extends App {
+object Video_Games_Analysis_2 {
   println("Video Games Analysis 2")
 
   //  define spark session
@@ -44,12 +44,20 @@ object video_games_analysis_2 extends App {
     .option("sep", ",")
     .option("nullValue", "")
     .option("compression", "snappy") // bzip2, gzip, lz4, deflate, uncompressed
-    .option("path","D:/Code/DataSet/SparkDataSet/vgsales.csv")
+    .option("path","D:/DataSet/DataSet/SparkDataSet/vgsales.csv")
     .load()
 
-//  compute total sales of video games, select Name
-  val total_sales_df = games_df
-    .select((col("NA_Sales") + col("EU_Sales") + col("JP_Sales") +
-    col("Other_Sales") + col("Global_Sales")).as("Total_Sales"), col("Name"))
-    .show(truncate = false)
+  def compute() = {
+    val total_sales_df = games_df
+      .select((col("NA_Sales") + col("EU_Sales") + col("JP_Sales") +
+        col("Other_Sales") + col("Global_Sales")).as("Total_Sales"), col("Name"))
+
+      total_sales_df.show(truncate = false)
+      println(s"Records Effected: ${total_sales_df.count()}")
+  }
+
+  def main(args: Array[String]): Unit = {
+    compute()
+    spark.stop()
+  }
 }
