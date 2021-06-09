@@ -1,6 +1,5 @@
-package Data_Engineering_I
+package Data_Engineering_1
 
-import Data_Engineering_I.Date_Format_1.spark
 import org.apache.spark.sql.{DataFrame, Dataset, Row, SaveMode, SparkSession}
 import org.apache.spark.sql.types.{DateType, DoubleType, IntegerType, StringType, StructField, StructType}
 import org.apache.spark.sql.functions._
@@ -50,5 +49,5 @@ object Date_Format_3 extends App {
 
   res_df.printSchema()
   res_df.show()
-
+  spark.stop()
 }
