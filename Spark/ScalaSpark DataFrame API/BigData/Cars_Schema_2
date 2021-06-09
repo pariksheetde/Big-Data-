@@ -11,11 +11,11 @@ import org.apache.spark.sql.types.IntegerType
 
 
 object Cars_Schema_2 extends App {
-  println("USA Cars Details using Seq, Row & StructType")
+  println("German Cars Details using Seq, Row & StructType")
 
   val spark = SparkSession.builder()
     .master("local[3]")
-    .appName("USA Cars Details using StructType")
+    .appName("German Cars Details using StructType")
     .getOrCreate()
 
   //  define data using seq and row
