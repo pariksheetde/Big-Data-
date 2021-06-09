@@ -9,7 +9,7 @@ import org.apache.spark.sql.types.DateType
 import org.apache.spark.sql.types.StringType
 import org.apache.spark.sql.functions.{col, column, expr}
 
-object imdb_movies_analysis_DF_1 extends App {
+object IMDB_Movies_Analysis_2 {
   println("IMDb Movies Analysis")
 
   //  define spark session
@@ -50,23 +50,28 @@ object imdb_movies_analysis_DF_1 extends App {
     .format("csv")
     .option("header", "true")
     .schema(movies_schema)
-//    .option("dateFormat", "yyyy-MM-dd")
+    //    .option("dateFormat", "yyyy-MM-dd")
     .option("mode", "failFast") // dropMalFormed, permissive
     .option("sep", ",")
     .option("nullValue", "")
     .option("compression", "snappy") // bzip2, gzip, lz4, deflate, uncompressed
-    .option("path","D:/Code/DataSet/SparkDataSet/IMDb_Movies.csv")
+    .option("path","D:/DataSet/DataSet/SparkDataSet/IMDb_Movies.csv")
     .load()
 
-  movies_df.show()
-  //  select the required columns, filter out unnecessary details
-  import spark.implicits._
-  val movies_sel = movies_df.select(col("title"), expr("year"), 'date_published,
-    'genre, 'duration, column("country"), column("language"), $"director", expr("reviews_from_users as users_rating"),
-    expr("reviews_from_critics as critics_rating"))
-    .filter("country = 'USA'")
-    .where("year > 2000")
-    .show(truncate = false)
+  def compute() = {
+    //  select the required columns, filter out unnecessary details
+    import spark.implicits._
+    val movies_sel = movies_df.select(col("title"), expr("year"), 'date_published,
+      'genre, 'duration, column("country"), column("language"), $"director", expr("reviews_from_users as users_rating"),
+      expr("reviews_from_critics as critics_rating"))
+      .filter("country = 'USA'")
+      .where("year > 2000")
 
-  spark.stop()
+      movies_sel.show(truncate = false)
+  }
+
+  def main(args: Array[String]): Unit = {
+    compute()
+    spark.stop()
+  }
 }
