@@ -18,13 +18,13 @@ import org.apache.spark.sql.functions.count
 //import spark.implicits._
 import java.sql.Date
 
-object date_manipulation_2 extends App {
+object Date_Manipulation_2 extends App {
   println("Date Manipulation using Seq")
   println("Date Manipulation 2")
 
   def dateconversion(df: DataFrame, fmt: String, fld: String): DataFrame = {
     df.withColumn(fld, to_date(col(fld),fmt))
-  }
+}
 
   val spark:SparkSession = SparkSession.builder()
     .master("local[1]").appName("Date Formatting")
