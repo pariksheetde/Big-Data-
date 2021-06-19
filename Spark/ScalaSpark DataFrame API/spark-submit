@@ -3,7 +3,7 @@ spark-submit --master yarn-client --driver-memory 4g --executor-memory 10g --exe
 
 --------------------------------------------------------------------EXECUTE SPARK JOB USING spark-submit----------------------------------------------------------------
 
-D:\Code\ScalaSpark>c:\spark\bin\spark-submit --class BigData.smart_phones_schema_design_1 d:\Code\ScalaSpark\out\artifacts\HelloSpark\HelloSpark.jar
+C:\>spark3\bin\spark-submit --class Data_Engineering_1.Date_Format_1 d:\Code\ScalaSpark\out\artifacts\SparkJar\SparkJar.jar
 
 --------------------------------------------------------------------EXECUTE SPARK JOB USING spark-submit----------------------------------------------------------------
 
