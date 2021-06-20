@@ -50,5 +50,10 @@ libraryDependencies ++= Seq(
   // kafka
   "org.apache.kafka" %% "kafka" % kafkaVersion,
   "org.apache.kafka" % "kafka-streams" % kafkaVersion,
-  "io.delta" %% "delta-core" % "0.8.0"
+  "io.delta" %% "delta-core" % "0.8.0",
+
+  // twitter packages
+  "org.twitter4j" % "twitter4j-core" % "4.0.4",
+  "org.twitter4j" % "twitter4j-stream" % "4.0.4"
+
 )
