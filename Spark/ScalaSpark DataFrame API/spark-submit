@@ -9,3 +9,5 @@ C:\>spark3\bin\spark-submit --class Data_Engineering_1.Date_Format_1 d:\Code\Sca
 
 
 C:\sbt>sbt assembly
+
+C:\>spark3\bin\spark-submit d:\Code\ScalaSpark\out\artifacts\SparkJar\Churn_Model_Agg_10.jar
