@@ -13,7 +13,7 @@ import org.apache.spark.sql._
 
 import java.sql.Timestamp
 
-object Covid_Data_Analysis_1 extends App {
+object Covid_Data_Analysis_1 {
   println("Covid Cases Analysis 1")
 
   val sparkAppConfig = new SparkConf()
@@ -39,34 +39,40 @@ object Covid_Data_Analysis_1 extends App {
     .option("compression", "snappy") // bzip2, gzip, lz4, deflate, uncompressed
     .csv("D:/DataSet/DataSet/SparkDataSet/Covid_Cases.csv")
 
-  //  read the covid case class
-  import spark.implicits._
-  val sel_covid : Dataset[covid_cc] = covid_df.select("SNO", "ObservationDate", "Country", "State",
-    "Last_Update", "Confirmed",
-    "Deaths", "Recovered")
-    .as[covid_cc]
+  def compute() = {
+    //  read the covid case class
+    import spark.implicits._
+    val sel_covid: Dataset[covid_cc] = covid_df.select("SNO", "ObservationDate", "Country", "State",
+      "Last_Update", "Confirmed",
+      "Deaths", "Recovered")
+      .as[covid_cc]
 
-  //  select only the required columns
-  val man_col_covid_1 = sel_covid.selectExpr("ObservationDate as Observation", "Country", "State", "Last_Update", "Confirmed", "Deaths", "Recovered")
-    .withColumn("Month", substring(col("Observation"), 1, 2))
-    .withColumn("Date", substring(col("Observation"), 4, 2))
-    .withColumn("Year", substring(col("Observation"), 7, 4))
-    .withColumn("Time", substring(col("Last_Update"), 11, 5))
-    .withColumn("Observation_Dt", to_date(expr("concat(Date, '/', Month, '/', Year)"),"d/M/y"))
-    .drop("Observation")
+    //  select only the required columns
+    val man_col_covid_1 = sel_covid.selectExpr("ObservationDate as Observation", "Country", "State", "Last_Update", "Confirmed", "Deaths", "Recovered")
+      .withColumn("Month", substring(col("Observation"), 1, 2))
+      .withColumn("Date", substring(col("Observation"), 4, 2))
+      .withColumn("Year", substring(col("Observation"), 7, 4))
+      .withColumn("Time", substring(col("Last_Update"), 11, 5))
+      .withColumn("Observation_Dt", to_date(expr("concat(Date, '/', Month, '/', Year)"), "d/M/y"))
+      .drop("Observation")
 
-  //  clean the DF converting the string to date type
-  val man_col_covid_2 = man_col_covid_1.selectExpr("Observation_Dt", "Country", "State", "Last_Update",
-    "Confirmed", "Deaths", "Recovered","Date as Occurance_DT", "Month as Occurance_Month", "Year as Occurance_Year", "Time")
-    .withColumn("Occurance_DT", expr("Occurance_DT").cast(IntegerType))
-    .withColumn("Occurance_Month", expr("Occurance_Month").cast(IntegerType))
-    .withColumn("Occurance_Year", expr("Occurance_Year").cast(IntegerType))
+    //  clean the DF converting the string to date type
+    val man_col_covid_2 = man_col_covid_1.selectExpr("Observation_Dt", "Country", "State", "Last_Update",
+      "Confirmed", "Deaths", "Recovered", "Date as Occurance_DT", "Month as Occurance_Month", "Year as Occurance_Year", "Time")
+      .withColumn("Occurance_DT", expr("Occurance_DT").cast(IntegerType))
+      .withColumn("Occurance_Month", expr("Occurance_Month").cast(IntegerType))
+      .withColumn("Occurance_Year", expr("Occurance_Year").cast(IntegerType))
 
-  val man_col_covid_3 = man_col_covid_2.selectExpr("Observation_Dt", "Time", "Occurance_DT", "Occurance_Month", "Occurance_Year",
-    "Country", "State", "Confirmed", "Deaths", "Recovered")
+    val man_col_covid_3 = man_col_covid_2.selectExpr("Observation_Dt", "Time", "Occurance_DT", "Occurance_Month", "Occurance_Year",
+      "Country", "State", "Confirmed", "Deaths", "Recovered")
 
-  man_col_covid_3.printSchema()
-  man_col_covid_3.show()
+    man_col_covid_3.printSchema()
+    man_col_covid_3.show()
+    println(s"Record Effected: ${man_col_covid_3.count()}")
+  }
 
-  spark.stop()
+  def main(args: Array[String]): Unit = {
+    compute()
+    spark.stop()
+  }
 }
