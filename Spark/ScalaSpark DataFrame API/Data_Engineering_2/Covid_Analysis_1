@@ -1,4 +1,4 @@
-package Data_Engineering_II
+package Data_Engineering_2
 
 import java.sql.Date
 import org.apache.spark.sql.{DataFrame, Dataset, Row, SaveMode, SparkSession}
@@ -13,7 +13,7 @@ import org.apache.spark.sql._
 
 import java.sql.Timestamp
 
-object Covid_Analysis_1 extends App {
+object Covid_Data_Analysis_1 extends App {
   println("Covid Cases Analysis 1")
 
   val sparkAppConfig = new SparkConf()
@@ -26,7 +26,7 @@ object Covid_Analysis_1 extends App {
 
   //  define case class for emp
   case class covid_cc(SNO: Integer, ObservationDate: String, Country: String, State : String, Last_Update: String, Confirmed: Integer, Deaths: Integer,
-                    Recovered: Integer)
+                      Recovered: Integer)
 
   //  read the emp datafile from the location
   val covid_df : Dataset[Row] = spark.read
@@ -37,16 +37,16 @@ object Covid_Analysis_1 extends App {
     .option("sep", ",")
     .option("nullValue", "NA")
     .option("compression", "snappy") // bzip2, gzip, lz4, deflate, uncompressed
-    .csv("D:/Code/DataSet/SparkDataSet/Covid_Cases.csv")
+    .csv("D:/DataSet/DataSet/SparkDataSet/Covid_Cases.csv")
 
   //  read the covid case class
   import spark.implicits._
   val sel_covid : Dataset[covid_cc] = covid_df.select("SNO", "ObservationDate", "Country", "State",
-                                                     "Last_Update", "Confirmed",
-                                                     "Deaths", "Recovered")
-                                                     .as[covid_cc]
+    "Last_Update", "Confirmed",
+    "Deaths", "Recovered")
+    .as[covid_cc]
 
-//  select only the required columns
+  //  select only the required columns
   val man_col_covid_1 = sel_covid.selectExpr("ObservationDate as Observation", "Country", "State", "Last_Update", "Confirmed", "Deaths", "Recovered")
     .withColumn("Month", substring(col("Observation"), 1, 2))
     .withColumn("Date", substring(col("Observation"), 4, 2))
@@ -55,7 +55,7 @@ object Covid_Analysis_1 extends App {
     .withColumn("Observation_Dt", to_date(expr("concat(Date, '/', Month, '/', Year)"),"d/M/y"))
     .drop("Observation")
 
-//  clean the DF converting the string to date type
+  //  clean the DF converting the string to date type
   val man_col_covid_2 = man_col_covid_1.selectExpr("Observation_Dt", "Country", "State", "Last_Update",
     "Confirmed", "Deaths", "Recovered","Date as Occurance_DT", "Month as Occurance_Month", "Year as Occurance_Year", "Time")
     .withColumn("Occurance_DT", expr("Occurance_DT").cast(IntegerType))
