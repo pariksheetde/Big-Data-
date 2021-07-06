@@ -1,14 +1,14 @@
-package Data_Engineering_II
+package Data_Engineering_2
 
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types.{DateType, IntegerType, StringType, StructField, StructType}
 
 
-object Department_DF extends App {
+object Department_DF {
   println("Reading Departments file")
 
-//  create a spark session
+  //  create a spark session
   val sparkAppConf = new SparkConf()
   sparkAppConf.set("spark.app.name", "Reading Departments file")
   sparkAppConf.set("spark.master", "local[3]")
@@ -17,26 +17,25 @@ object Department_DF extends App {
     .config(sparkAppConf)
     .getOrCreate()
 
-//  define schema for Dept
+  //  define schema for Dept
   val dept_sch = StructType(List(
-    StructField("department_id", IntegerType, false),
-    StructField("department_name", StringType),
-    StructField("manager_id", IntegerType),
-    StructField("location_id", IntegerType)
+    StructField("dept_id", IntegerType, false),
+    StructField("dept_name", StringType),
+    StructField("loc_id", IntegerType)
   ))
 
-//  read a dept file
+  //  read a dept file
   val dept_df = spark.read
     .format("csv")
     .schema(dept_sch)
     .option("header", "true")
-    .load("D:/Code/DataSet/SparkDataSet/departments.csv")
+    .load("D:/DataSet/DataSet/SparkDataSet/departments.csv")
 
-  val sel_dept = dept_df.selectExpr("Department_ID as DeptID", "Department_Name as Dept_Nm",
-  "Manager_id as ManagerID", "location_id as LocID")
+  val sel_dept = dept_df.selectExpr("dept_id as DeptID", "dept_name as Dept_Nm", "loc_id as LocID")
 
-  sel_dept.printSchema()
-  sel_dept.show(false)
-
-  spark.stop()
+  def main(args: Array[String]): Unit = {
+    sel_dept.printSchema()
+    sel_dept.show(false)
+    spark.stop()
+  }
 }
