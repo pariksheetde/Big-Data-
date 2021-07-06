@@ -1,4 +1,4 @@
-package Data_Engineering_II
+package Data_Engineering_2
 
 import org.apache.spark.sql.{DataFrame, Dataset, Row, SaveMode, SparkSession}
 import org.apache.spark.sql.types.{DateType, DoubleType, IntegerType, StringType, StructField, StructType}
@@ -21,14 +21,14 @@ object Data_Frame_2 extends App {
     .config(sparkAppConf)
     .getOrCreate()
 
-//  define the data
+  //  define the data
   val data = Seq(
     Row("Samsung", "Galaxy S8", "Android" ,65000, "15-10-2021"),
     Row("Apple", "IPhone 10 MAX", "iOS", 75000, "12-11-2020"),
     Row("Apple", "IPhone X", "iOS", 125000, "12-10-2017"),
     Row("Redmi", "Redmi 9", "Android", 10900,"12-12-2015"))
 
-//  define the schema
+  //  define the schema
   val schema = StructType(List(
     StructField("Company", StringType),
     StructField("Model", StringType),
@@ -53,6 +53,6 @@ object Data_Frame_2 extends App {
   final_df.printSchema()
   final_df.show()
   println(s"Number of rows in DF ${final_df.count()}")
-  
+
   spark.stop()
 }
