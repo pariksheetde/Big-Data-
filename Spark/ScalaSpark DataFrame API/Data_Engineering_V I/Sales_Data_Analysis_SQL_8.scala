@@ -12,18 +12,18 @@ import org.apache.spark.sql._
 import org.apache.spark.sql.functions.rank
 import org.apache.spark.sql.expressions.Window
 
-object Invoice_Data_Analysis_SQL_1 {
-  println("Invoice Data Analysis 1")
+object Sales_Data_Analysis_SQL_8 {
+  println("Sales Data Analysis 8")
 
   val sparkAppConfig = new SparkConf()
 
-  sparkAppConfig.set("spark.app.name", "Invoice Data Analysis 1")
+  sparkAppConfig.set("spark.app.name", "Sales Data Analysis 8")
   sparkAppConfig.set("spark.master", "local[3]")
 
   val spark = SparkSession.builder.config(sparkAppConfig)
     .getOrCreate()
 
-  def read_invoice_fn(filename: String) = spark.read
+  def read_sales_data(filename: String) = spark.read
     .format("csv")
     .option("header", "true")
     .option("inferSchema", "true")
@@ -32,27 +32,24 @@ object Invoice_Data_Analysis_SQL_1 {
     .option("sep", ",")
     .option("nullValue", "NA")
     .option("compression", "snappy") // bzip2, gzip, lz4, deflate, uncompressed
-    .csv(s"D:/DataSet/DataSet/SparkData/$filename")
+    .csv(s"D:/DataSet/DataSet/SparkDataSet/$filename")
 
   def compute() = {
     import spark.implicits._
-    val invoice_df = read_invoice_fn("Invoices.csv")
-    invoice_df.show(false)
+    val sales_df = read_sales_data("Sales_Data.csv")
+    sales_df.show(false)
 
-    println(s"COMPUTE THE INVOICE STATS")
-    val inv_agg = invoice_df.select("Country", "InvoiceNo")
-      .groupBy("Country")
+    println(s"COMPUTE MAX SALES IN EACH COUNTRY FOR EACH PRODUCT")
+    val country_df = sales_df.selectExpr("COUNTRY as Country", "PRODUCTLINE as Product", "Sales as Sales")
+      .groupBy("Country", "Product")
       .agg(
-        count("Country").as("Cnt_of_Records"),
-        countDistinct("Country").as("Number_of_Country"),
-        count("InvoiceNo").as("Number_of_Invoices_each_Country")
-      )
-    inv_agg.show(false)
+        sum("Sales").alias("Sales")
+      ).orderBy(desc("Sales"))
+    country_df.show(false)
 
-    val cnt_invoice_country = invoice_df.groupBy("Country", "InvoiceNo")
-      .agg(
-        count("InvoiceNo").as("Invoice_Cnt")
-      ).show(false)
+    val top_sales_country = country_df.selectExpr("Country", "Product", "Sales")
+      .withColumn("Rank", rank().over(Window.partitionBy("Country").orderBy(desc("Sales"))))
+    top_sales_country.show(false)
   }
 
   def main(args: Array[String]): Unit = {
