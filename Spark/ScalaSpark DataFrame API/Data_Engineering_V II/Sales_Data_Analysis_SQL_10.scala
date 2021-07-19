@@ -13,7 +13,7 @@ import org.apache.spark.sql.functions.rank
 import org.apache.spark.sql.expressions.Window
 
 object Sales_Data_Analysis_SQL_10 {
-  println("Sales Data Analysis 9")
+  println("Sales Data Analysis 10")
 
   val sparkAppConfig = new SparkConf()
 
