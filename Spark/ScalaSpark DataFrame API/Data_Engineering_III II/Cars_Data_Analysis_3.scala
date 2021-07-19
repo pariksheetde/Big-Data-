@@ -12,12 +12,12 @@ import org.apache.spark.sql._
 import org.apache.spark.sql.functions.rank
 import org.apache.spark.sql.expressions.Window
 
-object Cars_Analysis_2 extends App {
-  println("Cars Data Analysis 2")
+object Cars_Data_Analysis_3 extends App {
+  println("Cars Data Analysis 3")
 
   val sparkAppConfig = new SparkConf()
 
-  sparkAppConfig.set("spark.app.name", "Cars Data Analysis 2")
+  sparkAppConfig.set("spark.app.name", "Cars Data Analysis 3")
   sparkAppConfig.set("spark.master", "local[3]")
 
   val spark = SparkSession.builder.config(sparkAppConfig)
