@@ -12,7 +12,7 @@ import org.apache.spark.sql._
 import org.apache.spark.sql.functions.rank
 import org.apache.spark.sql.expressions.Window
 
-object Cars_Analysis_1 extends App {
+object Cars_Data_Analysis_1 extends App {
   println("Cars Data Analysis 1")
 
   val sparkAppConfig = new SparkConf()
