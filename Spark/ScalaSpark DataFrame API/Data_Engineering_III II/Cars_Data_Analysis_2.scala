@@ -12,8 +12,8 @@ import org.apache.spark.sql._
 import org.apache.spark.sql.functions.rank
 import org.apache.spark.sql.expressions.Window
 
-object Cars_Data_Analysis_1 extends App {
-  println("Cars Data Analysis 1")
+object Cars_Data_Analysis_2 extends App {
+  println("Cars Data Analysis 2")
 
   val sparkAppConfig = new SparkConf()
 
