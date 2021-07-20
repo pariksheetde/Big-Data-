@@ -4,9 +4,11 @@ import org.apache.spark.sql.SparkSession
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.functions._
 
-object Departments_Data_Analysis_1 {
+
+object Employees_Data_Analysis_1 {
   println("Accessing Oracle DB")
-  println("Accessing Hr.Departments Table")
+  println("Accessing Hr.Employees Table")
+
 
   val spark = SparkSession.builder()
     .master("local[3]")
@@ -15,7 +17,7 @@ object Departments_Data_Analysis_1 {
 
   val emp_df = spark.read.format("jdbc")
     .option("url", "jdbc:oracle:thin:Hr/Hr@localhost:1521/prod")
-    .option("dbtable", "hr.departments")
+    .option("dbtable", "hr.employees")
     .option("user", "Hr")
     .option("password", "Hr")
     .option("driver", "oracle.jdbc.driver.OracleDriver")
