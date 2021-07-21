@@ -39,3 +39,9 @@ emp_salary_df.show()
 # COMMAND ----------
 
 emp_salary_df.write.format("csv").mode("overwrite").save("/mnt/hr-data-lake/high_paid_emp", header = True)
+
+# COMMAND ----------
+
+high_paid_res_df = spark.read.csv("/mnt/hr-data-lake/high_paid_emp", header = True)
+high_paid_res_df.show()
+print("Records Effected ", high_paid_res_df.count())
